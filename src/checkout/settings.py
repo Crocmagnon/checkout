@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "anymail",
     "django_cleanup.apps.CleanupConfig",
     "common",
+    "purchase",
 ]
 
 MIDDLEWARE = [
