@@ -43,12 +43,6 @@ def pre_commit(ctx: Context) -> None:
         ctx.run("pre-commit run --all-files", pty=True)
 
 
-@task
-def mypy(ctx: Context) -> None:
-    with ctx.cd(BASE_DIR):
-        ctx.run("pre-commit run --all-files mypy", pty=True)
-
-
 @task(pre=[pre_commit, test_cov])
 def check(ctx: Context) -> None:
     pass
@@ -80,7 +74,7 @@ def check_alive(ctx: Context) -> None:
     exception = None
     for _ in range(5):
         try:
-            res = requests.get("https://gabnotes.org")
+            res = requests.get("https://checkout.augendre.info")
             res.raise_for_status()
             print("Server is up & running")
             return
