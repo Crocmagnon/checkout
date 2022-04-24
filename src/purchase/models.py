@@ -17,6 +17,14 @@ class PaymentMethod(Model):
     def __str__(self):
         return self.name
 
+    @property
+    def turnover(self) -> int:
+        return sum(basket.price for basket in self.baskets.all())
+
+    @property
+    def turnover_display(self) -> str:
+        return f"{self.turnover / 100}€"
+
 
 def default_product_display_order():
     return Product.objects.last().display_order + 1
@@ -33,6 +41,22 @@ class Product(Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def unit_price_display(self) -> str:
+        return f"{self.unit_price_cents / 100}€"
+
+    @property
+    def turnover(self) -> int:
+        return sum(items.price for items in self.basket_items.all())
+
+    @property
+    def turnover_display(self) -> str:
+        return f"{self.turnover / 100}€"
+
+    @property
+    def sold(self):
+        return sum(items.quantity for items in self.basket_items.all())
 
     def save(self, *args, **kwargs):
         super().save()

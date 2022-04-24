@@ -6,18 +6,27 @@ from purchase.models import Basket, BasketItem, PaymentMethod, Product
 
 @register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["name", "display_order", "unit_price"]
+    list_display = ["name", "display_order", "unit_price", "sold", "turnover"]
     list_editable = ["display_order"]
     search_fields = ["name"]
 
     def unit_price(self, instance: Product):
-        return instance.unit_price_cents / 100
+        return instance.unit_price_display
+
+    def sold(self, instance: Product):
+        return instance.sold
+
+    def turnover(self, instance: Product):
+        return instance.turnover_display
 
 
 @register(PaymentMethod)
 class PaymentMethodAdmin(admin.ModelAdmin):
-    list_display = ["name"]
+    list_display = ["name", "turnover"]
     search_fields = ["name"]
+
+    def turnover(self, instance: Product):
+        return instance.turnover_display
 
 
 class BasketItemInline(admin.TabularInline):
