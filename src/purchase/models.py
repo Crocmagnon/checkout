@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from PIL import Image, ImageOps
 
 
 class Model(models.Model):
@@ -32,6 +33,39 @@ class Product(Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super().save()
+        with Image.open(self.image.path) as img:
+            img = ImageOps.exif_transpose(img)
+
+            width, height = img.size  # Get dimensions
+
+            if width > 300 and height > 300:
+                # keep ratio but shrink down
+                img.thumbnail((width, height))
+
+            # check which one is smaller
+            if height < width:
+                # make square by cutting off equal amounts left and right
+                left = (width - height) / 2
+                right = (width + height) / 2
+                top = 0
+                bottom = height
+                img = img.crop((left, top, right, bottom))
+
+            elif width < height:
+                # make square by cutting off bottom
+                left = 0
+                right = width
+                top = 0
+                bottom = width
+                img = img.crop((left, top, right, bottom))
+
+            if width > 300 and height > 300:
+                img.thumbnail((300, 300))
+
+            img.save(self.image.path)
 
 
 class Basket(Model):
