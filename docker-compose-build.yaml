@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+  django:
+    extends:
+      file: docker-compose.yaml
+      service: django
+    image: crocmagnon/cheese-factory:latest
+    platform: linux/amd64
+
+volumes:
+  staticfiles: {}
+  media: {}

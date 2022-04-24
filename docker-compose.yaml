@@ -1,0 +1,23 @@
+version: '2.4'
+services:
+  django:
+    image: crocmagnon/cheese-factory:dev
+    build:
+      context: .
+      args:
+        POETRY_OPTIONS: "--no-dev"
+    env_file:
+      - envs/docker-local.env
+    volumes:
+      - ./db:/app/db
+      - staticfiles:/app/staticfiles
+      - media:/app/media
+    restart: on-failure
+    init: true
+    tty: true
+    ports:
+      - "8000:8000"
+
+volumes:
+  staticfiles: {}
+  media: {}

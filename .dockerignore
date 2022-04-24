@@ -1,0 +1,9 @@
+db/
+media/
+src/media/
+staticfiles/
+src/staticfiles/
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+.idea/

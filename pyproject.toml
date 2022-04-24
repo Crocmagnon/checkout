@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "checkout"
+version = "0.1.0"
+description = ""
+authors = ["Gabriel Augendre <gabriel@augendre.info>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.0"
+django-anymail = {version = "^8.4", extras = ["mailgun"]}
+django-cleanup = "^5.0"
+whitenoise = {extras = ["brotli"], version = "^6.0"}
+django-csp = "^3.7"
+django-environ = "^0.8.1"
+requests = "^2.27.1"
+django-extensions = "^3.1.5"
+bpython = "^0.22.1"
+gunicorn = "^20.1.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.7"
+pytest = "^6.0"
+pytest-django = "^4.5"
+model-bakery = "^1.1"
+pytest-cov = "^3.0"
+poetry-deps-scanner = "^1.0.1"
+invoke = "^1.7.0"
+
+[tool.black]
+target-version = ['py310']
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+addopts = "--color=yes"
+minversion = "6.0"
+DJANGO_SETTINGS_MODULE = "checkout.settings"
+testpaths = [
+    "src",
+]
+
+[tool.flakeheaven]
+max_complexity = 10
+format = "grouped"
+
+[tool.flakeheaven.plugins]
+"flake8-*" = [
+    "+*",
+    # long lines
+    "-E501",
+    # conflict with black on PEP8 interpretation
+    "-E203",
+    # deprecated rule: https://www.flake8rules.com/rules/W503.html
+    "-W503",
+]
+flake8-quotes = ["+*", "-Q000"] # found double quotes, conflict with black
+flake8-commas = ["+*", "-C812"] # missing trailing comma, conflict with black
+flake8-docstrings = ["+*", "-D1??"] # missing docstring
+flake8-rst-docstrings = ["-*"]
+
+[tool.flakeheaven.exceptions."**/tests/*"]
+flake8-bandit = ["+*", "-S101"] # Use of assert detected.
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
