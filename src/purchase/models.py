@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Model(models.Model):
@@ -34,21 +35,12 @@ class Product(Model):
 
 
 class Basket(Model):
-    STATUS_DRAFT = "DRAFT"
-    STATUS_COMPLETE = "COMPLETE"
-    _STATUS_CHOICES = [
-        (STATUS_DRAFT, "Draft"),
-        (STATUS_COMPLETE, "Complete"),
-    ]
     payment_method = models.ForeignKey(
         to=PaymentMethod,
         on_delete=models.PROTECT,
         related_name="baskets",
         null=True,
         blank=True,
-    )
-    status = models.CharField(
-        max_length=20, choices=_STATUS_CHOICES, default=STATUS_DRAFT
     )
 
     def __str__(self):
@@ -57,6 +49,14 @@ class Basket(Model):
     @property
     def price(self) -> int:
         return sum(item.price for item in self.items.all())
+
+    @property
+    def price_display(self) -> str:
+        price = self.price / 100
+        return f"{price}€"
+
+    def get_absolute_url(self):
+        return reverse("purchase:update", args=(self.pk,))
 
 
 class BasketItem(Model):
@@ -71,3 +71,8 @@ class BasketItem(Model):
     @property
     def price(self) -> int:
         return self.product.unit_price_cents * self.quantity
+
+    @property
+    def price_display(self) -> str:
+        price = self.price / 100
+        return f"{price}€"

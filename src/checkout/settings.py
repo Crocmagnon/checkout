@@ -82,6 +82,8 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "common",
     "purchase",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -195,7 +197,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # CSP
 CSP_DEFAULT_SRC = ("'none'",)
 CSP_IMG_SRC = ("'self'",)
-CSP_SCRIPT_SRC = ("'self'",)
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'")
 CSP_CONNECT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
 CSP_MANIFEST_SRC = ("'self'",)
@@ -204,3 +206,6 @@ CSP_BASE_URI = ("'none'",)
 CSP_FORM_ACTION = ("'self'",)
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"

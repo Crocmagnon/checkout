@@ -25,18 +25,18 @@ class BasketItemInline(admin.TabularInline):
     extra = 0
     readonly_fields = ["price"]
 
-    def price(self, instance) -> float:
-        return instance.price / 100
+    def price(self, instance) -> str:
+        return instance.price_display
 
 
 @register(Basket)
 class BasketAdmin(admin.ModelAdmin):
-    list_display = ["id", "status", "payment_method", "created_at", "price"]
-    fields = ["created_at", "status", "payment_method"]
-    list_filter = ["status", "payment_method"]
+    list_display = ["id", "payment_method", "created_at", "price"]
+    fields = ["created_at", "payment_method"]
+    list_filter = ["payment_method"]
     date_hierarchy = "created_at"
     readonly_fields = ["created_at"]
     inlines = [BasketItemInline]
 
-    def price(self, instance) -> float:
-        return instance.price / 100
+    def price(self, instance) -> str:
+        return instance.price_display

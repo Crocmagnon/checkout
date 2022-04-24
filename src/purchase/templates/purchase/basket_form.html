@@ -1,0 +1,16 @@
+{% extends "common/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if object %}
+        <h1>{{ object }}</h1>
+    {% else %}
+        <h1>New basket</h1>
+    {% endif %}
+    {% crispy form %}
+    {% if object %}
+        <div>
+            Price: {{ object.price_display }}
+        </div>
+        <a href="{% url "purchase:new" %}" class="btn btn-secondary">New</a>
+    {% endif %}
+{% endblock %}
