@@ -7,6 +7,7 @@ from purchase.models import Basket, BasketItem, PaymentMethod, Product
 @register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ["name", "display_order", "unit_price"]
+    list_editable = ["display_order"]
     search_fields = ["name"]
 
     def unit_price(self, instance: Product):
