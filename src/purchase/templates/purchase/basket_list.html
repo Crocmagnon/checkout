@@ -11,14 +11,16 @@
                         <p class="card-text">
                             {{ basket.items.count }} items<br>
                             {{ basket.price|currency }}<br>
-                            {{ basket.payment_method }}
+                            {{ basket.payment_method|default:"-" }}
                         </p>
-                        {% if perms.purchase.change_basket %}
-                            <a href="{% url "purchase:update" basket.id %}" class="btn btn-sm btn-primary">Edit</a>
-                        {% endif %}
-                        {% if perms.purchase.delete_basket %}
-                            <a href="{% url "purchase:delete" basket.id %}" class="btn btn-sm btn-danger">Delete</a>
-                        {% endif %}
+                        <div class="btn-group btn-group-sm">
+                            {% if perms.purchase.change_basket %}
+                                <a href="{% url "purchase:update" basket.id %}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                            {% endif %}
+                            {% if perms.purchase.delete_basket %}
+                                <a href="{% url "purchase:delete" basket.id %}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>

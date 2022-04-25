@@ -2,19 +2,18 @@
 {% load crispy_forms_tags purchase %}
 {% block content %}
     {% if object %}
+        <h1>{{ object }} <span class="badge bg-secondary">{{ object.price|currency }}</span></h1>
+        <p class="metadata">
+            {{ object.created_at }}
+        </p>
         {% if not object.payment_method %}
-            <div class="alert alert-warning" role="alert">Missing payment method.</div>
+            <div class="alert alert-danger" role="alert">Missing payment method.</div>
         {% endif %}
-        <h1>{{ object }}</h1>
-        <p>{{ object.created_at }}</p>
     {% else %}
         <h1>New basket</h1>
     {% endif %}
     {% crispy form %}
     {% if object %}
-        <div>
-            Price: {{ object.price|currency }}
-        </div>
         <a href="{% url "purchase:new" %}" class="btn btn-secondary">New</a>
     {% endif %}
 {% endblock %}
