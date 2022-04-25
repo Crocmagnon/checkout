@@ -82,6 +82,8 @@ class Product(Model):
 
     def save(self, *args, **kwargs):
         super().save()
+        if not self.image:
+            return
         with Image.open(self.image.path) as img:
             img = ImageOps.exif_transpose(img)
 
