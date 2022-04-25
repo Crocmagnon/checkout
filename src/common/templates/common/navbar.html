@@ -6,14 +6,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {% if perms.purchase.view_basket %}
-                    <li class="nav-item">
-                        <a href="{% url "purchase:list" %}" class="nav-link">Baskets</a>
-                    </li>
-                {% endif %}
                 {% if perms.purchase.add_basket %}
                     <li class="nav-item">
                         <a href="{% url "purchase:new" %}" class="nav-link">New basket</a>
+                    </li>
+                {% endif %}
+                {% if perms.purchase.view_basket %}
+                    <li class="nav-item">
+                        <a href="{% url "purchase:list" %}" class="nav-link">Baskets</a>
                     </li>
                 {% endif %}
                 {% if user.is_staff %}
