@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.admin import register
 
 from purchase.models import Basket, BasketItem, PaymentMethod, Product
+from purchase.templatetags.purchase import currency
 
 
 @register(Product)
@@ -10,14 +11,17 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ["display_order"]
     search_fields = ["name"]
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).with_sold().with_turnover()
+
     def unit_price(self, instance: Product):
-        return instance.unit_price_display
+        return currency(instance.unit_price_cents)
 
     def sold(self, instance: Product):
         return instance.sold
 
     def turnover(self, instance: Product):
-        return instance.turnover_display
+        return currency(instance.turnover)
 
 
 @register(PaymentMethod)
@@ -25,8 +29,11 @@ class PaymentMethodAdmin(admin.ModelAdmin):
     list_display = ["name", "turnover"]
     search_fields = ["name"]
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).with_turnover()
+
     def turnover(self, instance: Product):
-        return instance.turnover_display
+        return currency(instance.turnover)
 
 
 class BasketItemInline(admin.TabularInline):
@@ -35,18 +42,24 @@ class BasketItemInline(admin.TabularInline):
     extra = 0
     readonly_fields = ["price"]
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).priced()
+
     def price(self, instance) -> str:
-        return instance.price_display
+        return currency(instance.price)
 
 
 @register(Basket)
 class BasketAdmin(admin.ModelAdmin):
     list_display = ["id", "payment_method", "created_at", "price"]
-    fields = ["created_at", "payment_method"]
+    fields = ["created_at", "payment_method", "price"]
     list_filter = ["payment_method"]
     date_hierarchy = "created_at"
-    readonly_fields = ["created_at"]
+    readonly_fields = ["created_at", "price"]
     inlines = [BasketItemInline]
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).priced()
+
     def price(self, instance) -> str:
-        return instance.price_display
+        return currency(instance.price)

@@ -2,7 +2,7 @@ from crispy_forms.layout import Field
 
 
 class BasketItemField(Field):
-    template = "purchase/basket_item.html"
+    template = "purchase/snippets/basket_item.html"
 
     def __init__(self, *args, product, **kwargs):
         super().__init__(*args, **kwargs)

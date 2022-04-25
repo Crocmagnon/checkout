@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Count, F, Sum
 from django.urls import reverse
 from PIL import Image, ImageOps
 
@@ -11,23 +12,37 @@ class Model(models.Model):
         abstract = True
 
 
+class PaymentMethodQuerySet(models.QuerySet):
+    def with_turnover(self):
+        return self.annotate(
+            turnover=Sum(
+                F("baskets__items__quantity")
+                * F("baskets__items__product__unit_price_cents")
+            )
+        )
+
+
 class PaymentMethod(Model):
     name = models.CharField(max_length=50, unique=True)
+
+    objects = PaymentMethodQuerySet.as_manager()
 
     def __str__(self):
         return self.name
 
-    @property
-    def turnover(self) -> int:
-        return sum(basket.price for basket in self.baskets.all())
-
-    @property
-    def turnover_display(self) -> str:
-        return f"{self.turnover / 100}€"
-
 
 def default_product_display_order():
     return Product.objects.last().display_order + 1
+
+
+class ProductQuerySet(models.QuerySet):
+    def with_turnover(self):
+        return self.annotate(
+            turnover=Sum(F("basket_items__quantity") * F("unit_price_cents"))
+        )
+
+    def with_sold(self):
+        return self.annotate(sold=Sum("basket_items__quantity"))
 
 
 class Product(Model):
@@ -36,27 +51,13 @@ class Product(Model):
     unit_price_cents = models.PositiveIntegerField()
     display_order = models.PositiveIntegerField(default=default_product_display_order)
 
+    objects = ProductQuerySet.as_manager()
+
     class Meta:
         ordering = ["display_order", "name"]
 
     def __str__(self):
         return self.name
-
-    @property
-    def unit_price_display(self) -> str:
-        return f"{self.unit_price_cents / 100}€"
-
-    @property
-    def turnover(self) -> int:
-        return sum(items.price for items in self.basket_items.all())
-
-    @property
-    def turnover_display(self) -> str:
-        return f"{self.turnover / 100}€"
-
-    @property
-    def sold(self):
-        return sum(items.quantity for items in self.basket_items.all())
 
     def save(self, *args, **kwargs):
         super().save()
@@ -92,6 +93,13 @@ class Product(Model):
             img.save(self.image.path)
 
 
+class BasketQuerySet(models.QuerySet):
+    def priced(self):
+        return self.annotate(
+            price=Sum(F("items__quantity") * F("items__product__unit_price_cents"))
+        )
+
+
 class Basket(Model):
     payment_method = models.ForeignKey(
         to=PaymentMethod,
@@ -101,20 +109,18 @@ class Basket(Model):
         blank=True,
     )
 
+    objects = BasketQuerySet.as_manager()
+
     def __str__(self):
         return f"Panier #{self.id}"
 
-    @property
-    def price(self) -> int:
-        return sum(item.price for item in self.items.all())
-
-    @property
-    def price_display(self) -> str:
-        price = self.price / 100
-        return f"{price}€"
-
     def get_absolute_url(self):
         return reverse("purchase:update", args=(self.pk,))
+
+
+class BasketItemQuerySet(models.QuerySet):
+    def priced(self):
+        return self.annotate(price=F("quantity") * F("product__unit_price_cents"))
 
 
 class BasketItem(Model):
@@ -126,11 +132,4 @@ class BasketItem(Model):
     )
     quantity = models.PositiveIntegerField()
 
-    @property
-    def price(self) -> int:
-        return self.product.unit_price_cents * self.quantity
-
-    @property
-    def price_display(self) -> str:
-        price = self.price / 100
-        return f"{price}€"
+    objects = BasketItemQuerySet.as_manager()

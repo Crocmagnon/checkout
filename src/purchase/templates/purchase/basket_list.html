@@ -1,4 +1,5 @@
 {% extends "common/base.html" %}
+{% load purchase %}
 {% block content %}
     <h1>Baskets</h1>
     <div class="row row-cols-auto g-4">
@@ -9,7 +10,7 @@
                         <h5 class="card-title">Basket #{{ basket.id }}</h5>
                         <p class="card-text">
                             {{ basket.items.count }} items<br>
-                            {{ basket.price_display }}<br>
+                            {{ basket.price|currency }}<br>
                             {{ basket.payment_method }}
                         </p>
                         {% if perms.purchase.change_basket %}

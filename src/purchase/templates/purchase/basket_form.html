@@ -1,5 +1,5 @@
 {% extends "common/base.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags purchase %}
 {% block content %}
     {% if object %}
         <h1>{{ object }}</h1>
@@ -9,7 +9,7 @@
     {% crispy form %}
     {% if object %}
         <div>
-            Price: {{ object.price_display }}
+            Price: {{ object.price|currency }}
         </div>
         <a href="{% url "purchase:new" %}" class="btn btn-secondary">New</a>
     {% endif %}
