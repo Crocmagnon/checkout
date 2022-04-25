@@ -15,6 +15,8 @@ from pathlib import Path
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.contrib import messages
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 env = environ.Env(
@@ -196,7 +198,7 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # CSP
 CSP_DEFAULT_SRC = ("'none'",)
-CSP_IMG_SRC = ("'self'",)
+CSP_IMG_SRC = ("'self'", "data:")
 CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'")
 CSP_CONNECT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
@@ -209,3 +211,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+MESSAGE_TAGS = {messages.ERROR: "danger"}
