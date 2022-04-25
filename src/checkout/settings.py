@@ -46,9 +46,9 @@ admins = env("ADMINS")
 if admins:
     ADMINS = list(map(lambda x: tuple(x.split("|")), admins))
 
-DEFAULT_FROM_EMAIL = "Gab's Notes <checkout@mg.gabnotes.org>"
-SERVER_EMAIL = "Gab's Notes <checkout@mg.gabnotes.org>"
-EMAIL_SUBJECT_PREFIX = "[Cheese checkout] "
+DEFAULT_FROM_EMAIL = "Checkout <checkout@mg.gabnotes.org>"
+SERVER_EMAIL = "Checkout <checkout@mg.gabnotes.org>"
+EMAIL_SUBJECT_PREFIX = "[Checkout] "
 EMAIL_TIMEOUT = 30
 
 ANYMAIL = {
@@ -109,7 +109,7 @@ ROOT_URLCONF = "checkout.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": ["checkout/templates"],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -181,11 +181,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR.parent / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-MEDIA_URL = "/media/"
+MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR.parent / "media"
 
 AUTH_USER_MODEL = "common.User"
