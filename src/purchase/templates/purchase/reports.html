@@ -4,16 +4,15 @@
 {% block content %}
     <h1>Reports</h1>
     <h2>Total turnover</h2>
-    <ul>
-        <li>
-            {{ total|currency }}
-        </li>
-    </ul>
-    <h2>Turnover by day</h2>
+    <ul><li>{{ total|currency }}</li></ul>
 
     <h2>Products</h2>
     {% include "purchase/snippets/report_products.html" %}
-    <h2>Turnover by product by day</h2>
+
     <h2>Turnover by payment method</h2>
-    <h2>Turnover by payment method by day</h2>
+    {% include "purchase/snippets/report_payment_methods.html" %}
+
+    <h2>Baskets without payment method</h2>
+    {% include "purchase/snippets/report_no_payment_method.html" %}
+
 {% endblock %}

@@ -1,0 +1,20 @@
+{% load purchase %}
+
+<table class="table table-hover table-sm">
+    <thead><tr>
+        <th scope="col">Basket ID</th>
+        <th scope="col">Price</th>
+    </tr></thead>
+    <tbody>
+        {% for basket in no_payment_method %}
+            <tr>
+                <th scope="row">
+                    <a href="{% url "purchase:update" basket.id %}">
+                        {{ basket }}
+                    </a>
+                </th>
+                <td>{{ basket.price|currency }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

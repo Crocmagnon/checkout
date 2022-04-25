@@ -3,6 +3,7 @@
 {% block content %}
     {% if object %}
         <h1>{{ object }}</h1>
+        <p>{{ object.created_at }}</p>
     {% else %}
         <h1>New basket</h1>
     {% endif %}

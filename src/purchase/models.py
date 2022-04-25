@@ -21,6 +21,9 @@ class PaymentMethodQuerySet(models.QuerySet):
             )
         )
 
+    def with_sold(self):
+        return self.annotate(sold=Count("baskets", distinct=True))
+
 
 class PaymentMethod(Model):
     name = models.CharField(max_length=50, unique=True)
@@ -99,6 +102,9 @@ class BasketQuerySet(models.QuerySet):
             price=Sum(F("items__quantity") * F("items__product__unit_price_cents"))
         )
 
+    def no_payment_method(self):
+        return self.filter(payment_method=None)
+
 
 class Basket(Model):
     payment_method = models.ForeignKey(
@@ -112,7 +118,7 @@ class Basket(Model):
     objects = BasketQuerySet.as_manager()
 
     def __str__(self):
-        return f"Panier #{self.id}"
+        return f"Basket #{self.id}"
 
     def get_absolute_url(self):
         return reverse("purchase:update", args=(self.pk,))
