@@ -27,6 +27,8 @@ env = environ.Env(
     MAILGUN_SENDER_DOMAIN=(str, ""),
     HOSTS=(list, []),
     DB_BASE_DIR=(Path, BASE_DIR),
+    TIME_ZONE=(str, "Europe/Paris"),
+    LANGUAGE_CODE=(str, "fr-fr"),
 )
 
 env_file = os.getenv("ENV_FILE", None)
@@ -167,9 +169,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = env("LANGUAGE_CODE")
 
-TIME_ZONE = "Europe/Paris"
+TIME_ZONE = env("TIME_ZONE")
 
 USE_I18N = True
 
