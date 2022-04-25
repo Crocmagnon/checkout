@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Avg, Sum
 from django.views.generic import TemplateView
 
 from purchase.models import Basket, PaymentMethod, Product
@@ -14,6 +14,9 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
         context.update(
             {
                 "total": Basket.objects.priced().aggregate(total=Sum("price"))["total"],
+                "average_basket": Basket.objects.priced().aggregate(avg=Avg("price"))[
+                    "avg"
+                ],
                 "products": Product.objects.with_turnover().with_sold(),
                 "payment_methods": PaymentMethod.objects.with_turnover().with_sold(),
                 "no_payment_method": Basket.objects.no_payment_method().priced(),

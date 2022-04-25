@@ -3,8 +3,11 @@
 
 {% block content %}
     <h1>Reports</h1>
-    <h2>Total turnover</h2>
-    <ul><li>{{ total|currency }}</li></ul>
+    <h2>General</h2>
+    <ul>
+        <li>Total turnover: {{ total|currency }}</li>
+        <li>Average basket: {{ average_basket|currency }}</li>
+    </ul>
 
     <h2>Products</h2>
     {% include "purchase/snippets/report_products.html" %}
