@@ -1,4 +1,5 @@
 {% extends "common/base.html" %}
+{% load i18n %}
 {% load crispy_forms_tags purchase %}
 {% block content %}
     {% if object %}
@@ -7,13 +8,13 @@
             {{ object.created_at }}
         </p>
         {% if not object.payment_method %}
-            <div class="alert alert-danger" role="alert">Missing payment method.</div>
+            <div class="alert alert-danger" role="alert">{% translate "Missing payment method." %}</div>
         {% endif %}
     {% else %}
-        <h1>New basket</h1>
+        <h1>{% translate "New basket" %}</h1>
     {% endif %}
     {% crispy form %}
     {% if object %}
-        <a href="{% url "purchase:new" %}" class="btn btn-secondary">New</a>
+        <a href="{% url "purchase:new" %}" class="btn btn-secondary">{% translate "New" %}</a>
     {% endif %}
 {% endblock %}

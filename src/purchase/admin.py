@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import register
+from django.utils.translation import gettext_lazy as _
 
 from purchase.models import Basket, BasketItem, PaymentMethod, Product
 from purchase.templatetags.purchase import currency
@@ -14,12 +15,15 @@ class ProductAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).with_sold().with_turnover()
 
+    @admin.display(description=_("unit price"))
     def unit_price(self, instance: Product):
         return currency(instance.unit_price_cents)
 
+    @admin.display(description=_("sold"))
     def sold(self, instance: Product):
         return instance.sold
 
+    @admin.display(description=_("turnover"))
     def turnover(self, instance: Product):
         return currency(instance.turnover)
 
@@ -32,6 +36,7 @@ class PaymentMethodAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).with_turnover()
 
+    @admin.display(description=_("turnover"))
     def turnover(self, instance: Product):
         return currency(instance.turnover)
 
@@ -45,6 +50,7 @@ class BasketItemInline(admin.TabularInline):
     def get_queryset(self, request):
         return super().get_queryset(request).priced()
 
+    @admin.display(description=_("price"))
     def price(self, instance) -> str:
         return currency(instance.price)
 
@@ -61,5 +67,6 @@ class BasketAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super().get_queryset(request).priced()
 
+    @admin.display(description=_("price"))
     def price(self, instance) -> str:
         return currency(instance.price)

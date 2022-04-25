@@ -1,5 +1,6 @@
 {% extends "common/base.html" %}
+{% load i18n %}
 {% block content %}
-    <h1>Page not found</h1>
-    <p>We tried and tried but couldn't find the page you're looking for.</p>
+    <h1>{% translate "Page not found" %}</h1>
+    <p>{% translate "We tried and tried but couldn't find the page you're looking for." %}</p>
 {% endblock %}

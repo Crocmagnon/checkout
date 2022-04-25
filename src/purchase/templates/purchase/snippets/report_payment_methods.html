@@ -1,10 +1,11 @@
+{% load i18n %}
 {% load purchase %}
 
 <table class="table table-hover table-sm">
     <thead><tr>
-        <th scope="col">Payment method</th>
-        <th scope="col"># baskets</th>
-        <th scope="col">Turnover</th>
+        <th scope="col">{% translate "Payment method" %}</th>
+        <th scope="col">{% translate "# baskets" %}</th>
+        <th scope="col">{% translate "Turnover" %}</th>
     </tr></thead>
     <tbody>
         {% for payment_method in payment_methods %}

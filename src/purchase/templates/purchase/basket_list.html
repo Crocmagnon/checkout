@@ -1,15 +1,16 @@
 {% extends "common/base.html" %}
+{% load i18n %}
 {% load purchase %}
 {% block content %}
-    <h1>Baskets</h1>
+    <h1>{% translate "Baskets" %}</h1>
     <div class="row row-cols-auto g-4">
         {% for basket in baskets %}
             <div class="col">
                 <div class="card h-100 {% if not basket.payment_method %}bg-warning text-black{% endif %}">
                     <div class="card-body">
-                        <h5 class="card-title">Basket #{{ basket.id }}</h5>
+                        <h5 class="card-title">{% blocktranslate with basket_id=basket.id %}Basket #{{ basket_id }}{% endblocktranslate %}</h5>
                         <p class="card-text">
-                            {{ basket.items.count }} items<br>
+                            {% blocktranslate count counter=basket.items.count %}1 item{% plural %}{{ counter }} items{% endblocktranslate %}<br>
                             {{ basket.price|currency }}<br>
                             {{ basket.payment_method|default:"-" }}
                         </p>

@@ -1,9 +1,10 @@
 {% extends "common/base.html" %}
+{% load i18n %}
 {% block content %}
     <h1>{{ object }}</h1>
     <form method="post">
         {% csrf_token %}
-        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <p>{% blocktranslate %}Are you sure you want to delete "{{ basket }}"?{% endblocktranslate %}</p>
         {{ form }}
         <input class="btn btn-danger" type="submit" value="Confirm">
     </form>

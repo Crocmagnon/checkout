@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout, Submit
 from django import forms
+from django.utils.translation import gettext as _
 
 from purchase.layout import BasketItemField
 from purchase.models import Basket, Product
@@ -19,7 +20,7 @@ class BasketForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.add_input(Submit("submit", "Save"))
+        self.helper.add_input(Submit("submit", _("Save")))
         self.helper.layout = Layout()
         products = {}
         basket = kwargs.get("instance")

@@ -1,12 +1,14 @@
 from django.db import models
 from django.db.models import Count, F, Sum
 from django.urls import reverse
+from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 from PIL import Image, ImageOps
 
 
 class Model(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("created at"))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_("updated at"))
 
     class Meta:
         abstract = True
@@ -26,9 +28,13 @@ class PaymentMethodQuerySet(models.QuerySet):
 
 
 class PaymentMethod(Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=True, verbose_name=_("name"))
 
     objects = PaymentMethodQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _("payment method")
+        verbose_name_plural = _("payment methods")
 
     def __str__(self):
         return self.name
@@ -49,15 +55,21 @@ class ProductQuerySet(models.QuerySet):
 
 
 class Product(Model):
-    name = models.CharField(max_length=250, unique=True)
-    image = models.ImageField(null=True, blank=True)
-    unit_price_cents = models.PositiveIntegerField()
-    display_order = models.PositiveIntegerField(default=default_product_display_order)
+    name = models.CharField(max_length=250, unique=True, verbose_name=_("name"))
+    image = models.ImageField(null=True, blank=True, verbose_name=_("image"))
+    unit_price_cents = models.PositiveIntegerField(
+        verbose_name=_("unit price (cents)"), help_text=_("unit price in cents")
+    )
+    display_order = models.PositiveIntegerField(
+        default=default_product_display_order, verbose_name=_("display order")
+    )
 
     objects = ProductQuerySet.as_manager()
 
     class Meta:
         ordering = ["display_order", "name"]
+        verbose_name = _("product")
+        verbose_name_plural = _("products")
 
     def __str__(self):
         return self.name
@@ -113,12 +125,17 @@ class Basket(Model):
         related_name="baskets",
         null=True,
         blank=True,
+        verbose_name=_("payment method"),
     )
 
     objects = BasketQuerySet.as_manager()
 
+    class Meta:
+        verbose_name = _("basket")
+        verbose_name_plural = _("baskets")
+
     def __str__(self):
-        return f"Basket #{self.id}"
+        return gettext("Basket #%(id)s") % {"id": self.id}
 
     def get_absolute_url(self):
         return reverse("purchase:update", args=(self.pk,))
@@ -131,11 +148,21 @@ class BasketItemQuerySet(models.QuerySet):
 
 class BasketItem(Model):
     product = models.ForeignKey(
-        to=Product, on_delete=models.PROTECT, related_name="basket_items"
+        to=Product,
+        on_delete=models.PROTECT,
+        related_name="basket_items",
+        verbose_name=_("product"),
     )
     basket = models.ForeignKey(
-        to=Basket, on_delete=models.CASCADE, related_name="items"
+        to=Basket,
+        on_delete=models.CASCADE,
+        related_name="items",
+        verbose_name=_("basket"),
     )
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(verbose_name=_("quantity"))
 
     objects = BasketItemQuerySet.as_manager()
+
+    class Meta:
+        verbose_name = _("basket item")
+        verbose_name_plural = _("basket items")

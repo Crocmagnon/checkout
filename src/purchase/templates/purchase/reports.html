@@ -1,21 +1,22 @@
 {% extends "common/base.html" %}
+{% load i18n %}
 {% load purchase %}
 
 {% block content %}
-    <h1>Reports</h1>
-    <h2>General</h2>
+    <h1>{% translate "Reports" %}</h1>
+    <h2>{% translate "General" %}</h2>
     <ul>
-        <li>Total turnover: {{ total|currency }}</li>
-        <li>Average basket: {{ average_basket|currency }}</li>
+        <li>{% translate "Total turnover:" %} {{ total|currency }}</li>
+        <li>{% translate "Average basket:" %} {{ average_basket|currency }}</li>
     </ul>
 
-    <h2>Products</h2>
+    <h2>{% translate "Products" %}</h2>
     {% include "purchase/snippets/report_products.html" %}
 
-    <h2>Turnover by payment method</h2>
+    <h2>{% translate "Turnover by payment method" %}</h2>
     {% include "purchase/snippets/report_payment_methods.html" %}
 
-    <h2>Baskets without payment method</h2>
+    <h2>{% translate "Baskets without payment method" %}</h2>
     {% include "purchase/snippets/report_no_payment_method.html" %}
 
 {% endblock %}

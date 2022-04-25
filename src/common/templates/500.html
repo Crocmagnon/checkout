@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,7 +8,7 @@
         <style>html { font-family: sans-serif; }</style>
     </head>
     <body>
-        <h1>Server error (500)</h1>
-        <p>There's an error on our end. Don't worry, our engineers are already working on it!</p>
+        <h1>{% translate "Server error (500)" %}</h1>
+        <p>{% translate "There's an error on our end. Don't worry though, our engineers are already working to fix it!" %}</p>
     </body>
 </html>
