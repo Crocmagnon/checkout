@@ -1,7 +1,7 @@
 version: '2.4'
 services:
   django:
-    image: crocmagnon/cheese-factory:dev
+    image: crocmagnon/checkout:dev
     build:
       context: .
       args:
@@ -21,3 +21,4 @@ services:
 volumes:
   staticfiles: {}
   media: {}
+  grafana: {}
