@@ -40,7 +40,10 @@ class BasketForm(forms.ModelForm):
             )
             fields.append(BasketItemField(field_name, product=product))
         self.helper.layout = Layout(
-            Div(*fields, css_class="row"),
+            Div(
+                *fields,
+                css_class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4",
+            ),
             Field("payment_method"),
         )
 
