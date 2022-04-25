@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import Count, F, Sum
+from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
@@ -17,9 +18,12 @@ class Model(models.Model):
 class PaymentMethodQuerySet(models.QuerySet):
     def with_turnover(self):
         return self.annotate(
-            turnover=Sum(
-                F("baskets__items__quantity")
-                * F("baskets__items__product__unit_price_cents")
+            turnover=Coalesce(
+                Sum(
+                    F("baskets__items__quantity")
+                    * F("baskets__items__product__unit_price_cents")
+                ),
+                0,
             )
         )
 
@@ -47,11 +51,13 @@ def default_product_display_order():
 class ProductQuerySet(models.QuerySet):
     def with_turnover(self):
         return self.annotate(
-            turnover=Sum(F("basket_items__quantity") * F("unit_price_cents"))
+            turnover=Coalesce(
+                Sum(F("basket_items__quantity") * F("unit_price_cents")), 0
+            )
         )
 
     def with_sold(self):
-        return self.annotate(sold=Sum("basket_items__quantity"))
+        return self.annotate(sold=Coalesce(Sum("basket_items__quantity"), 0))
 
 
 class Product(Model):
@@ -111,7 +117,9 @@ class Product(Model):
 class BasketQuerySet(models.QuerySet):
     def priced(self):
         return self.annotate(
-            price=Sum(F("items__quantity") * F("items__product__unit_price_cents"))
+            price=Coalesce(
+                Sum(F("items__quantity") * F("items__product__unit_price_cents")), 0
+            )
         )
 
     def no_payment_method(self):
@@ -143,7 +151,9 @@ class Basket(Model):
 
 class BasketItemQuerySet(models.QuerySet):
     def priced(self):
-        return self.annotate(price=F("quantity") * F("product__unit_price_cents"))
+        return self.annotate(
+            price=Coalesce(F("quantity") * F("product__unit_price_cents"), 0)
+        )
 
 
 class BasketItem(Model):
