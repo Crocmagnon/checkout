@@ -11,10 +11,7 @@
     </head>
     <body>
         <div class="container">
-            {% if user.is_staff %}
-                <a href="{% url "admin:index" %}" class="btn btn-outline-secondary">Admin</a>
-                <a href="{% url "admin:purchase_basket_changelist" %}" class="btn btn-outline-secondary">Baskets</a>
-            {% endif %}
+            {% include "common/navbar.html" %}
             {% block content %}
             {% endblock %}
         </div>

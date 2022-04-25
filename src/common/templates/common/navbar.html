@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url "purchase:list" %}">Checkout</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if perms.purchase.can_view_basket %}
+                    <li class="nav-item">
+                        <a href="{% url "purchase:list" %}" class="nav-link">Baskets</a>
+                    </li>
+                {% endif %}
+                {% if perms.purchase.can_add_basket %}
+                    <li class="nav-item">
+                        <a href="{% url "purchase:new" %}" class="nav-link">New basket</a>
+                    </li>
+                {% endif %}
+                {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "admin:index" %}">Admin</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
