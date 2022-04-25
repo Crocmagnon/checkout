@@ -12,8 +12,12 @@
                             {{ basket.price_display }}<br>
                             {{ basket.payment_method }}
                         </p>
-                        <a href="{% url "purchase:update" basket.id %}" class="btn btn-sm btn-primary">Edit</a>
-                        <a href="{% url "purchase:delete" basket.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        {% if perms.purchase.change_basket %}
+                            <a href="{% url "purchase:update" basket.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        {% endif %}
+                        {% if perms.purchase.delete_basket %}
+                            <a href="{% url "purchase:delete" basket.id %}" class="btn btn-sm btn-danger">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -17,6 +17,12 @@ class NewBasketView(ProtectedViewsMixin, SuccessMessageMixin, CreateView):
     form_class = BasketForm
     success_message = "Successfully created basket."
 
+    def get_success_url(self):
+        if self.request.user.has_perm("purchase.change_basket"):
+            return super().get_success_url()
+        else:
+            return reverse("purchase:new")
+
 
 class UpdateBasketView(ProtectedViewsMixin, SuccessMessageMixin, UpdateView):
     permission_required = ["purchase.change_basket", "purchase.view_basket"]
