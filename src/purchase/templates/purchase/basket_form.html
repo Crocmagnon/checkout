@@ -2,6 +2,9 @@
 {% load crispy_forms_tags purchase %}
 {% block content %}
     {% if object %}
+        {% if not object.payment_method %}
+            <div class="alert alert-warning" role="alert">Missing payment method.</div>
+        {% endif %}
         <h1>{{ object }}</h1>
         <p>{{ object.created_at }}</p>
     {% else %}

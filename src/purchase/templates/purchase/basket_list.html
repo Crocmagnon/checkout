@@ -5,7 +5,7 @@
     <div class="row row-cols-auto g-4">
         {% for basket in baskets %}
             <div class="col">
-                <div class="card h-100">
+                <div class="card h-100 {% if not basket.payment_method %}bg-warning text-black{% endif %}">
                     <div class="card-body">
                         <h5 class="card-title">Basket #{{ basket.id }}</h5>
                         <p class="card-text">
