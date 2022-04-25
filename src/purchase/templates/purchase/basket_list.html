@@ -1,0 +1,22 @@
+{% extends "common/base.html" %}
+{% block content %}
+    <h1>Baskets</h1>
+    <div class="row">
+        {% for basket in baskets %}
+            <div class="col-sm-3 mb-3 mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Basket #{{ basket.id }}</h5>
+                        <p class="card-text">
+                            {{ basket.items.count }} items<br>
+                            {{ basket.price_display }}<br>
+                            {{ basket.payment_method }}
+                        </p>
+                        <a href="{% url "purchase:update" basket.id %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url "purchase:delete" basket.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
