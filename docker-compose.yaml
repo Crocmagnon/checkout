@@ -18,6 +18,16 @@ services:
     ports:
       - "8000:8000"
 
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+      - grafana:/var/lib/grafana
+      - ./db:/app/db
+    environment:
+      - GF_INSTALL_PLUGINS=frser-sqlite-datasource
+    ports:
+      - "3000:3000"
+
 volumes:
   staticfiles: {}
   media: {}
