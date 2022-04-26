@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-26 20:06+0200\n"
+"POT-Creation-Date: 2022-04-26 20:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,6 @@ msgstr ""
 #: purchase/templates/purchase/reports.html:14
 #: purchase/templates/purchase/snippets/report_payment_methods.html:8
 #: purchase/templates/purchase/snippets/report_products.html:8
-#: purchase/views/reports.py:80
 msgid "Turnover"
 msgstr ""
 
@@ -175,11 +174,11 @@ msgstr ""
 msgid "Products"
 msgstr ""
 
-#: purchase/templates/purchase/reports.html:34
+#: purchase/templates/purchase/reports.html:33
 msgid "Turnover by payment method"
 msgstr ""
 
-#: purchase/templates/purchase/reports.html:37
+#: purchase/templates/purchase/reports.html:36
 msgid "Baskets without payment method"
 msgstr ""
 
@@ -204,7 +203,7 @@ msgid "Product"
 msgstr ""
 
 #: purchase/templates/purchase/snippets/report_products.html:7
-#: purchase/views/reports.py:64
+#: purchase/views/reports.py:65
 msgid "# sold"
 msgstr ""
 
@@ -220,10 +219,14 @@ msgstr ""
 msgid "Basket successfully deleted."
 msgstr ""
 
-#: purchase/views/reports.py:112
+#: purchase/views/reports.py:70
+msgid "Turnover by product"
+msgstr ""
+
+#: purchase/views/reports.py:106
 msgid "Basket count by hour"
 msgstr ""
 
-#: purchase/views/reports.py:117
+#: purchase/views/reports.py:111
 msgid "Turnover by hour"
 msgstr ""
