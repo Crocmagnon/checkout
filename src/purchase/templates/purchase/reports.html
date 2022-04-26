@@ -26,6 +26,8 @@
 
     <h2>{% translate "Products" %}</h2>
     {% include "purchase/snippets/report_products.html" %}
+    {{ products_sold_plot|safe }}
+    {{ products_turnover_plot|safe }}
 
     <h2>{% translate "Turnover by payment method" %}</h2>
     {% include "purchase/snippets/report_payment_methods.html" %}
