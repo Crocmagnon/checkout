@@ -1,6 +1,9 @@
 ## Build venv
 FROM python:3.10.4-bullseye AS venv
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gettext
+
 # https://python-poetry.org/docs/#installation
 ENV POETRY_VERSION=1.1.13
 RUN curl -sSL https://install.python-poetry.org | python3 -
