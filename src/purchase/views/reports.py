@@ -89,10 +89,12 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
             basket = baskets[basket_index]
             count = 0
             turnover = 0
-            while basket.created_at < end_slot and basket_index < len(baskets) - 1:
+            while basket.created_at < end_slot:
                 count += 1
                 turnover += basket.price / 100
                 basket_index += 1
+                if basket_index == len(baskets):
+                    break
                 basket = baskets[basket_index]
             labels.append(current)
             counts.append(count)
