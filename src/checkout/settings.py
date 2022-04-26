@@ -46,8 +46,8 @@ admins = env("ADMINS")
 if admins:
     ADMINS = list(map(lambda x: tuple(x.split("|")), admins))
 
-DEFAULT_FROM_EMAIL = "Checkout <checkout@mg.gabnotes.org>"
-SERVER_EMAIL = "Checkout <checkout@mg.gabnotes.org>"
+DEFAULT_FROM_EMAIL = "Checkout <checkout@mg.augendre.info>"
+SERVER_EMAIL = "Checkout <checkout@mg.augendre.info>"
 EMAIL_SUBJECT_PREFIX = "[Checkout] "
 EMAIL_TIMEOUT = 30
 
