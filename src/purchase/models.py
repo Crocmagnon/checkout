@@ -41,7 +41,7 @@ class PaymentMethodManager(models.Manager):
 class PaymentMethod(Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=_("name"))
 
-    objects = PaymentMethodManager.from_queryset(PaymentMethodQuerySet)
+    objects = PaymentMethodManager.from_queryset(PaymentMethodQuerySet)()
 
     class Meta:
         verbose_name = _("payment method")
@@ -89,7 +89,7 @@ class Product(Model):
         default=default_product_display_order, verbose_name=_("display order")
     )
 
-    objects = ProductManager.from_queryset(ProductQuerySet)
+    objects = ProductManager.from_queryset(ProductQuerySet)()
 
     class Meta:
         ordering = ["display_order", "name"]
