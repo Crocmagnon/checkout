@@ -19,6 +19,7 @@ RUN python -m venv --copies /app/venv \
 ENV PATH /app/venv/bin:$PATH
 COPY src ./src/
 RUN python ./src/manage.py collectstatic --no-input
+RUN python ./src/manage.py compilemessages -l fr -l en
 
 ## Get git versions
 FROM alpine/git AS git
