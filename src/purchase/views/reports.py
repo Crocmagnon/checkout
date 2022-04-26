@@ -31,8 +31,7 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
         }
 
         products = Product.objects.with_turnover().with_sold()
-        products_sold_plot = self.get_products_sold_plot(products)
-        products_turnover_plot = self.get_products_turnover_plot(products)
+        products_plot = self.get_products_plot(products)
         baskets = list(Basket.objects.priced().order_by("created_at"))
         by_hour_plot = self.by_hour_plot(baskets)
         context.update(
@@ -42,8 +41,7 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
                 "average_basket": Basket.objects.average_basket(),
                 "average_basket_by_day": average_basket_by_day,
                 "products": products,
-                "products_sold_plot": products_sold_plot,
-                "products_turnover_plot": products_turnover_plot,
+                "products_plot": products_plot,
                 "by_hour_plot": by_hour_plot,
                 "payment_methods": PaymentMethod.objects.with_turnover().with_sold(),
                 "no_payment_method": Basket.objects.no_payment_method().priced(),
@@ -51,33 +49,29 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
         )
         return context
 
-    def get_products_sold_plot(self, products: ProductQuerySet):
+    def get_products_plot(self, products: ProductQuerySet):
         labels = []
-        values = []
+        sold = []
+        turnover = []
         for product in products:
             labels.append(product.name)
-            values.append(product.sold)
-        fig = plt.figure()
-        plt.bar(labels, values)
-        plt.xticks(rotation=15)
-        image_data = StringIO()
-        plt.title(_("# sold"))
-        fig.savefig(image_data, format="svg")
-        image_data.seek(0)
-        return image_data.getvalue()
+            sold.append(product.sold)
+            turnover.append(product.turnover / 100)
 
-    def get_products_turnover_plot(self, products: ProductQuerySet):
-        labels = []
-        values = []
-        for product in products:
-            labels.append(product.name)
-            values.append(product.turnover / 100)
-        fig = plt.figure()
-        plt.bar(labels, values)
-        plt.xticks(rotation=15)
+        fig, ax1 = plt.subplots()
+        color = "tab:orange"
+        ax1.bar(labels, sold, width=0.8, color=color)
+        ax1.tick_params(axis="x", rotation=15)
+        ax1.set_ylabel(_("# sold"), color=color)
+
+        color = "tab:blue"
+        ax2 = ax1.twinx()
+        ax2.bar(labels, turnover, width=0.4, color=color)
+        ax2.set_ylabel(_("Turnover by product"), color=color)
         plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter("%.2f€"))
+
+        fig.tight_layout()
         image_data = StringIO()
-        plt.title(_("Turnover"))
         fig.savefig(image_data, format="svg")
         image_data.seek(0)
         return image_data.getvalue()
