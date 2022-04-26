@@ -4,7 +4,7 @@ services:
     extends:
       file: docker-compose.yaml
       service: django
-    image: crocmagnon/cheese-factory:latest
+    image: crocmagnon/checkout:latest
     platform: linux/amd64
 
 volumes:
