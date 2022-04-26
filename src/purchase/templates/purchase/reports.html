@@ -24,6 +24,8 @@
         {% endfor %}
     </ul>
 
+    {{ by_hour_plot|safe }}
+
     <h2>{% translate "Products" %}</h2>
     {% include "purchase/snippets/report_products.html" %}
     {{ products_sold_plot|safe }}
