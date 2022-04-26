@@ -1,0 +1,46 @@
+[
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2022-04-26T20:30:22.959Z",
+      "updated_at": "2022-04-26T20:30:22.959Z",
+      "name": "Clou",
+      "image": "",
+      "unit_price_cents": 134,
+      "display_order": 1
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2022-04-26T20:30:22.959Z",
+      "updated_at": "2022-04-26T20:30:22.959Z",
+      "name": "Villard'Ain",
+      "image": "",
+      "unit_price_cents": 290,
+      "display_order": 1
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2022-04-26T20:30:22.959Z",
+      "updated_at": "2022-04-26T20:30:22.959Z",
+      "name": "Herbier",
+      "image": "",
+      "unit_price_cents": 330,
+      "display_order": 1
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2022-04-26T20:30:22.959Z",
+      "updated_at": "2022-04-26T20:30:22.959Z",
+      "name": "Blanc vache",
+      "image": "",
+      "unit_price_cents": 650,
+      "display_order": 1
+    }
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "model": "purchase.paymentmethod",
+    "fields": {
+      "created_at": "2022-04-26T20:30:22.960Z",
+      "updated_at": "2022-04-26T20:30:22.960Z",
+      "name": "Esp\u00e8ces"
+    }
+  },
+  {
+    "model": "purchase.paymentmethod",
+    "fields": {
+      "created_at": "2022-04-26T20:30:22.960Z",
+      "updated_at": "2022-04-26T20:30:22.960Z",
+      "name": "CB"
+    }
+  },
+  {
+    "model": "purchase.paymentmethod",
+    "fields": {
+      "created_at": "2022-04-26T20:30:22.960Z",
+      "updated_at": "2022-04-26T20:30:22.960Z",
+      "name": "Ch\u00e8que"
+    }
+  }
+]
