@@ -1,6 +1,7 @@
 import datetime
 from io import StringIO
 
+from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 from matplotlib import pyplot as plt
@@ -22,6 +23,11 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        baskets = list(Basket.objects.priced().order_by("created_at"))
+        if not baskets:
+            messages.warning(self.request, _("No sale to report"))
+            return context
+
         dates = Basket.objects.values_list("created_at__date", flat=True).distinct()
         average_basket_by_day = {
             date: Basket.objects.by_date(date).average_basket() for date in dates
@@ -32,7 +38,6 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
 
         products = Product.objects.with_turnover().with_sold()
         products_plot = self.get_products_plot(products)
-        baskets = list(Basket.objects.priced().order_by("created_at"))
         by_hour_plot = self.by_hour_plot(baskets)
         context.update(
             {

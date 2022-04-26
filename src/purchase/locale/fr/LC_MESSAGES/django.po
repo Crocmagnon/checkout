@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-26 20:35+0200\n"
+"POT-Creation-Date: 2022-04-26 21:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -200,7 +200,7 @@ msgid "Product"
 msgstr "Produit"
 
 #: purchase/templates/purchase/snippets/report_products.html:7
-#: purchase/views/reports.py:65
+#: purchase/views/reports.py:70
 msgid "# sold"
 msgstr "Nb. vendus"
 
@@ -216,14 +216,18 @@ msgstr "Panier correctement modifié."
 msgid "Basket successfully deleted."
 msgstr "Panier correctement supprimé."
 
-#: purchase/views/reports.py:70
+#: purchase/views/reports.py:28
+msgid "No sale to report"
+msgstr "Aucune vente à afficher"
+
+#: purchase/views/reports.py:75
 msgid "Turnover by product"
 msgstr "Chiffre d'affaires par produit"
 
-#: purchase/views/reports.py:106
+#: purchase/views/reports.py:113
 msgid "Basket count by hour"
 msgstr "Nombre de paniers par heure"
 
-#: purchase/views/reports.py:111
+#: purchase/views/reports.py:118
 msgid "Turnover by hour"
 msgstr "Chiffre d'affaires par heure"
