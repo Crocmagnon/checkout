@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-25 23:04+0200\n"
+"POT-Creation-Date: 2022-04-26 18:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,44 +18,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/common/templates/403.html:4
+#: common/templates/403.html:4
 msgid "Permission denied"
 msgstr ""
 
-#: src/common/templates/403.html:5
+#: common/templates/403.html:5
 msgid "You're not allowed to access this page."
 msgstr ""
 
-#: src/common/templates/404.html:4
+#: common/templates/404.html:4
 msgid "Page not found"
 msgstr ""
 
-#: src/common/templates/404.html:5
+#: common/templates/404.html:5
 msgid "We tried and tried but couldn't find the page you're looking for."
 msgstr ""
 
-#: src/common/templates/500.html:11
+#: common/templates/500.html:11
 msgid "Server error (500)"
 msgstr ""
 
-#: src/common/templates/500.html:12
+#: common/templates/500.html:12
 msgid ""
 "There's an error on our end. Don't worry though, our engineers are already "
 "working to fix it!"
 msgstr ""
 
-#: src/common/templates/common/navbar.html:12
+#: common/templates/common/navbar.html:12
 msgid "New basket"
 msgstr ""
 
-#: src/common/templates/common/navbar.html:17
+#: common/templates/common/navbar.html:17
 msgid "Baskets"
 msgstr ""
 
-#: src/common/templates/common/navbar.html:20
+#: common/templates/common/navbar.html:20
 msgid "Reports"
 msgstr ""
 
-#: src/common/templates/common/navbar.html:25
+#: common/templates/common/navbar.html:25
 msgid "Admin"
 msgstr ""

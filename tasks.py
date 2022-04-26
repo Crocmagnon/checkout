@@ -21,6 +21,18 @@ COMPOSE_BUILD_ENV = {"COMPOSE_FILE": COMPOSE_BUILD_FILE}
 
 
 @task
+def makemessages(ctx: Context) -> None:
+    with ctx.cd(SRC_DIR):
+        ctx.run("./manage.py makemessages -l en -l fr", pty=True, echo=True)
+
+
+@task
+def compilemessages(ctx: Context) -> None:
+    with ctx.cd(SRC_DIR):
+        ctx.run("./manage.py compilemessages -l en -l fr", pty=True, echo=True)
+
+
+@task
 def test(ctx: Context) -> None:
     with ctx.cd(SRC_DIR):
         ctx.run("pytest", pty=True, echo=True)

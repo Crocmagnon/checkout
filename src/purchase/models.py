@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from django.db import models
-from django.db.models import Count, F, Sum
+from django.db.models import Avg, Count, F, Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.utils.translation import gettext
@@ -117,14 +119,23 @@ class Product(Model):
 
 
 class BasketQuerySet(models.QuerySet):
-    def priced(self):
+    def priced(self) -> BasketQuerySet:
         return self.annotate(
             price=Coalesce(
                 Sum(F("items__quantity") * F("items__product__unit_price_cents")), 0
             )
         )
 
-    def no_payment_method(self):
+    def average_basket(self) -> float:
+        return self.priced().aggregate(avg=Avg("price"))["avg"]
+
+    def by_date(self, date) -> BasketQuerySet:
+        return self.filter(created_at__date=date)
+
+    def turnover(self) -> int:
+        return self.priced().aggregate(total=Sum("price"))["total"]
+
+    def no_payment_method(self) -> BasketQuerySet:
         return self.filter(payment_method=None)
 
 

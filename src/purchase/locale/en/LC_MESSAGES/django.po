@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-25 23:04+0200\n"
+"POT-Creation-Date: 2022-04-26 18:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,193 +18,202 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/purchase/admin.py:18
+#: purchase/admin.py:18
 msgid "unit price"
 msgstr ""
 
-#: src/purchase/admin.py:22
+#: purchase/admin.py:22
 msgid "sold"
 msgstr ""
 
-#: src/purchase/admin.py:26 src/purchase/admin.py:39
+#: purchase/admin.py:26 purchase/admin.py:39
 msgid "turnover"
 msgstr ""
 
-#: src/purchase/admin.py:53 src/purchase/admin.py:70
+#: purchase/admin.py:53 purchase/admin.py:70
 msgid "price"
 msgstr ""
 
-#: src/purchase/forms.py:23
+#: purchase/forms.py:23
 msgid "Save"
 msgstr ""
 
-#: src/purchase/models.py:10
+#: purchase/models.py:13
 msgid "created at"
 msgstr ""
 
-#: src/purchase/models.py:11
+#: purchase/models.py:14
 msgid "updated at"
 msgstr ""
 
-#: src/purchase/models.py:31 src/purchase/models.py:58
+#: purchase/models.py:37 purchase/models.py:66
 msgid "name"
 msgstr ""
 
-#: src/purchase/models.py:36 src/purchase/models.py:128
+#: purchase/models.py:42 purchase/models.py:149
 msgid "payment method"
 msgstr ""
 
-#: src/purchase/models.py:37
+#: purchase/models.py:43
 msgid "payment methods"
 msgstr ""
 
-#: src/purchase/models.py:59
+#: purchase/models.py:67
 msgid "image"
 msgstr ""
 
-#: src/purchase/models.py:61
+#: purchase/models.py:69
 msgid "unit price (cents)"
 msgstr ""
 
-#: src/purchase/models.py:61
+#: purchase/models.py:69
 msgid "unit price in cents"
 msgstr ""
 
-#: src/purchase/models.py:64
+#: purchase/models.py:72
 msgid "display order"
 msgstr ""
 
-#: src/purchase/models.py:71 src/purchase/models.py:154
+#: purchase/models.py:79 purchase/models.py:177
 msgid "product"
 msgstr ""
 
-#: src/purchase/models.py:72
+#: purchase/models.py:80
 msgid "products"
 msgstr ""
 
-#: src/purchase/models.py:134 src/purchase/models.py:160
+#: purchase/models.py:155 purchase/models.py:183
 msgid "basket"
 msgstr ""
 
-#: src/purchase/models.py:135
+#: purchase/models.py:156
 msgid "baskets"
 msgstr ""
 
-#: src/purchase/models.py:138
+#: purchase/models.py:159
 #, python-format
 msgid "Basket #%(id)s"
 msgstr ""
 
-#: src/purchase/models.py:162
+#: purchase/models.py:185
 msgid "quantity"
 msgstr ""
 
-#: src/purchase/models.py:167
+#: purchase/models.py:190
 msgid "basket item"
 msgstr ""
 
-#: src/purchase/models.py:168
+#: purchase/models.py:191
 msgid "basket items"
 msgstr ""
 
-#: src/purchase/templates/purchase/basket_confirm_delete.html:7
+#: purchase/templates/purchase/basket_confirm_delete.html:7
 #, python-format
 msgid "Are you sure you want to delete \"%(basket)s\"?"
 msgstr ""
 
-#: src/purchase/templates/purchase/basket_form.html:11
+#: purchase/templates/purchase/basket_form.html:11
 msgid "Missing payment method."
 msgstr ""
 
-#: src/purchase/templates/purchase/basket_form.html:14
+#: purchase/templates/purchase/basket_form.html:14
 msgid "New basket"
 msgstr ""
 
-#: src/purchase/templates/purchase/basket_form.html:18
+#: purchase/templates/purchase/basket_form.html:18
 msgid "New"
 msgstr ""
 
-#: src/purchase/templates/purchase/basket_list.html:5
+#: purchase/templates/purchase/basket_list.html:5
 msgid "Baskets"
 msgstr ""
 
-#: src/purchase/templates/purchase/basket_list.html:11
+#: purchase/templates/purchase/basket_list.html:11
 #, python-format
 msgid "Basket #%(basket_id)s"
 msgstr ""
 
-#: src/purchase/templates/purchase/basket_list.html:13
+#: purchase/templates/purchase/basket_list.html:13
 #, python-format
 msgid "1 item"
 msgid_plural "%(counter)s items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/purchase/templates/purchase/reports.html:6
+#: purchase/templates/purchase/reports.html:6
 msgid "Reports"
 msgstr ""
 
-#: src/purchase/templates/purchase/reports.html:7
+#: purchase/templates/purchase/reports.html:7
 msgid "General"
 msgstr ""
 
-#: src/purchase/templates/purchase/reports.html:9
+#: purchase/templates/purchase/reports.html:9
 msgid "Total turnover:"
 msgstr ""
 
-#: src/purchase/templates/purchase/reports.html:10
+#: purchase/templates/purchase/reports.html:10
 msgid "Average basket:"
 msgstr ""
 
-#: src/purchase/templates/purchase/reports.html:13
-msgid "Products"
+#: purchase/templates/purchase/reports.html:13
+msgid "By day"
 msgstr ""
 
-#: src/purchase/templates/purchase/reports.html:16
-msgid "Turnover by payment method"
-msgstr ""
-
-#: src/purchase/templates/purchase/reports.html:19
-msgid "Baskets without payment method"
-msgstr ""
-
-#: src/purchase/templates/purchase/snippets/report_no_payment_method.html:6
-msgid "Basket ID"
-msgstr ""
-
-#: src/purchase/templates/purchase/snippets/report_no_payment_method.html:7
-msgid "Price"
-msgstr ""
-
-#: src/purchase/templates/purchase/snippets/report_payment_methods.html:6
-msgid "Payment method"
-msgstr ""
-
-#: src/purchase/templates/purchase/snippets/report_payment_methods.html:7
-msgid "# baskets"
-msgstr ""
-
-#: src/purchase/templates/purchase/snippets/report_payment_methods.html:8
-#: src/purchase/templates/purchase/snippets/report_products.html:8
+#: purchase/templates/purchase/reports.html:14
+#: purchase/templates/purchase/snippets/report_payment_methods.html:8
+#: purchase/templates/purchase/snippets/report_products.html:8
 msgid "Turnover"
 msgstr ""
 
-#: src/purchase/templates/purchase/snippets/report_products.html:6
+#: purchase/templates/purchase/reports.html:20
+msgid "Average basket"
+msgstr ""
+
+#: purchase/templates/purchase/reports.html:27
+msgid "Products"
+msgstr ""
+
+#: purchase/templates/purchase/reports.html:30
+msgid "Turnover by payment method"
+msgstr ""
+
+#: purchase/templates/purchase/reports.html:33
+msgid "Baskets without payment method"
+msgstr ""
+
+#: purchase/templates/purchase/snippets/report_no_payment_method.html:6
+msgid "Basket ID"
+msgstr ""
+
+#: purchase/templates/purchase/snippets/report_no_payment_method.html:7
+msgid "Price"
+msgstr ""
+
+#: purchase/templates/purchase/snippets/report_payment_methods.html:6
+msgid "Payment method"
+msgstr ""
+
+#: purchase/templates/purchase/snippets/report_payment_methods.html:7
+msgid "# baskets"
+msgstr ""
+
+#: purchase/templates/purchase/snippets/report_products.html:6
 msgid "Product"
 msgstr ""
 
-#: src/purchase/templates/purchase/snippets/report_products.html:7
+#: purchase/templates/purchase/snippets/report_products.html:7
 msgid "# sold"
 msgstr ""
 
-#: src/purchase/views/basket.py:15
+#: purchase/views/basket.py:15
 msgid "Successfully created basket."
 msgstr ""
 
-#: src/purchase/views/basket.py:30
+#: purchase/views/basket.py:30
 msgid "Successfully updated basket."
 msgstr ""
 
-#: src/purchase/views/basket.py:45
+#: purchase/views/basket.py:45
 msgid "Basket successfully deleted."
 msgstr ""
