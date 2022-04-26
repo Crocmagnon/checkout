@@ -20,6 +20,7 @@ Pillow = "^9.1.0"
 django-crispy-forms = "^1.14.0"
 crispy-bootstrap5 = "^0.6"
 matplotlib = "^3.5.1"
+freezegun = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.7"
