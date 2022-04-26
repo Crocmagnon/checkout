@@ -47,7 +47,10 @@ class PaymentMethod(Model):
 
 
 def default_product_display_order():
-    return Product.objects.last().display_order + 1
+    last = Product.objects.last()
+    if last is None:
+        return 1
+    return last.display_order + 1
 
 
 class ProductQuerySet(models.QuerySet):
