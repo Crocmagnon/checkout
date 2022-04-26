@@ -1,6 +1,11 @@
 {% extends "common/base.html" %}
+{% load static %}
 {% load i18n %}
 {% load purchase %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static "purchase/css/reports.css" %}">
+{% endblock %}
 
 {% block content %}
     <h1>{% translate "Reports" %}</h1>
