@@ -2,6 +2,7 @@ import random
 from datetime import timedelta
 
 import freezegun
+from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 
@@ -9,31 +10,12 @@ from purchase.models import Basket, BasketItem, PaymentMethod, Product
 
 
 class Command(BaseCommand):
-    help = "Generates dummy data"  # noqa: A003
+    help = "Generates dummy baskets"  # noqa: A003
 
     def handle(self, *args, **options):
-        products = [
-            Product(name="Clou", unit_price_cents=134),
-            Product(name="Villard'Ain", unit_price_cents=290),
-            Product(name="Herbier", unit_price_cents=330),
-            Product(name="Blanc vache", unit_price_cents=650),
-        ]
-        products = Product.objects.bulk_create(products)
-        self.stdout.write(
-            self.style.SUCCESS(f"Successfully created {len(products)} products.")
-        )
-
-        payment_methods = [
-            PaymentMethod(name="Espèces"),
-            PaymentMethod(name="CB"),
-            PaymentMethod(name="Chèque"),
-        ]
-        payment_methods = PaymentMethod.objects.bulk_create(payment_methods)
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Successfully created {len(payment_methods)} payment methods."
-            )
-        )
+        call_command("loaddata", ["payment_methods", "products"])
+        products = list(Product.objects.all())
+        payment_methods = list(PaymentMethod.objects.all())
 
         count = 0
         hours = list(range(-29, -20))

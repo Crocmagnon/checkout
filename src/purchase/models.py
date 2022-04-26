@@ -33,10 +33,15 @@ class PaymentMethodQuerySet(models.QuerySet):
         return self.annotate(sold=Count("baskets", distinct=True))
 
 
+class PaymentMethodManager(models.Manager):
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
+
+
 class PaymentMethod(Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=_("name"))
 
-    objects = PaymentMethodQuerySet.as_manager()
+    objects = PaymentMethodManager.from_queryset(PaymentMethodQuerySet)
 
     class Meta:
         verbose_name = _("payment method")
@@ -44,6 +49,10 @@ class PaymentMethod(Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def natural_key(self):
+        return (self.name,)
 
 
 def default_product_display_order():
@@ -65,6 +74,11 @@ class ProductQuerySet(models.QuerySet):
         return self.annotate(sold=Coalesce(Sum("basket_items__quantity"), 0))
 
 
+class ProductManager(models.Manager):
+    def get_by_natural_key(self, name):
+        return self.get(name=name)
+
+
 class Product(Model):
     name = models.CharField(max_length=250, unique=True, verbose_name=_("name"))
     image = models.ImageField(null=True, blank=True, verbose_name=_("image"))
@@ -75,7 +89,7 @@ class Product(Model):
         default=default_product_display_order, verbose_name=_("display order")
     )
 
-    objects = ProductQuerySet.as_manager()
+    objects = ProductManager.from_queryset(ProductQuerySet)
 
     class Meta:
         ordering = ["display_order", "name"]
@@ -84,6 +98,10 @@ class Product(Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def natural_key(self):
+        return (self.name,)
 
     def save(self, *args, **kwargs):
         super().save()
