@@ -7,12 +7,7 @@ from django.views.generic import TemplateView
 from matplotlib import pyplot as plt
 from matplotlib import ticker
 
-from purchase.models import (
-    Basket,
-    PaymentMethod,
-    Product,
-    ProductQuerySet,
-)
+from purchase.models import Basket, PaymentMethod, Product, ProductQuerySet
 from purchase.views.utils import ProtectedViewsMixin
 
 
