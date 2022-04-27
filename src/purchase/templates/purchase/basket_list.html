@@ -3,7 +3,7 @@
 {% load purchase %}
 {% block content %}
     <h1>{% translate "Baskets" %}</h1>
-    <div class="row row-cols-auto g-4">
+    <div class="row row-cols-2 row-cols-xl-6 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-4">
         {% for basket in baskets %}
             <div class="col">
                 <div class="card h-100 {% if not basket.payment_method %}bg-warning text-black{% endif %}">
@@ -12,7 +12,13 @@
                         <p class="card-text">
                             {% blocktranslate count counter=basket.items.count %}1 item{% plural %}{{ counter }} items{% endblocktranslate %}<br>
                             {{ basket.price|currency }}<br>
-                            {{ basket.payment_method|default:"-" }}
+                            {{ basket.payment_method|default:"-" }}<br>
+                            {% now "Y-m-d" as todays_date %}
+                            {% if basket.created_at|date:"Y-m-d" == todays_date %}
+                                {{ basket.created_at|date:"TIME_FORMAT" }}
+                            {% else %}
+                                {{ basket.created_at }}
+                            {% endif %}
                         </p>
                         <div class="btn-group btn-group-sm">
                             {% if perms.purchase.change_basket %}
