@@ -9,7 +9,6 @@ from matplotlib import ticker
 
 from purchase.models import (
     Basket,
-    BasketQuerySet,
     PaymentMethod,
     Product,
     ProductQuerySet,

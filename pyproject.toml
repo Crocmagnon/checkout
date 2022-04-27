@@ -50,7 +50,7 @@ max_complexity = 10
 format = "grouped"
 
 [tool.flakeheaven.plugins]
-"flake8-*" = [
+"*" = [
     "+*",
     # long lines
     "-E501",
