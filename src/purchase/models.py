@@ -23,7 +23,7 @@ class PaymentMethodQuerySet(models.QuerySet):
             turnover=Coalesce(
                 Sum(
                     F("baskets__items__quantity")
-                    * F("baskets__items__product__unit_price_cents")
+                    * F("baskets__items__unit_price_cents")
                 ),
                 0,
             )
@@ -65,7 +65,8 @@ class ProductQuerySet(models.QuerySet):
     def with_turnover(self):
         return self.annotate(
             turnover=Coalesce(
-                Sum(F("basket_items__quantity") * F("unit_price_cents")), 0
+                Sum(F("basket_items__quantity") * F("basket_items__unit_price_cents")),
+                0,
             )
         )
 
@@ -140,9 +141,7 @@ class Product(Model):
 class BasketQuerySet(models.QuerySet):
     def priced(self) -> BasketQuerySet:
         return self.annotate(
-            price=Coalesce(
-                Sum(F("items__quantity") * F("items__product__unit_price_cents")), 0
-            )
+            price=Coalesce(Sum(F("items__quantity") * F("items__unit_price_cents")), 0)
         )
 
     def average_basket(self) -> float:
@@ -183,9 +182,7 @@ class Basket(Model):
 
 class BasketItemQuerySet(models.QuerySet):
     def priced(self):
-        return self.annotate(
-            price=Coalesce(F("quantity") * F("product__unit_price_cents"), 0)
-        )
+        return self.annotate(price=Coalesce(F("quantity") * F("unit_price_cents"), 0))
 
 
 class BasketItem(Model):
@@ -202,6 +199,10 @@ class BasketItem(Model):
         verbose_name=_("basket"),
     )
     quantity = models.PositiveIntegerField(verbose_name=_("quantity"))
+    unit_price_cents = models.PositiveIntegerField(
+        verbose_name=_("unit price (cents)"),
+        help_text=_("product's unit price in cents at the time of purchase"),
+    )
 
     objects = BasketItemQuerySet.as_manager()
 

@@ -41,7 +41,10 @@ class Command(BaseCommand):
                 product = random.choice(products)
                 items.append(
                     BasketItem(
-                        product=product, basket=basket, quantity=random.randint(1, 3)
+                        product=product,
+                        basket=basket,
+                        quantity=random.randint(1, 3),
+                        unit_price_cents=product.unit_price_cents,
                     )
                 )
             BasketItem.objects.bulk_create(items)

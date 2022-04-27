@@ -51,13 +51,19 @@ class BasketForm(forms.ModelForm):
     def save(self, commit=True):
         instance: Basket = super().save(commit=True)
         name: str
+        products = {product.id: product for product in Product.objects.all()}
         for name, value in self.cleaned_data.items():
             if name.startswith(PREFIX):
                 product_id = int(name.removeprefix(PREFIX))
+                product = products[product_id]
                 if value > 0:
                     instance.items.update_or_create(
-                        product_id=product_id, defaults={"quantity": value}
+                        product=product,
+                        defaults={
+                            "quantity": value,
+                            "unit_price_cents": product.unit_price_cents,
+                        },
                     )
                 if value == 0:
-                    instance.items.filter(product_id=product_id).delete()
+                    instance.items.filter(product=product).delete()
         return instance
