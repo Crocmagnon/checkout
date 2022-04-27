@@ -49,13 +49,7 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
         return context
 
     def get_products_plot(self, products: ProductQuerySet):
-        labels = []
-        sold = []
-        turnover = []
-        for product in products:
-            labels.append(product.name)
-            sold.append(product.sold)
-            turnover.append(product.turnover / 100)
+        labels, sold, turnover = self.get_products_data_for_plot(products)
 
         fig, ax1 = plt.subplots()
         color = "tab:orange"
@@ -75,7 +69,38 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
         image_data.seek(0)
         return image_data.getvalue()
 
+    def get_products_data_for_plot(self, products):
+        labels = []
+        sold = []
+        turnover = []
+        for product in products:
+            labels.append(product.name)
+            sold.append(product.sold)
+            turnover.append(product.turnover / 100)
+        return labels, sold, turnover
+
     def by_hour_plot(self, baskets):
+        counts, labels, turnovers = self.get_by_hour_data_for_plot(baskets)
+        fig, ax1 = plt.subplots()
+        hours_in_day = 24
+        color = "tab:orange"
+        ax1.bar(labels, counts, width=1 / hours_in_day, color=color)
+        ax1.tick_params(axis="x", rotation=15)
+        ax1.set_ylabel(_("Basket count by hour"), color=color)
+
+        color = "tab:blue"
+        ax2 = ax1.twinx()
+        ax2.bar(labels, turnovers, width=1 / (hours_in_day * 2), color=color)
+        ax2.set_ylabel(_("Turnover by hour"), color=color)
+        plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter("%.2f€"))
+
+        fig.tight_layout()
+        image_data = StringIO()
+        fig.savefig(image_data, format="svg")
+        image_data.seek(0)
+        return image_data.getvalue()
+
+    def get_by_hour_data_for_plot(self, baskets):
         current: datetime.datetime = baskets[0].created_at
         current = current.replace(minute=0, second=0, microsecond=0)
         end: datetime.datetime = baskets[-1].created_at
@@ -99,21 +124,4 @@ class ReportsView(ProtectedViewsMixin, TemplateView):
             counts.append(count)
             turnovers.append(turnover)
             current = end_slot
-        fig, ax1 = plt.subplots()
-        hours_in_day = 24
-        color = "tab:orange"
-        ax1.bar(labels, counts, width=1 / hours_in_day, color=color)
-        ax1.tick_params(axis="x", rotation=15)
-        ax1.set_ylabel(_("Basket count by hour"), color=color)
-
-        color = "tab:blue"
-        ax2 = ax1.twinx()
-        ax2.bar(labels, turnovers, width=1 / (hours_in_day * 2), color=color)
-        ax2.set_ylabel(_("Turnover by hour"), color=color)
-        plt.gca().yaxis.set_major_formatter(ticker.FormatStrFormatter("%.2f€"))
-
-        fig.tight_layout()
-        image_data = StringIO()
-        fig.savefig(image_data, format="svg")
-        image_data.seek(0)
-        return image_data.getvalue()
+        return counts, labels, turnovers
