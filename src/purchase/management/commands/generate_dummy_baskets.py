@@ -35,9 +35,9 @@ class Command(BaseCommand):
         methods_weights = [random.randint(1, 6) for _ in range(len(payment_methods))]
         products_weights = [1 / product.display_order for product in products]
         for _ in range(count):
-            method: PaymentMethod = random.choices(
-                payment_methods, weights=methods_weights
-            )[0]
+            method = None
+            if random.random() < 0.99:
+                method = random.choices(payment_methods, weights=methods_weights)[0]
             basket = Basket.objects.create(payment_method=method)
             items = []
             item_count = int(random.normalvariate(3, 2))
