@@ -32,13 +32,17 @@ class Command(BaseCommand):
 
     def generate_baskets(self, payment_methods, products):
         count = int(random.normalvariate(20, 10))
+        methods_weights = [random.randint(1, 6) for _ in range(len(payment_methods))]
+        products_weights = [1 / product.display_order for product in products]
         for _ in range(count):
-            method = random.choice(payment_methods)
+            method: PaymentMethod = random.choices(
+                payment_methods, weights=methods_weights
+            )[0]
             basket = Basket.objects.create(payment_method=method)
             items = []
             item_count = int(random.normalvariate(3, 2))
             for _ in range(item_count):
-                product = random.choice(products)
+                product: Product = random.choices(products, weights=products_weights)[0]
                 items.append(
                     BasketItem(
                         product=product,
