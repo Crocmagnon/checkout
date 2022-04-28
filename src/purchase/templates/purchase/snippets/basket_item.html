@@ -3,6 +3,13 @@
     <div class="card h-100 {% if field.value %}bg-success text-white{% endif %}">
         {% if product.image %}
             <img src="{{ product.image.url }}" class="card-img">
+        {% else %}
+            <div class="card-img product-img-placeholder"
+                style="background-color: hsl({{ product.color_hue }}, 60%, 80%)">
+                <span>
+                    {{ product.name|slice:"1" }}
+                </span>
+            </div>
         {% endif %}
         <div class="card-body">
             <h4 class="card-title">{{ product.name }}</h4>

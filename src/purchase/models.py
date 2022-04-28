@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+
 from django.db import models
 from django.db.models import Avg, Count, F, Sum
 from django.db.models.functions import Coalesce
@@ -101,6 +103,12 @@ class Product(Model):
 
     def natural_key(self):
         return (self.name,)
+
+    @property
+    def color_hue(self):
+        return int(
+            hashlib.sha256(bytes(self.name, encoding="utf-8")).hexdigest()[:2], base=16
+        )
 
     def save(self, *args, **kwargs):
         super().save()

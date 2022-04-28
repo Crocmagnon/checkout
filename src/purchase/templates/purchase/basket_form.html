@@ -1,6 +1,10 @@
 {% extends "common/base.html" %}
+{% load static %}
 {% load i18n %}
 {% load crispy_forms_tags purchase %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static "purchase/css/basket_form.css" %}">
+{% endblock %}
 {% block content %}
     {% if object %}
         <h1>{{ object }} <span class="badge bg-secondary">{{ object.price|currency }}</span></h1>

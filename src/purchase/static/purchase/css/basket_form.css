@@ -1,0 +1,10 @@
+.product-img-placeholder {
+    aspect-ratio: 1/1;
+    font-size: 6em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.product-img-placeholder span {
+    text-align: center;
+}
