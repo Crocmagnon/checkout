@@ -1,5 +1,6 @@
+from crispy_forms.bootstrap import InlineRadios
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Field, Layout, Submit
+from crispy_forms.layout import Div, Layout, Submit
 from django import forms
 from django.utils.translation import gettext as _
 
@@ -13,6 +14,7 @@ class BasketForm(forms.ModelForm):
     class Meta:
         model = Basket
         fields = ["payment_method"]
+        widgets = {"payment_method": forms.RadioSelect}
 
     class Media:
         js = ["purchase/js/basket_form.js"]
@@ -20,6 +22,7 @@ class BasketForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.helper.form_class = "form-horizontal"
         self.helper.add_input(Submit("submit", _("Save")))
         self.helper.layout = Layout()
         products = {}
@@ -45,7 +48,7 @@ class BasketForm(forms.ModelForm):
                 *fields,
                 css_class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4",
             ),
-            Field("payment_method"),
+            InlineRadios("payment_method"),
         )
 
     def save(self, commit=True):
