@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 
 from django.db import models
-from django.db.models import Avg, Count, F, Sum
+from django.db.models import Avg, Count, F, Sum, UniqueConstraint
 from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.utils.translation import gettext
@@ -217,3 +217,6 @@ class BasketItem(Model):
     class Meta:
         verbose_name = _("basket item")
         verbose_name_plural = _("basket items")
+        constraints = [
+            UniqueConstraint("product", "basket", name="unique_product_per_basket")
+        ]

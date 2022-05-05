@@ -2,6 +2,7 @@ import random
 from datetime import timedelta
 
 import freezegun
+import numpy as np
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
@@ -39,10 +40,19 @@ class Command(BaseCommand):
             if random.random() < 0.99:
                 method = random.choices(payment_methods, weights=methods_weights)[0]
             basket = Basket.objects.create(payment_method=method)
+            items_in_basket = int(random.normalvariate(3, 2))
+            if items_in_basket > len(products):
+                items_in_basket = len(products)
+            if items_in_basket < 1:
+                items_in_basket = 1
+            selected_products = np.random.choice(
+                products,
+                size=items_in_basket,
+                replace=False,
+                p=np.asarray(products_weights) / sum(products_weights),
+            )
             items = []
-            item_count = int(random.normalvariate(3, 2))
-            for _ in range(item_count):
-                product: Product = random.choices(products, weights=products_weights)[0]
+            for product in selected_products:
                 items.append(
                     BasketItem(
                         product=product,
