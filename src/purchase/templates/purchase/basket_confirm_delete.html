@@ -5,7 +5,6 @@
     <form method="post">
         {% csrf_token %}
         <p>{% blocktranslate %}Are you sure you want to delete "{{ basket }}"?{% endblocktranslate %}</p>
-        {{ form }}
         <input class="btn btn-danger" type="submit" value="Confirm">
     </form>
 {% endblock %}

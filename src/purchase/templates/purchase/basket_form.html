@@ -6,19 +6,19 @@
     <link rel="stylesheet" href="{% static "purchase/css/basket_form.css" %}">
 {% endblock %}
 {% block content %}
-    {% if object %}
-        <h1>{{ object }} <span class="badge bg-secondary">{{ object.price|currency }}</span></h1>
+    {% if basket %}
+        <h1>{{ basket }} <span class="badge bg-secondary">{{ basket.price|currency }}</span></h1>
         <p class="metadata">
-            {{ object.created_at }}
+            {{ basket.created_at }}
         </p>
-        {% if not object.payment_method %}
+        {% if not basket.payment_method %}
             <div class="alert alert-danger" role="alert">{% translate "Missing payment method." %}</div>
         {% endif %}
     {% else %}
         <h1>{% translate "New basket" %}</h1>
     {% endif %}
     {% crispy form %}
-    {% if object %}
+    {% if basket %}
         <a href="{% url "purchase:new" %}" class="btn btn-secondary">{% translate "New" %}</a>
     {% endif %}
 {% endblock %}
