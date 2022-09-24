@@ -33,6 +33,7 @@ invoke = "^1.7.0"
 factory-boy = "^3.2.1"
 pytest-selenium = "^4.0.0"
 selenium = "^4.4.3"
+kolo = "^2.0.3"
 
 [tool.black]
 target-version = ['py310']

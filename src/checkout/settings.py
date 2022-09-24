@@ -104,6 +104,14 @@ MIDDLEWARE = [
     "csp.middleware.CSPMiddleware",
 ]
 
+try:
+    import kolo  # noqa: F401
+
+    MIDDLEWARE = ["kolo.middleware.KoloMiddleware"] + MIDDLEWARE
+except ImportError:
+    # Don't add kolo if unavailable
+    pass
+
 ROOT_URLCONF = "checkout.urls"
 
 TEMPLATES = [
