@@ -24,12 +24,15 @@ freezegun = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.7"
-pytest = "^7.1"
+pytest = "^6.0"
 pytest-django = "^4.5"
 model-bakery = "^1.1"
 pytest-cov = "^3.0"
 poetry-deps-scanner = "^2.0"
 invoke = "^1.7.0"
+factory-boy = "^3.2.1"
+pytest-selenium = "^4.0.0"
+selenium = "^4.4.3"
 
 [tool.black]
 target-version = ['py310']
@@ -38,7 +41,7 @@ target-version = ['py310']
 profile = "black"
 
 [tool.pytest.ini_options]
-addopts = "--color=yes"
+addopts = "--color=yes --driver Firefox"
 minversion = "6.0"
 DJANGO_SETTINGS_MODULE = "checkout.settings"
 testpaths = [
