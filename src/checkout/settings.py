@@ -44,7 +44,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 admins = env("ADMINS")
 if admins:
-    ADMINS = list(map(lambda x: tuple(x.split("|")), admins))
+    ADMINS = [tuple(admin.split("|")) for admin in admins]
 
 DEFAULT_FROM_EMAIL = "Checkout <checkout@mg.augendre.info>"
 SERVER_EMAIL = "Checkout <checkout@mg.augendre.info>"
