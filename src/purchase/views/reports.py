@@ -2,6 +2,7 @@ import datetime
 from io import StringIO
 from zoneinfo import ZoneInfo
 
+import matplotlib
 import numpy as np
 from django.conf import settings
 from django.contrib import messages
@@ -16,6 +17,8 @@ from matplotlib.dates import AutoDateLocator, ConciseDateFormatter, HourLocator
 from matplotlib.figure import Figure
 
 from purchase.models import Basket, PaymentMethod, Product, ProductQuerySet
+
+matplotlib.use("TkAgg")
 
 
 @permission_required("purchase.view_basket")
