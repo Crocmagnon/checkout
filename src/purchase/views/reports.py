@@ -19,7 +19,7 @@ from matplotlib.figure import Figure
 
 from purchase.models import Basket, PaymentMethod, Product, ProductQuerySet
 
-matplotlib.use("Agg")
+matplotlib.use("SVG")
 
 
 @permission_required("purchase.view_basket")
