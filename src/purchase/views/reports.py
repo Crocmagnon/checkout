@@ -18,17 +18,20 @@ from matplotlib.container import BarContainer
 from matplotlib.dates import AutoDateLocator, ConciseDateFormatter, HourLocator
 from matplotlib.figure import Figure
 
-from purchase.models import Basket, CacheEtag, PaymentMethod, Product, ProductQuerySet
+from purchase.models import (
+    Basket,
+    PaymentMethod,
+    Product,
+    ProductQuerySet,
+    reports_etag,
+    reports_last_modified,
+)
 
 matplotlib.use("SVG")
 
 
-def reports_etag(request):
-    return str(CacheEtag.get_solo().value)
-
-
 @permission_required("purchase.view_basket")
-@condition(etag_func=reports_etag)
+@condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def products_plots_view(request):
     products = Product.objects.with_turnover().with_sold()
     (
@@ -43,7 +46,7 @@ def products_plots_view(request):
 
 
 @permission_required("purchase.view_basket")
-@condition(etag_func=reports_etag)
+@condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def by_hour_plot_view(request):
     baskets = list(Basket.objects.priced().order_by("created_at"))
     context = {
@@ -53,7 +56,7 @@ def by_hour_plot_view(request):
 
 
 @permission_required("purchase.view_basket")
-@condition(etag_func=reports_etag)
+@condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def reports(request):
     template_name = "purchase/reports.html"
     baskets = list(Basket.objects.priced().order_by("created_at"))

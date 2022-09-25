@@ -8,8 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import condition, require_http_methods
 
 from purchase.forms import BasketForm
-from purchase.models import Basket
-from purchase.views.reports import reports_etag
+from purchase.models import Basket, reports_etag, reports_last_modified
 
 
 @require_http_methods(["GET", "POST"])
@@ -50,7 +49,7 @@ def update_basket(request: HttpRequest, pk: int) -> HttpResponse:
 
 
 @permission_required("purchase.view_basket")
-@condition(etag_func=reports_etag)
+@condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def list_baskets(request: HttpRequest) -> HttpResponse:
     context = {"baskets": Basket.objects.priced().order_by("-id")}
     return TemplateResponse(request, "purchase/basket_list.html", context)

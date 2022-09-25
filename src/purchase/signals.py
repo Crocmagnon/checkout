@@ -1,4 +1,4 @@
 def basket_item_on_save(sender, **kwargs):
-    from purchase.models import CacheEtag
+    from purchase.models import Cache
 
-    CacheEtag.get_solo().refresh()
+    Cache.get_solo().refresh()

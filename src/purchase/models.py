@@ -224,12 +224,21 @@ class BasketItem(Model):
         ]
 
 
-class CacheEtag(SingletonModel):
-    value = models.UUIDField(default=uuid.uuid4)
+class Cache(SingletonModel):
+    etag = models.UUIDField(default=uuid.uuid4)
+    last_modified = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return str(self.value)
+        return str(self.etag)
 
     def refresh(self):
-        self.value = uuid.uuid4()
+        self.etag = uuid.uuid4()
         self.save()
+
+
+def reports_etag(request):
+    return str(Cache.get_solo().etag)
+
+
+def reports_last_modified(request):
+    return Cache.get_solo().last_modified
