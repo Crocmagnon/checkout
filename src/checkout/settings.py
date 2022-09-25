@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "django_extensions",
     "django_htmx",
+    "solo",
 ]
 
 MIDDLEWARE = [
