@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_extensions",
+    "django_htmx",
 ]
 
 MIDDLEWARE = [
@@ -102,6 +103,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "csp.middleware.CSPMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 try:

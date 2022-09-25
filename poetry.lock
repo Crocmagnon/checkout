@@ -343,6 +343,17 @@ python-versions = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
+name = "django-htmx"
+version = "1.12.2"
+description = "Extensions for using Django with htmx."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "factory-boy"
 version = "3.2.1"
 description = "A versatile test fixtures replacement based on thoughtbot's factory_bot for Ruby."
@@ -1153,7 +1164,7 @@ h11 = ">=0.9.0,<1"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "e21ae8f93aefc631a43ccf43b79a3660ca11c6870677d60878b0adc88303953d"
+content-hash = "e0332f1446a90fc3a5dc2fa2ca5d1745eb0d90d8f033094d79b2df9376b79639"
 
 [metadata.files]
 ansicon = []
@@ -1276,6 +1287,7 @@ django-environ = [
     {file = "django_environ-0.9.0-py2.py3-none-any.whl", hash = "sha256:f21a5ef8cc603da1870bbf9a09b7e5577ab5f6da451b843dbcc721a7bca6b3d9"},
 ]
 django-extensions = []
+django-htmx = []
 factory-boy = []
 faker = []
 filelock = []

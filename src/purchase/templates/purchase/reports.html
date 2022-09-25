@@ -1,7 +1,5 @@
 {% extends "common/base.html" %}
-{% load static %}
-{% load i18n %}
-{% load purchase %}
+{% load static i18n purchase django_htmx %}
 
 {% block extrahead %}
     <link rel="stylesheet" href="{% static "purchase/css/reports.css" %}">
@@ -29,18 +27,20 @@
         {% endfor %}
     </ul>
 
-    {{ by_hour_plot|safe }}
+    {% include "purchase/snippets/htmx_plot.html" with url='purchase:by_hour_plot' %}
 
     <h2>{% translate "Products" %}</h2>
     {% include "purchase/snippets/report_products.html" %}
-    {{ products_plot|safe }}
-    {{ products_sold_pie|safe }}
-    {{ products_turnover_pie|safe }}
+    {% include "purchase/snippets/htmx_plot.html" with url='purchase:products_plots' %}
 
     <h2>{% translate "Turnover by payment method" %}</h2>
     {% include "purchase/snippets/report_payment_methods.html" %}
 
     <h2>{% translate "Baskets without payment method" %}</h2>
     {% include "purchase/snippets/report_no_payment_method.html" %}
+{% endblock %}
 
+{% block extrascript %}
+    <script src="{% static 'vendor/htmx-1.8.0/htmx.min.js' %}" defer></script>
+    {% django_htmx_script %}
 {% endblock %}

@@ -7,6 +7,7 @@ import numpy as np
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
+from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.utils.translation import gettext as _
 from matplotlib import pyplot as plt
@@ -18,7 +19,30 @@ from matplotlib.figure import Figure
 
 from purchase.models import Basket, PaymentMethod, Product, ProductQuerySet
 
-matplotlib.use("TkAgg")
+matplotlib.use("Agg")
+
+
+@permission_required("purchase.view_basket")
+def products_plots_view(request):
+    products = Product.objects.with_turnover().with_sold()
+    (
+        products_plot,
+        products_sold_pie,
+        products_turnover_pie,
+    ) = get_products_plots(products)
+    context = {
+        "plots": [products_plot, products_sold_pie, products_turnover_pie],
+    }
+    return render(request, "purchase/snippets/plots.html", context)
+
+
+@permission_required("purchase.view_basket")
+def by_hour_plot_view(request):
+    baskets = list(Basket.objects.priced().order_by("created_at"))
+    context = {
+        "plots": [by_hour_plot(baskets)],
+    }
+    return render(request, "purchase/snippets/plots.html", context)
 
 
 @permission_required("purchase.view_basket")
@@ -36,11 +60,6 @@ def reports(request):
     turnover_by_day = {date: Basket.objects.by_date(date).turnover() for date in dates}
 
     products = Product.objects.with_turnover().with_sold()
-    (
-        products_plot,
-        products_sold_pie,
-        products_turnover_pie,
-    ) = get_products_plots(products)
 
     context = {
         "turnover": Basket.objects.turnover(),
@@ -48,10 +67,6 @@ def reports(request):
         "average_basket": Basket.objects.average_basket(),
         "average_basket_by_day": average_basket_by_day,
         "products": products,
-        "products_plot": products_plot,
-        "products_sold_pie": products_sold_pie,
-        "products_turnover_pie": products_turnover_pie,
-        "by_hour_plot": by_hour_plot(baskets),
         "payment_methods": PaymentMethod.objects.with_turnover().with_sold(),
         "no_payment_method": Basket.objects.no_payment_method().priced(),
     }
