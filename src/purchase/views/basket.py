@@ -5,14 +5,16 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import condition, require_http_methods
 
 from purchase.forms import BasketForm
 from purchase.models import Basket
+from purchase.views.reports import reports_etag
 
 
 @require_http_methods(["GET", "POST"])
 @permission_required("purchase.add_basket")
+@condition(etag_func=reports_etag)
 def new_basket(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = BasketForm(request.POST)
@@ -32,6 +34,7 @@ def new_basket(request: HttpRequest) -> HttpResponse:
 
 @require_http_methods(["GET", "POST"])
 @permission_required("purchase.change_basket")
+@condition(etag_func=reports_etag)
 def update_basket(request: HttpRequest, pk: int) -> HttpResponse:
     basket = get_object_or_404(Basket.objects.priced(), pk=pk)
     if request.method == "POST":
@@ -49,6 +52,7 @@ def update_basket(request: HttpRequest, pk: int) -> HttpResponse:
 
 
 @permission_required("purchase.view_basket")
+@condition(etag_func=reports_etag)
 def list_baskets(request: HttpRequest) -> HttpResponse:
     context = {"baskets": Basket.objects.priced().order_by("-id")}
     return TemplateResponse(request, "purchase/basket_list.html", context)

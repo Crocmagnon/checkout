@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from django.template.response import TemplateResponse
 from django.utils.translation import gettext as _
+from django.views.decorators.http import condition
 from matplotlib import pyplot as plt
 from matplotlib import ticker
 from matplotlib.axes import Axes
@@ -17,12 +18,17 @@ from matplotlib.container import BarContainer
 from matplotlib.dates import AutoDateLocator, ConciseDateFormatter, HourLocator
 from matplotlib.figure import Figure
 
-from purchase.models import Basket, PaymentMethod, Product, ProductQuerySet
+from purchase.models import Basket, CacheEtag, PaymentMethod, Product, ProductQuerySet
 
 matplotlib.use("SVG")
 
 
+def reports_etag(request):
+    return str(CacheEtag.get_solo().value)
+
+
 @permission_required("purchase.view_basket")
+@condition(etag_func=reports_etag)
 def products_plots_view(request):
     products = Product.objects.with_turnover().with_sold()
     (
@@ -37,6 +43,7 @@ def products_plots_view(request):
 
 
 @permission_required("purchase.view_basket")
+@condition(etag_func=reports_etag)
 def by_hour_plot_view(request):
     baskets = list(Basket.objects.priced().order_by("created_at"))
     context = {
@@ -46,6 +53,7 @@ def by_hour_plot_view(request):
 
 
 @permission_required("purchase.view_basket")
+@condition(etag_func=reports_etag)
 def reports(request):
     template_name = "purchase/reports.html"
     baskets = list(Basket.objects.priced().order_by("created_at"))

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import uuid
 
 from django.db import models
 from django.db.models import Avg, Count, F, Sum, UniqueConstraint
@@ -9,6 +10,7 @@ from django.urls import reverse
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 from PIL import Image, ImageOps
+from solo.models import SingletonModel
 
 
 class Model(models.Model):
@@ -220,3 +222,14 @@ class BasketItem(Model):
         constraints = [
             UniqueConstraint("product", "basket", name="unique_product_per_basket")
         ]
+
+
+class CacheEtag(SingletonModel):
+    value = models.UUIDField(default=uuid.uuid4)
+
+    def __str__(self) -> str:
+        return str(self.value)
+
+    def refresh(self):
+        self.value = uuid.uuid4()
+        self.save()

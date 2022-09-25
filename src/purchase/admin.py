@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.admin import register
 from django.utils.translation import gettext_lazy as _
+from solo.admin import SingletonModelAdmin
 
-from purchase.models import Basket, BasketItem, PaymentMethod, Product
+from purchase.models import Basket, BasketItem, CacheEtag, PaymentMethod, Product
 from purchase.templatetags.purchase import currency
 
 
@@ -70,3 +71,6 @@ class BasketAdmin(admin.ModelAdmin):
     @admin.display(description=_("price"))
     def price(self, instance) -> str:
         return currency(instance.price)
+
+
+admin.site.register(CacheEtag, SingletonModelAdmin)
