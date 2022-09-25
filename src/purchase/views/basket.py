@@ -14,7 +14,6 @@ from purchase.views.reports import reports_etag
 
 @require_http_methods(["GET", "POST"])
 @permission_required("purchase.add_basket")
-@condition(etag_func=reports_etag)
 def new_basket(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = BasketForm(request.POST)
@@ -34,7 +33,6 @@ def new_basket(request: HttpRequest) -> HttpResponse:
 
 @require_http_methods(["GET", "POST"])
 @permission_required("purchase.change_basket")
-@condition(etag_func=reports_etag)
 def update_basket(request: HttpRequest, pk: int) -> HttpResponse:
     basket = get_object_or_404(Basket.objects.priced(), pk=pk)
     if request.method == "POST":
