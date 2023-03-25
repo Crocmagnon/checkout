@@ -1,2 +1,0 @@
-[filters]
-ignore_request_paths = ["/static/"]
