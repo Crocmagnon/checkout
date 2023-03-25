@@ -1,61 +1,63 @@
-## Build venv
-FROM python:3.10.4-bullseye AS venv
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gettext
-
-# https://python-poetry.org/docs/#installation
-ENV POETRY_VERSION=1.1.13
-RUN curl -sSL https://install.python-poetry.org | python3 -
-
-ENV PATH /root/.local/bin:$PATH
-ARG POETRY_OPTIONS
+##############################################
+# write git info
+##############################################
+FROM alpine/git:v2.36.3 AS git
 
 WORKDIR /app
+COPY .git /app/.git/
+RUN git describe --tags --always > /git-describe
+RUN git rev-parse HEAD > /git-commit
+RUN date +'%Y-%m-%d %H:%M %Z' > /build-date
 
-COPY pyproject.toml poetry.lock ./
 
-RUN python -m venv --copies /app/venv \
-    && . /app/venv/bin/activate \
-    && poetry install $POETRY_OPTIONS
 
-ENV PATH /app/venv/bin:$PATH
-COPY src ./src/
-RUN python ./src/manage.py collectstatic --no-input
-RUN python ./src/manage.py compilemessages -l fr -l en
+##############################################
+# Main image
+##############################################
+FROM python:3.11.2-slim-bullseye AS final
 
-## Get git versions
-FROM alpine/git AS git
-ADD . /app
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Setup user & group
+##############################################
+RUN groupadd -g 1000 django
+RUN useradd -M -d /app -u 1000 -g 1000 -s /bin/bash django
+
+# Setup system
+##############################################
+RUN apt-get update -y \
+    && apt-get install -y --no-install-recommends \
+        libxml2 \
+        media-types
+
+# Fetch project requirements
+##############################################
+COPY --chown=django:django --from=git /git-describe /git-commit /build-date /app/git/
+
+# Create directory structure
+##############################################
 WORKDIR /app
-RUN git rev-parse HEAD | tee /version
+COPY --chown=django:django pyproject.toml requirements.txt ./
+ADD --chown=django:django ./src ./src
+COPY --chown=django:django tasks.py ./tasks.py
 
+RUN mkdir -p /app/data /app/db
+RUN chown django:django /app /app/data /app/db
 
-## Beginning of runtime image
-FROM python:3.10.4-slim-bullseye as prod
-ENV TZ "Europe/Paris"
-RUN mkdir -p /app/db
-
-COPY --from=venv /app/venv /app/venv/
-ENV PATH /app/venv/bin:$PATH
-
-WORKDIR /app
-COPY LICENSE pyproject.toml ./
-COPY docker ./docker/
-COPY src ./src/
-COPY --from=git /version /app/.version
-COPY --from=venv /app/staticfiles /app/staticfiles/
-
+ENV STATIC_ROOT=/app/static
 ENV SECRET_KEY "changeme"
 ENV DEBUG "false"
 ENV DB_BASE_DIR "/app/db"
-#ENV HOSTS="host1;host2"
-#ENV ADMINS='Full Name,email@example.com'
-#ENV MAILGUN_API_KEY='key-yourapikey'
-#ENV MAILGUN_SENDER_DOMAIN='mailgun.example.com'
-#ENV BLOG_BASE_URL='https://url-of-your-blog.example.com'
+
+RUN python -m pip install --no-cache-dir -r requirements.txt
+WORKDIR /app/src
+RUN python manage.py collectstatic --noinput --clear
+
+EXPOSE 8000
+
+WORKDIR /app/src
 
 HEALTHCHECK --start-period=30s CMD python -c "import requests; requests.get('http://localhost:8000', timeout=2)"
 
-WORKDIR /app/src
-CMD ["/app/docker/run.sh"]
+USER django
+CMD ["gunicorn", "checkout.wsgi", "--graceful-timeout=5", "--worker-tmp-dir=/dev/shm", "--workers=2", "--threads=4", "--worker-class=gthread", "--bind=0.0.0.0:8000", "--log-file=-"]

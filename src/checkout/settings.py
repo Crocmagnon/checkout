@@ -29,6 +29,7 @@ env = environ.Env(
     DB_BASE_DIR=(Path, BASE_DIR),
     TIME_ZONE=(str, "Europe/Paris"),
     LANGUAGE_CODE=(str, "fr-fr"),
+    STATIC_ROOT=(Path, BASE_DIR.parent / "staticfiles"),
 )
 
 env_file = os.getenv("ENV_FILE", None)
@@ -193,7 +194,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR.parent / "staticfiles"
+STATIC_ROOT = env("STATIC_ROOT")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "media/"
