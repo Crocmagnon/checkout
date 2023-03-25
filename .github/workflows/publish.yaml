@@ -50,4 +50,4 @@ jobs:
           max_attempts: 5
           retry_wait_seconds: 2
           warning_on_retry: false
-          command: curl -sSL --fail -m 10 https://checkout.augendre.info | grep ${GITHUB_SHA::7} > /dev/null
+          command: curl -sSL --fail -m 10 https://checkout.augendre.info/ping/ | grep ${GITHUB_SHA::7} > /dev/null

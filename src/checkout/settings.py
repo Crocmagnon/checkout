@@ -129,6 +129,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "common.context_processors.app",
             ],
         },
     },
@@ -228,3 +229,26 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MESSAGE_TAGS = {messages.ERROR: "danger"}
+
+APP = {
+    "build": {
+        "date": "latest-date",
+        "commit": "latest-commit",
+        "describe": "latest-describe",
+    },
+}
+try:
+    with Path("/app/git/build-date").open() as f:
+        APP["build"]["date"] = f.read().strip()
+except Exception:  # noqa: S110
+    pass
+try:
+    with Path("/app/git/git-commit").open() as f:
+        APP["build"]["commit"] = f.read().strip()
+except Exception:  # noqa: S110
+    pass
+try:
+    with Path("/app/git/git-describe").open() as f:
+        APP["build"]["describe"] = f.read().strip()
+except Exception:  # noqa: S110
+    pass

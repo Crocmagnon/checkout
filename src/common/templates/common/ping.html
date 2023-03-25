@@ -1,0 +1,10 @@
+{% extends "common/base.html" %}
+{% block content %}
+    <h1>Ping</h1>
+    <h2>Versions</h2>
+    <ul>
+        <li>Build date: {{ build.date }}</li>
+        <li>Commit: {{ build.commit }}</li>
+        <li>Version: {{ build.describe }}</li>
+    </ul>
+{% endblock %}
