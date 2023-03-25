@@ -1,0 +1,44 @@
+name: Update dependencies
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 18 * * MON'
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    name: Update dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Update dependencies
+        run: |
+          pip install pip-tools invoke
+          invoke update-dependencies --no-sync
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.PR_APP_ID }}
+          private_key: ${{ secrets.PR_APP_PRIVATE_KEY }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        id: create-pull-request
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          commit-message: Update dependencies
+          base: master
+          branch: update-dependencies
+          title: Update dependencies
+          delete-branch: true
