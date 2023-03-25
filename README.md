@@ -2,10 +2,16 @@
 
 Simple interface to register baskets.
 
-## Development
+## Quick start
+Clone, then
 ```shell
-inv test-cov
-inv beam
+pip install -U pip pip-tools invoke
+inv sync-dependencies
+pre-commit install --install-hooks
+inv test
+./src/manage.py migrate
+./src/manage.py generat_dummy_baskets
+./src/manage.py createsuperuser
 ```
 
 # Reuse
