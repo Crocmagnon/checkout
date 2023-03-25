@@ -53,7 +53,7 @@ ENV DB_BASE_DIR "/app/db"
 RUN python -m pip install --no-cache-dir -r requirements.txt
 WORKDIR /app/src
 RUN python manage.py collectstatic --noinput --clear
-RUN python ./src/manage.py compilemessages -l fr -l en
+RUN python manage.py compilemessages -l fr -l en
 
 EXPOSE 8000
 
