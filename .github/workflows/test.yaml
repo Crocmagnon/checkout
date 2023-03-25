@@ -31,5 +31,5 @@ jobs:
       - name: Check pre-commit
         run: pre-commit run --show-diff-on-failure --color=always --all-files
       - name: Test
-        run: pytest --cov=. --cov-branch --cov-report term-missing:skip-covered
+        run: inv test-cov
         working-directory: ./src/

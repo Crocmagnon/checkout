@@ -57,13 +57,13 @@ def compilemessages(ctx: Context) -> None:
         ctx.run("./manage.py compilemessages -l en -l fr", pty=True, echo=True)
 
 
-@task
+@task(pre=[compilemessages])
 def test(ctx: Context) -> None:
     with ctx.cd(SRC_DIR):
         ctx.run("pytest", pty=True, echo=True)
 
 
-@task
+@task(pre=[compilemessages])
 def test_cov(ctx: Context) -> None:
     with ctx.cd(SRC_DIR):
         ctx.run(
