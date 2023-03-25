@@ -28,7 +28,8 @@ RUN useradd -M -d /app -u 1000 -g 1000 -s /bin/bash django
 RUN apt-get update -y \
     && apt-get install -y --no-install-recommends \
         libxml2 \
-        media-types
+        media-types \
+        gettext
 
 # Fetch project requirements
 ##############################################
@@ -52,6 +53,7 @@ ENV DB_BASE_DIR "/app/db"
 RUN python -m pip install --no-cache-dir -r requirements.txt
 WORKDIR /app/src
 RUN python manage.py collectstatic --noinput --clear
+RUN python ./src/manage.py compilemessages -l fr -l en
 
 EXPOSE 8000
 
