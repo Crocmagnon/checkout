@@ -1,9 +1,10 @@
 from django.urls import path
 
-from common.views import home, ping
+from common import views
 
 app_name = "common"
 urlpatterns = [
-    path("ping/", ping, name="ping"),
-    path("", home, name="home"),
+    path("error_check/", views.error_check, name="error_check"),
+    path("ping/", views.ping, name="ping"),
+    path("", views.home, name="home"),
 ]

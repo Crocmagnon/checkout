@@ -7,3 +7,8 @@ def home(_request):
 
 def ping(request):
     return render(request, "common/ping.html", {})
+
+
+def error_check(_request):
+    msg = "Error check"
+    raise ValueError(msg)
