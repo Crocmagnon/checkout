@@ -1,4 +1,4 @@
-"""checkout URL Configuration
+"""checkout URL Configuration.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
@@ -24,7 +24,8 @@ urlpatterns = [
     path(
         "robots.txt",
         TemplateView.as_view(
-            template_name="common/robots.txt", content_type="text/plain"
+            template_name="common/robots.txt",
+            content_type="text/plain",
         ),
     ),
     path("", include("common.urls")),

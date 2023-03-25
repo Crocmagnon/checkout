@@ -6,7 +6,6 @@ import purchase.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("purchase", "0002_alter_product_image"),
     ]
@@ -16,7 +15,7 @@ class Migration(migrations.Migration):
             model_name="product",
             name="display_order",
             field=models.PositiveIntegerField(
-                default=purchase.models.default_product_display_order
+                default=purchase.models.default_product_display_order,
             ),
         ),
     ]

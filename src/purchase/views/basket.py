@@ -44,7 +44,9 @@ def update_basket(request: HttpRequest, pk: int) -> HttpResponse:
         form = BasketForm(instance=basket)
 
     return TemplateResponse(
-        request, "purchase/basket_form.html", {"form": form, "basket": basket}
+        request,
+        "purchase/basket_form.html",
+        {"form": form, "basket": basket},
     )
 
 
@@ -62,7 +64,6 @@ def delete_basket(request: HttpRequest, pk: int) -> HttpResponse:
     if request.method == "GET":
         context = {"basket": basket}
         return TemplateResponse(request, "purchase/basket_confirm_delete.html", context)
-    else:
-        basket.delete()
-        messages.success(request, _("Basket successfully deleted."))
-        return redirect("purchase:list")
+    basket.delete()
+    messages.success(request, _("Basket successfully deleted."))
+    return redirect("purchase:list")

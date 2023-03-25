@@ -7,7 +7,6 @@ import purchase.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("purchase", "0004_remove_basket_status"),
     ]
@@ -128,7 +127,10 @@ class Migration(migrations.Migration):
             model_name="product",
             name="image",
             field=models.ImageField(
-                blank=True, null=True, upload_to="", verbose_name="image"
+                blank=True,
+                null=True,
+                upload_to="",
+                verbose_name="image",
             ),
         ),
         migrations.AlterField(
@@ -140,7 +142,8 @@ class Migration(migrations.Migration):
             model_name="product",
             name="unit_price_cents",
             field=models.PositiveIntegerField(
-                help_text="unit price in cents", verbose_name="unit price (cents)"
+                help_text="unit price in cents",
+                verbose_name="unit price (cents)",
             ),
         ),
         migrations.AlterField(

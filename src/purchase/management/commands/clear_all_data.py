@@ -6,7 +6,7 @@ from purchase.models import Basket, BasketItem, PaymentMethod, Product
 class Command(BaseCommand):
     help = "Clear all data"  # noqa: A003
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options):  # noqa: ARG002
         self.delete(BasketItem)
         self.delete(Basket)
         self.delete(Product)

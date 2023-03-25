@@ -13,7 +13,7 @@ from purchase.models import Basket, BasketItem, PaymentMethod, Product
 class Command(BaseCommand):
     help = "Generates dummy baskets"  # noqa: A003
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options):  # noqa: ARG002
         call_command("loaddata", ["payment_methods", "products"])
         products = list(Product.objects.all())
         payment_methods = list(PaymentMethod.objects.all())
@@ -37,7 +37,7 @@ class Command(BaseCommand):
         products_weights = [1 / product.display_order for product in products]
         for _ in range(count):
             method = None
-            if random.random() < 0.99:
+            if random.random() < 0.99:  # noqa: PLR2004
                 method = random.choices(payment_methods, weights=methods_weights)[0]
             basket = Basket.objects.create(payment_method=method)
             items_in_basket = int(random.normalvariate(3, 2))
@@ -45,7 +45,7 @@ class Command(BaseCommand):
                 items_in_basket = len(products)
             if items_in_basket < 1:
                 items_in_basket = 1
-            selected_products = np.random.choice(
+            selected_products = np.random.Generator(
                 products,
                 size=items_in_basket,
                 replace=False,
@@ -59,7 +59,7 @@ class Command(BaseCommand):
                         basket=basket,
                         quantity=random.randint(1, 3),
                         unit_price_cents=product.unit_price_cents,
-                    )
+                    ),
                 )
             BasketItem.objects.bulk_create(items)
         return count

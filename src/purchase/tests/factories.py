@@ -21,7 +21,7 @@ class CashierFactory(factory.django.DjangoModelFactory):
     is_staff = True
 
     @factory.post_generation
-    def groups(self, create, extracted, **kwargs):
+    def groups(self, create, _extracted, **_kwargs):
         if create:
             self.groups.add(CashierGroupFactory())
 
@@ -48,7 +48,7 @@ class BasketWithItemsFactory(factory.django.DjangoModelFactory):
     payment_method = factory.Iterator(PaymentMethod.objects.all())
 
     @factory.post_generation
-    def items(self, create, extracted, **kwargs):
+    def items(self, create, _extracted, **_kwargs):
         if create:
             products = Product.objects.order_by("?")
             quantity = random.randint(1, len(products))
@@ -68,7 +68,7 @@ class CashierGroupFactory(factory.django.DjangoModelFactory):
     name = "Caissier"
 
     @factory.post_generation
-    def permissions(self, create, extracted, **kwargs):
+    def permissions(self, create, _extracted, **_kwargs):
         if create:
             self.permissions.add(
                 Permission.objects.get(codename="add_basket"),

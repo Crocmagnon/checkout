@@ -2,7 +2,7 @@ import datetime
 from io import StringIO
 from zoneinfo import ZoneInfo
 
-import matplotlib
+import matplotlib as mpl
 import numpy as np
 from django.conf import settings
 from django.contrib import messages
@@ -27,7 +27,7 @@ from purchase.models import (
     reports_last_modified,
 )
 
-matplotlib.use("SVG")
+mpl.use("SVG")
 
 
 @permission_required("purchase.view_basket")
@@ -204,5 +204,4 @@ def get_image_from_fig(fig):
     image_data = StringIO()
     fig.savefig(image_data, format="svg")
     image_data.seek(0)
-    img1 = image_data.getvalue()
-    return img1
+    return image_data.getvalue()

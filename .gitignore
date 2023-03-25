@@ -276,3 +276,4 @@ dmypy.json
 staticfiles/
 media/
 db.sqlite3
+.direnv

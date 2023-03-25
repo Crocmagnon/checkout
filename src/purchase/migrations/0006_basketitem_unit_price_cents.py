@@ -4,7 +4,7 @@ from django.db import migrations, models
 
 
 def forwards(apps, schema_editor):
-    BasketItem = apps.get_model("purchase", "BasketItem")
+    BasketItem = apps.get_model("purchase", "BasketItem")  # noqa: N806
     items = (
         BasketItem.objects.using(schema_editor.connection.alias)
         .all()
@@ -16,7 +16,6 @@ def forwards(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("purchase", "0005_alter_basket_options_alter_basketitem_options_and_more"),
     ]

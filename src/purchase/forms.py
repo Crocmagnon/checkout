@@ -39,8 +39,8 @@ class BasketForm(forms.ModelForm):
                         label=product.name,
                         min_value=0,
                         initial=products.get(product, 0),
-                    )
-                }
+                    ),
+                },
             )
             fields.append(BasketItemField(field_name, product=product))
         self.helper.layout = Layout(
@@ -51,7 +51,7 @@ class BasketForm(forms.ModelForm):
             InlineRadios("payment_method"),
         )
 
-    def save(self, commit=True):
+    def save(self):
         instance: Basket = super().save(commit=True)
         name: str
         products = {product.id: product for product in Product.objects.all()}

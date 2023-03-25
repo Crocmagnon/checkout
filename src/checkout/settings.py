@@ -110,7 +110,7 @@ MIDDLEWARE = [
 try:
     import kolo  # noqa: F401
 
-    MIDDLEWARE = ["kolo.middleware.KoloMiddleware"] + MIDDLEWARE
+    MIDDLEWARE = ["kolo.middleware.KoloMiddleware", *MIDDLEWARE]
 except ImportError:
     # Don't add kolo if unavailable
     pass
@@ -139,14 +139,14 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.db.DatabaseCache",
         "LOCATION": "cache",
-    }
+    },
 }
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DB_BASE_DIR = env("DB_BASE_DIR")
-if not DB_BASE_DIR:
+if not DB_BASE_DIR:  # noqa: SIM108
     # Protect against empty strings
     DB_BASE_DIR = BASE_DIR
 else:
@@ -156,7 +156,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": DB_BASE_DIR / "db.sqlite3",
-    }
+    },
 }
 
 INTERNAL_IPS = [
@@ -169,7 +169,7 @@ INTERNAL_IPS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},

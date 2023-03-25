@@ -20,7 +20,10 @@ from purchase.tests.factories import (
 
 
 @freezegun.freeze_time("2022-09-24 19:01:00+0200")
-def test_cashier_create_and_update_basket(live_server: LiveServer, selenium: WebDriver):
+def test_cashier_create_and_update_basket(  # noqa: PLR0915
+    live_server: LiveServer,
+    selenium: WebDriver,
+):
     wait = WebDriverWait(selenium, 10)
     assert Basket.objects.count() == 0
 
@@ -44,7 +47,7 @@ def test_cashier_create_and_update_basket(live_server: LiveServer, selenium: Web
     wait.until(lambda driver: driver.current_url == redirect_url)
     displayed_products = selenium.find_elements(By.CSS_SELECTOR, ".card.h-100")
     assert len(displayed_products) == len(products)
-    for product, displayed_product in zip(products, displayed_products):
+    for product, displayed_product in zip(products, displayed_products, strict=True):
         assert (
             product.name
             == displayed_product.find_element(By.CLASS_NAME, "card-title").text
@@ -185,7 +188,10 @@ def test_cashier_create_and_update_basket(live_server: LiveServer, selenium: Web
 
 
 def login(
-    live_server: LiveServer, selenium: WebDriver, cashier: User, url: str = "/"
+    live_server: LiveServer,
+    selenium: WebDriver,
+    cashier: User,
+    url: str = "/",
 ) -> None:
     # Go to page
     url = live_url(live_server, url)
@@ -215,12 +221,12 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
     with freezegun.freeze_time("2022-09-24 19:01:00+0200"):
         basket_with_payment_method = BasketWithItemsFactory()
         basket_with_payment_method = Basket.objects.priced().get(
-            pk=basket_with_payment_method.pk
+            pk=basket_with_payment_method.pk,
         )
     with freezegun.freeze_time("2022-09-24 19:02:00+0200"):
         basket_no_payment_method = BasketWithItemsFactory(payment_method=None)
         basket_no_payment_method = Basket.objects.priced().get(
-            pk=basket_no_payment_method.pk
+            pk=basket_no_payment_method.pk,
         )
 
     # Login
@@ -268,7 +274,7 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
 
     # Assert redirected to list view
     wait.until(
-        lambda driver: driver.current_url == live_reverse(live_server, "purchase:list")
+        lambda driver: driver.current_url == live_reverse(live_server, "purchase:list"),
     )
 
     # Click on edit on remaining basket
@@ -277,7 +283,9 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
 
     # Assert redirected to edit view
     redirect_url = live_reverse(
-        live_server, "purchase:update", pk=basket_no_payment_method.pk
+        live_server,
+        "purchase:update",
+        pk=basket_no_payment_method.pk,
     )
     wait.until(lambda driver: driver.current_url == redirect_url)
 

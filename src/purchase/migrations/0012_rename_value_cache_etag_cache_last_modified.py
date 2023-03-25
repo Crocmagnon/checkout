@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("purchase", "0011_rename_cacheetag_cache"),
     ]

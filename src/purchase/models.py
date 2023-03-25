@@ -27,10 +27,10 @@ class PaymentMethodQuerySet(models.QuerySet):
             turnover=Coalesce(
                 Sum(
                     F("baskets__items__quantity")
-                    * F("baskets__items__unit_price_cents")
+                    * F("baskets__items__unit_price_cents"),
                 ),
                 0,
-            )
+            ),
         )
 
     def with_sold(self):
@@ -71,7 +71,7 @@ class ProductQuerySet(models.QuerySet):
             turnover=Coalesce(
                 Sum(F("basket_items__quantity") * F("basket_items__unit_price_cents")),
                 0,
-            )
+            ),
         )
 
     def with_sold(self):
@@ -87,10 +87,12 @@ class Product(Model):
     name = models.CharField(max_length=250, unique=True, verbose_name=_("name"))
     image = models.ImageField(null=True, blank=True, verbose_name=_("image"))
     unit_price_cents = models.PositiveIntegerField(
-        verbose_name=_("unit price (cents)"), help_text=_("unit price in cents")
+        verbose_name=_("unit price (cents)"),
+        help_text=_("unit price in cents"),
     )
     display_order = models.PositiveIntegerField(
-        default=default_product_display_order, verbose_name=_("display order")
+        default=default_product_display_order,
+        verbose_name=_("display order"),
     )
 
     objects = ProductManager.from_queryset(ProductQuerySet)()
@@ -109,19 +111,21 @@ class Product(Model):
     @property
     def color_hue(self):
         return int(
-            hashlib.sha256(bytes(self.name, encoding="utf-8")).hexdigest()[:2], base=16
+            hashlib.sha256(bytes(self.name, encoding="utf-8")).hexdigest()[:2],
+            base=16,
         )
 
     def save(self, *args, **kwargs):
-        super().save()
+        super().save(*args, **kwargs)
         if not self.image:
             return
-        with Image.open(self.image.path) as img:
-            img = ImageOps.exif_transpose(img)
+        with Image.open(self.image.path) as img_file:
+            img = ImageOps.exif_transpose(img_file)
 
             width, height = img.size  # Get dimensions
 
-            if width > 300 and height > 300:
+            image_max_size = 300
+            if width > image_max_size and height > image_max_size:
                 # keep ratio but shrink down
                 img.thumbnail((width, height))
 
@@ -142,8 +146,8 @@ class Product(Model):
                 bottom = width
                 img = img.crop((left, top, right, bottom))
 
-            if width > 300 and height > 300:
-                img.thumbnail((300, 300))
+            if width > image_max_size and height > image_max_size:
+                img.thumbnail((image_max_size, image_max_size))
 
             img.save(self.image.path)
 
@@ -151,7 +155,7 @@ class Product(Model):
 class BasketQuerySet(models.QuerySet):
     def priced(self) -> BasketQuerySet:
         return self.annotate(
-            price=Coalesce(Sum(F("items__quantity") * F("items__unit_price_cents")), 0)
+            price=Coalesce(Sum(F("items__quantity") * F("items__unit_price_cents")), 0),
         )
 
     def average_basket(self) -> float:
@@ -220,7 +224,7 @@ class BasketItem(Model):
         verbose_name = _("basket item")
         verbose_name_plural = _("basket items")
         constraints = [
-            UniqueConstraint("product", "basket", name="unique_product_per_basket")
+            UniqueConstraint("product", "basket", name="unique_product_per_basket"),
         ]
 
 
@@ -236,9 +240,9 @@ class Cache(SingletonModel):
         self.save()
 
 
-def reports_etag(request):
+def reports_etag(_request):
     return str(Cache.get_solo().etag)
 
 
-def reports_last_modified(request):
+def reports_last_modified(_request):
     return Cache.get_solo().last_modified

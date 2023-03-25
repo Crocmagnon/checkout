@@ -1,48 +1,6 @@
-[tool.poetry]
-name = "checkout"
-version = "0.1.0"
-description = ""
-authors = ["Gabriel Augendre <gabriel@augendre.info>"]
-
-[tool.poetry.dependencies]
-python = "^3.10"
-django = "^4.0"
-django-anymail = {version = "^8.4", extras = ["mailgun"]}
-django-cleanup = "^6.0"
-whitenoise = {extras = ["brotli"], version = "^6.0"}
-django-csp = "^3.7"
-django-environ = "^0.9"
-requests = "^2.27.1"
-django-extensions = "^3.1.5"
-bpython = "^0.23"
-gunicorn = "^20.1.0"
-Pillow = "^9.1.0"
-django-crispy-forms = "^1.14.0"
-crispy-bootstrap5 = "^0.6"
-matplotlib = "^3.5.1"
-freezegun = "^1.2.1"
-django-htmx = "^1.12.2"
-django-solo = "^2.0.0"
-
-[tool.poetry.dev-dependencies]
-pre-commit = "^2.7"
-pytest = "^6.0"
-pytest-django = "^4.5"
-model-bakery = "^1.1"
-pytest-cov = "^3.0"
-poetry-deps-scanner = "^2.0"
-invoke = "^1.7.0"
-factory-boy = "^3.2.1"
-pytest-selenium = "^4.0.0"
-selenium = "^4.4.3"
-kolo = "^2.0.3"
-
-[tool.black]
-target-version = ['py310']
-
-[tool.isort]
-profile = "black"
-
+###############################################################################
+# pytest
+###############################################################################
 [tool.pytest.ini_options]
 addopts = "--color=yes --driver Firefox"
 minversion = "6.0"
@@ -51,28 +9,46 @@ testpaths = [
     "src",
 ]
 
-[tool.flakeheaven]
-max_complexity = 10
-format = "grouped"
+###############################################################################
+# ruff
+###############################################################################
 
-[tool.flakeheaven.plugins]
-"*" = [
-    "+*",
-    # long lines
-    "-E501",
-    # conflict with black on PEP8 interpretation
-    "-E203",
-    # deprecated rule: https://www.flake8rules.com/rules/W503.html
-    "-W503",
+[tool.ruff]
+src = ["src"]
+target-version = "py311"
+select = ["ALL"]
+unfixable = ["T20", "RUF001", "RUF002", "RUF003"]
+
+ignore = [
+    "ANN",  # flake8-annotations
+    "BLE",  # flake8-blind-except
+    "TCH",  # flake8-type-checking / TODO: revisit later ?
+
+    "E501",  # long lines
+    "D1",  # missing docstring
+    "TRY003",  # Avoid specifying long messages outside the exception class
 ]
-flake8-quotes = ["+*", "-Q000"] # found double quotes, conflict with black
-flake8-commas = ["+*", "-C812"] # missing trailing comma, conflict with black
-flake8-docstrings = ["+*", "-D1??"] # missing docstring
-flake8-rst-docstrings = ["-*"]
 
-[tool.flakeheaven.exceptions."**/tests/*"]
-flake8-bandit = ["+*", "-S101"] # Use of assert detected.
+[tool.ruff.per-file-ignores]
+"**/tests/*" = [
+    "S101",  # Use of assert detected.
+    "S105",  # Possible hardcoded password.
+    "B011",  # Do not call assert False since python -O removes these calls.
+    "ARG001",  # Unused function argument (mostly fixtures)
+    "PLR2004",  # Magic value used in comparison, consider replacing {value} with a constant variable
+    "S311",  # Standard pseudo-random generators are not suitable for cryptographic purposes.
+]
+# File {name} is part of an implicit namespace package. Add an `__init__.py`.
+"tasks.py" = ["INP001"]
+"src/conftest.py" = ["INP001"]
+"src/manage.py" = ["INP001"]
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+"src/purchase/management/commands/generate_dummy_baskets.py" = [
+    "S311",  # Standard pseudo-random generators are not suitable for cryptographic purposes.
+]
+
+[tool.ruff.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.mccabe]
+max-complexity = 10

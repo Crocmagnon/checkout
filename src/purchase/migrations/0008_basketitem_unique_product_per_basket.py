@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("purchase", "0007_alter_basketitem_unit_price_cents"),
     ]

@@ -1,7 +1,7 @@
 {% load static %}
 <div hx-get="{% url url %}"
-    hx-trigger="load"
-    hx-swap="outerHTML"
+     hx-trigger="load"
+     hx-swap="outerHTML"
 >
     <img class="htmx-indicator" src="{% static 'purchase/spinner.gif' %}" alt="Spinner">
 </div>

@@ -1,23 +1,48 @@
-"""
-Invoke management tasks for the project.
-
-The current implementation with type annotations is not compatible
-with invoke 1.6.0 and requires manual patching.
-
-See https://github.com/pyinvoke/invoke/pull/458/files
-"""
-
-
-import time
 from pathlib import Path
 
-import requests
 from invoke import Context, task
 
 BASE_DIR = Path(__file__).parent.resolve(strict=True)
 SRC_DIR = BASE_DIR / "src"
 COMPOSE_BUILD_FILE = BASE_DIR / "docker-compose-build.yaml"
 COMPOSE_BUILD_ENV = {"COMPOSE_FILE": COMPOSE_BUILD_FILE}
+TEST_ENV = {"ENV_FILE": BASE_DIR / "envs" / "test-envs.env"}
+
+
+@task
+def update_dependencies(ctx: Context, *, sync: bool = True):
+    return compile_dependencies(ctx, update=True, sync=sync)
+
+
+@task
+def compile_dependencies(ctx: Context, *, update: bool = False, sync: bool = False):
+    common_args = "-q --allow-unsafe --resolver=backtracking"
+    if update:
+        common_args += " --upgrade"
+    with ctx.cd(BASE_DIR):
+        ctx.run(
+            f"pip-compile {common_args} requirements.in",
+            pty=True,
+            echo=True,
+        )
+        ctx.run(
+            f"pip-compile {common_args} --strip-extras -o constraints.txt requirements.in",
+            pty=True,
+            echo=True,
+        )
+        ctx.run(
+            f"pip-compile {common_args} requirements-dev.in",
+            pty=True,
+            echo=True,
+        )
+    if sync:
+        sync_dependencies(ctx)
+
+
+@task
+def sync_dependencies(ctx: Context):
+    with ctx.cd(BASE_DIR):
+        ctx.run("pip-sync requirements.txt requirements-dev.txt", pty=True, echo=True)
 
 
 @task
@@ -47,58 +72,6 @@ def test_cov(ctx: Context) -> None:
             echo=True,
             env={"COVERAGE_FILE": BASE_DIR / ".coverage"},
         )
-
-
-@task
-def pre_commit(ctx: Context) -> None:
-    with ctx.cd(BASE_DIR):
-        ctx.run("pre-commit run --all-files", pty=True)
-
-
-@task(pre=[pre_commit, test_cov])
-def check(ctx: Context) -> None:
-    pass
-
-
-@task
-def build(ctx: Context) -> None:
-    with ctx.cd(BASE_DIR):
-        ctx.run(
-            "docker-compose build django", pty=True, echo=True, env=COMPOSE_BUILD_ENV
-        )
-
-
-@task
-def publish(ctx: Context) -> None:
-    with ctx.cd(BASE_DIR):
-        ctx.run(
-            "docker-compose push django", pty=True, echo=True, env=COMPOSE_BUILD_ENV
-        )
-
-
-@task
-def deploy(ctx: Context) -> None:
-    ctx.run("ssh ubuntu /mnt/data/checkout/update", pty=True, echo=True)
-
-
-@task
-def check_alive(ctx: Context) -> None:
-    exception = None
-    for _ in range(5):
-        try:
-            res = requests.get("https://checkout.augendre.info")
-            res.raise_for_status()
-            print("Server is up & running")
-            return
-        except requests.exceptions.HTTPError as e:
-            time.sleep(2)
-            exception = e
-    raise RuntimeError("Failed to reach the server") from exception
-
-
-@task(pre=[check, build, publish, deploy], post=[check_alive])
-def beam(ctx: Context) -> None:
-    pass
 
 
 @task
