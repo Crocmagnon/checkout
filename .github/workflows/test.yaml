@@ -23,6 +23,8 @@ jobs:
         run: |
           pip install pip-tools
           pip-sync requirements.txt requirements-dev.txt
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends gettext
       - name: Setup pre-commit cache
         uses: actions/cache@v3
         with:
