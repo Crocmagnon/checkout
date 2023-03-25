@@ -22,4 +22,5 @@ def firefox_options(firefox_options):
 @pytest.fixture()
 def selenium(selenium):
     selenium.implicitly_wait(3)
+    selenium.set_window_size(3860, 2140)
     return selenium
