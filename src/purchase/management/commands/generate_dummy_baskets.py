@@ -45,7 +45,8 @@ class Command(BaseCommand):
                 items_in_basket = len(products)
             if items_in_basket < 1:
                 items_in_basket = 1
-            selected_products = np.random.Generator(
+            rng = np.random.default_rng()
+            selected_products = rng.choice(
                 products,
                 size=items_in_basket,
                 replace=False,
