@@ -129,4 +129,7 @@ def price_preview(request: WSGIRequest) -> HttpResponse:
         elif name.startswith(UNPRICED_PREFIX):
             total += sum(map(int, request.POST.getlist(name)))
 
-    return HttpResponse(f"Montant total : {total/100:.2f}€")
+    total = f"{total/100:.2f}€"
+    return HttpResponse(
+        f'<span hx-swap-oob="true" id="basket-price" class="badge bg-secondary">{total}</span>Montant total : {total}',
+    )

@@ -6,7 +6,7 @@
 {% endblock %}
 {% block content %}
     {% if basket %}
-        <h1>{{ basket }} <span class="badge bg-secondary">{{ basket.price|currency }}</span></h1>
+        <h1>{{ basket }} <span id="basket-price" class="badge bg-secondary">{{ basket.price|currency }}</span></h1>
         <p class="metadata">
             {{ basket.created_at }}
         </p>
@@ -14,7 +14,7 @@
             <div class="alert alert-danger" role="alert">{% translate "Missing payment method." %}</div>
         {% endif %}
     {% else %}
-        <h1>{% translate "New basket" %}</h1>
+        <h1>{% translate "New basket" %} <span id="basket-price" class="badge bg-secondary d-none">{{ basket.price|currency }}</span></h1>
     {% endif %}
     {% crispy form %}
     <div class="row">
