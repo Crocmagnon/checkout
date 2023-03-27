@@ -1,0 +1,7 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "postStartCommand": "inv sync-dependencies && pre-commit install --install-hooks"
+}
