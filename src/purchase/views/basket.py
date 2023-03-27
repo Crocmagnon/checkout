@@ -49,8 +49,13 @@ def update_with_unpriced_products(basket: Basket, post_data: MultiValueDict):
     basket.items.filter(product__in=no_fixed_price.values()).delete()
     for product_id, product in no_fixed_price.items():
         if prices := post_data.getlist(f"{UNPRICED_PREFIX}{product_id}"):
-            for price in prices:
-                basket.items.create(product=product, quantity=1, unit_price_cents=price)
+            for price in map(int, prices):
+                if price:
+                    basket.items.create(
+                        product=product,
+                        quantity=1,
+                        unit_price_cents=price,
+                    )
 
 
 @require_http_methods(["GET", "POST"])
