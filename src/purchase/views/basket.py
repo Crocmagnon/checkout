@@ -3,7 +3,7 @@ import logging
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
 from django.core.handlers.wsgi import WSGIRequest
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.response import TemplateResponse
 from django.urls import reverse
@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import condition, require_http_methods
 from django_htmx.http import trigger_client_event
 
-from purchase.forms import UNPRICED_PREFIX, BasketForm
+from purchase.forms import PRICED_PREFIX, UNPRICED_PREFIX, BasketForm
 from purchase.models import Basket, Product, reports_etag, reports_last_modified
 
 logger = logging.getLogger(__name__)
@@ -100,14 +100,14 @@ def additional_unpriced_product(request: WSGIRequest) -> HttpResponse:
 
 @permission_required("purchase.view_basket")
 @condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
-def list_baskets(request: HttpRequest) -> HttpResponse:
+def list_baskets(request: WSGIRequest) -> HttpResponse:
     context = {"baskets": Basket.objects.priced().order_by("-id")}
     return TemplateResponse(request, "purchase/basket_list.html", context)
 
 
 @require_http_methods(["GET", "POST"])
 @permission_required("purchase.delete_basket")
-def delete_basket(request: HttpRequest, pk: int) -> HttpResponse:
+def delete_basket(request: WSGIRequest, pk: int) -> HttpResponse:
     basket = get_object_or_404(Basket, pk=pk)
     if request.method == "GET":
         context = {"basket": basket}
@@ -115,3 +115,18 @@ def delete_basket(request: HttpRequest, pk: int) -> HttpResponse:
     basket.delete()
     messages.success(request, _("Basket successfully deleted."))
     return redirect("purchase:list")
+
+
+@require_http_methods(["POST"])
+@permission_required("purchase.add_basket")
+def price_preview(request: WSGIRequest) -> HttpResponse:
+    total = 0
+    for name in request.POST:
+        if name.startswith(PRICED_PREFIX):
+            product_id = name[len(PRICED_PREFIX) :]
+            product = get_object_or_404(Product, pk=product_id)
+            total += product.unit_price_cents * int(request.POST.get(name, 0))
+        elif name.startswith(UNPRICED_PREFIX):
+            total += sum(map(int, request.POST.getlist(name)))
+
+    return HttpResponse(f"Montant total : {total/100:.2f}€")

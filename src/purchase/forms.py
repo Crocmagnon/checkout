@@ -2,6 +2,7 @@ from crispy_forms.bootstrap import InlineRadios
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Submit
 from django import forms
+from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from purchase.layout import BasketItemField
@@ -25,6 +26,12 @@ class BasketForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = "form-horizontal"
         self.helper.add_input(Submit("submit", _("Save")))
+        self.helper.attrs = {
+            "hx_post": reverse("purchase:price_preview"),
+            "hx_trigger": "change",
+            "hx_target": "#price_preview",
+            "hx_swap": "innerHTML",
+        }
         self.helper.layout = Layout()
         products = {}
         basket = kwargs.get("instance")
@@ -51,6 +58,7 @@ class BasketForm(forms.ModelForm):
                 css_id="products",
             ),
             InlineRadios("payment_method"),
+            Div(css_id="price_preview", css_class="mb-2"),
         )
 
     def save(self):
