@@ -6,7 +6,7 @@
     <div class="row row-cols-2 row-cols-xl-6 row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-4">
         {% for basket in baskets %}
             <div class="col">
-                <div class="card h-100 {% if not basket.payment_method %}bg-warning text-black{% endif %}">
+                <div class="card h-100">
                     <div class="card-body">
                         <h5 class="card-title">{% blocktranslate with basket_id=basket.id %}Basket #{{ basket_id }}{% endblocktranslate %}</h5>
                         <p class="card-text">

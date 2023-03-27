@@ -114,14 +114,21 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
     chain.double_click(price_input).perform()
     price_input.send_keys("401")
 
-    # Don't add payment method
+    # Add payment method
+    selenium.find_element(By.TAG_NAME, "html").send_keys(Keys.END)
+    time.sleep(1)
+    selenium.find_element(
+        By.CSS_SELECTOR,
+        f'input[type="radio"][value="{payment_methods[1].pk}"]',
+    ).click()
+
     # Save
     selenium.find_element(By.ID, "submit-id-submit").click()
 
     # Assert entries saved in DB (new basket with proper products)
     assert Basket.objects.count() == 1
     basket = Basket.objects.priced().first()
-    assert basket.payment_method is None
+    assert basket.payment_method == payment_methods[1]
     assert basket.items.count() == 4
     assert basket.items.get(product=products[0]).quantity == 2
     assert (
@@ -149,10 +156,6 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
     # Assert message in green for successful basket creation
     created_message = selenium.find_element(By.CSS_SELECTOR, ".messages .alert-success")
     assert created_message.text == "Panier correctement créé."
-
-    # Assert message in red for missing payment method
-    missing_payment = selenium.find_element(By.CSS_SELECTOR, ".alert.alert-danger")
-    assert missing_payment.text == "Moyen de paiement manquant."
 
     # Assert ID, price, date & product quantities
     # Selected products have a green background
@@ -192,11 +195,6 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
     quantity_input = displayed_product.find_element(By.CLASS_NAME, "numberinput")
     quantity = int(quantity_input.get_attribute("value"))
     assert quantity == 3
-
-    # Add payment method
-    selenium.find_element(By.TAG_NAME, "html").send_keys(Keys.END)
-    time.sleep(1)
-    selenium.find_element(By.ID, f"id_payment_method_{payment_methods[1].pk}").click()
 
     # Save
     selenium.find_element(By.ID, "submit-id-submit").click()
@@ -275,34 +273,30 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
             pk=basket_with_payment_method.pk,
         )
     with freezegun.freeze_time("2022-09-24 19:02:00+0200"):
-        basket_no_payment_method = BasketWithItemsFactory(payment_method=None)
-        basket_no_payment_method = Basket.objects.priced().get(
-            pk=basket_no_payment_method.pk,
+        another_basket = BasketWithItemsFactory()
+        another_basket = Basket.objects.priced().get(
+            pk=another_basket.pk,
         )
 
     # Login
     url = reverse("purchase:list")
     login(live_server, selenium, cashier, url)
 
-    # Assert first basket (last created) has yellow background
     # Assert basket info displayed
     displayed_baskets = selenium.find_elements(By.CSS_SELECTOR, ".card.h-100")
     first_basket = displayed_baskets[0]
-    assert "bg-warning" in first_basket.get_attribute("class")
     text = first_basket.text.replace("\n", " ")
-    assert f"n°{basket_no_payment_method.pk} " in text
-    expected_articles_count = basket_no_payment_method.items.count()
+    assert f"n°{another_basket.pk} " in text
+    expected_articles_count = another_basket.items.count()
     assert f" {expected_articles_count} article" in text
-    expected_price = basket_no_payment_method.price / 100
+    expected_price = another_basket.price / 100
     assert f" {expected_price:.2f}€" in text
-    expected_payment_method = "-"
+    expected_payment_method = another_basket.payment_method.name
     assert f" {expected_payment_method} " in text
     assert "19:02" in text
 
-    # Assert second basket (first created) doesn't have yellow background
     # Assert basket info displayed including payment method
     second_basket = displayed_baskets[1]
-    assert "bg-warning" not in second_basket.get_attribute("class")
     text = second_basket.text.replace("\n", " ")
     assert f"n°{basket_with_payment_method.pk} " in text
     expected_articles_count = basket_with_payment_method.items.count()
@@ -321,7 +315,7 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
 
     # Assert object deleted in DB
     assert Basket.objects.count() == 1
-    assert Basket.objects.first() == basket_no_payment_method
+    assert Basket.objects.first() == another_basket
 
     # Assert redirected to list view
     wait.until(
@@ -336,7 +330,7 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
     redirect_url = live_reverse(
         live_server,
         "purchase:update",
-        pk=basket_no_payment_method.pk,
+        pk=another_basket.pk,
     )
     wait.until(lambda driver: driver.current_url == redirect_url)
 

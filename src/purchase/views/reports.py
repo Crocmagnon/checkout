@@ -79,7 +79,6 @@ def reports(request):
         "average_basket_by_day": average_basket_by_day,
         "products": products,
         "payment_methods": PaymentMethod.objects.with_turnover().with_sold(),
-        "no_payment_method": Basket.objects.no_payment_method().priced(),
     }
     return TemplateResponse(request, template_name, context)
 

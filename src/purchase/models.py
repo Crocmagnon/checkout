@@ -179,17 +179,14 @@ class BasketQuerySet(models.QuerySet):
     def turnover(self) -> int:
         return self.priced().aggregate(total=Sum("price"))["total"]
 
-    def no_payment_method(self) -> BasketQuerySet:
-        return self.filter(payment_method=None)
-
 
 class Basket(Model):
     payment_method = models.ForeignKey(
         to=PaymentMethod,
         on_delete=models.PROTECT,
         related_name="baskets",
-        null=True,
-        blank=True,
+        null=False,
+        blank=False,
         verbose_name=_("payment method"),
     )
 
