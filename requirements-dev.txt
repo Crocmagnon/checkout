@@ -48,7 +48,7 @@ factory-boy==3.2.1
     # via -r requirements-dev.in
 faker==18.3.1
     # via factory-boy
-filelock==3.10.4
+filelock==3.10.7
     # via virtualenv
 h11==0.14.0
     # via wsproto
@@ -81,7 +81,7 @@ pathspec==0.11.1
     # via black
 pip-tools==6.12.3
     # via -r requirements-dev.in
-platformdirs==3.1.1
+platformdirs==3.2.0
     # via
     #   black
     #   virtualenv
