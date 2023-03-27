@@ -1,7 +1,6 @@
 {% extends "common/base.html" %}
-{% load static %}
-{% load i18n %}
-{% load crispy_forms_tags purchase %}
+{% load i18n static crispy_forms_tags purchase django_htmx %}
+
 {% block extrahead %}
     <link rel="stylesheet" href="{% static "purchase/css/basket_form.css" %}">
 {% endblock %}
@@ -18,7 +17,43 @@
         <h1>{% translate "New basket" %}</h1>
     {% endif %}
     {% crispy form %}
+    <form
+        hx-get="{% url "purchase:additional_unpriced_product" %}"
+        hx-target="#products"
+        hx-swap="beforeend"
+    >
+        <div class="input-group">
+            <select class="form-select" name="product_to_add" id="product_to_add">
+                {% for product in products %}
+                    <option value="{{ product.pk }}">{{ product.name }}</option>
+                {% endfor %}
+            </select>
+            <button
+                class="btn btn-outline-secondary"
+                type="submit"
+                id="add_product"
+            >
+                {% translate "Add product" %}
+            </button>
+        </div>
+    </form>
+    {% for item in basket.items.all %}
+        {% if item.product.unit_price_cents == 0 %}
+            <input
+                type="hidden"
+                hx-get="{% url "purchase:additional_unpriced_product" %}?product_to_add={{ item.product.pk }}&value={{ item.unit_price_cents }}"
+                hx-trigger="load"
+                hx-target="#products"
+                hx-swap="beforeend"
+            >
+        {% endif %}
+    {% endfor %}
     {% if basket %}
         <a href="{% url "purchase:new" %}" class="btn btn-secondary">{% translate "New" %}</a>
     {% endif %}
+{% endblock %}
+
+{% block extrascript %}
+    <script src="{% static 'vendor/htmx-1.8.6/htmx.min.js' %}" defer></script>
+    {% django_htmx_script %}
 {% endblock %}

@@ -4,7 +4,7 @@ import hashlib
 import uuid
 
 from django.db import models
-from django.db.models import Avg, Count, F, Sum, UniqueConstraint
+from django.db.models import Avg, Count, F, Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.utils.translation import gettext
@@ -77,6 +77,12 @@ class ProductQuerySet(models.QuerySet):
     def with_sold(self):
         return self.annotate(sold=Coalesce(Sum("basket_items__quantity"), 0))
 
+    def with_fixed_price(self):
+        return self.exclude(unit_price_cents=0)
+
+    def with_no_fixed_price(self):
+        return self.filter(unit_price_cents=0)
+
 
 class ProductManager(models.Manager):
     def get_by_natural_key(self, name):
@@ -88,7 +94,9 @@ class Product(Model):
     image = models.ImageField(null=True, blank=True, verbose_name=_("image"))
     unit_price_cents = models.PositiveIntegerField(
         verbose_name=_("unit price (cents)"),
-        help_text=_("unit price in cents"),
+        help_text=_(
+            "Unit price in cents. Use zero to denote that the product has no fixed price.",
+        ),
     )
     display_order = models.PositiveIntegerField(
         default=default_product_display_order,
@@ -114,6 +122,10 @@ class Product(Model):
             hashlib.sha256(bytes(self.name, encoding="utf-8")).hexdigest()[:2],
             base=16,
         )
+
+    @property
+    def has_fixed_price(self) -> bool:
+        return self.unit_price_cents > 0
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -223,9 +235,6 @@ class BasketItem(Model):
     class Meta:
         verbose_name = _("basket item")
         verbose_name_plural = _("basket items")
-        constraints = [
-            UniqueConstraint("product", "basket", name="unique_product_per_basket"),
-        ]
 
 
 class Cache(SingletonModel):

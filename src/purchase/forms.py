@@ -7,7 +7,8 @@ from django.utils.translation import gettext as _
 from purchase.layout import BasketItemField
 from purchase.models import Basket, Product
 
-PREFIX = "product-"
+PRICED_PREFIX = "product-"
+UNPRICED_PREFIX = "unpriced_product-"
 
 
 class BasketForm(forms.ModelForm):
@@ -31,8 +32,8 @@ class BasketForm(forms.ModelForm):
             for item in basket.items.all():
                 products[item.product] = item.quantity
         fields = []
-        for product in Product.objects.all():
-            field_name = f"{PREFIX}{product.id}"
+        for product in Product.objects.with_fixed_price():
+            field_name = f"{PRICED_PREFIX}{product.id}"
             self.fields.update(
                 {
                     field_name: forms.IntegerField(
@@ -47,6 +48,7 @@ class BasketForm(forms.ModelForm):
             Div(
                 *fields,
                 css_class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 row-cols-xl-6 g-4",
+                css_id="products",
             ),
             InlineRadios("payment_method"),
         )
@@ -56,8 +58,8 @@ class BasketForm(forms.ModelForm):
         name: str
         products = {product.id: product for product in Product.objects.all()}
         for name, value in self.cleaned_data.items():
-            if name.startswith(PREFIX):
-                product_id = int(name.removeprefix(PREFIX))
+            if name.startswith(PRICED_PREFIX):
+                product_id = int(name.removeprefix(PRICED_PREFIX))
                 product = products[product_id]
                 if value > 0:
                     instance.items.update_or_create(

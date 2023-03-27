@@ -6,6 +6,7 @@ from pytest_django.live_server_helper import LiveServer
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 
 from common.models import User
@@ -33,6 +34,11 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
         ProductFactory(),
         ProductFactory(),
         ProductFactory(),
+    ]
+    unpriced_products = [
+        ProductFactory(unit_price_cents=0),
+        ProductFactory(unit_price_cents=0),
+        ProductFactory(unit_price_cents=0),
     ]
     payment_methods = [
         PaymentMethodFactory(),
@@ -85,6 +91,29 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
     chain.double_click(quantity_input).perform()
     quantity_input.send_keys("4")
 
+    # Add non-fixed priced product
+    select = Select(selenium.find_element(By.ID, "product_to_add"))
+    unpriced_product = unpriced_products[1]
+    select.select_by_value(str(unpriced_product.pk))
+    selenium.find_element(By.ID, "add_product").click()
+    selenium.find_element(By.ID, "add_product").click()
+    elements = selenium.find_elements(
+        By.CSS_SELECTOR,
+        f"[data-product-id='{unpriced_product.pk}']",
+    )
+    for elem in elements:
+        assert (
+            elem.find_element(By.CLASS_NAME, "card-title").text == unpriced_product.name
+        )
+    price_input = elements[0].find_element(By.CLASS_NAME, "numberinput")
+    chain = ActionChains(selenium)
+    chain.double_click(price_input).perform()
+    price_input.send_keys("237")
+    price_input = elements[1].find_element(By.CLASS_NAME, "numberinput")
+    chain = ActionChains(selenium)
+    chain.double_click(price_input).perform()
+    price_input.send_keys("401")
+
     # Don't add payment method
     # Save
     selenium.find_element(By.ID, "submit-id-submit").click()
@@ -93,7 +122,7 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
     assert Basket.objects.count() == 1
     basket = Basket.objects.priced().first()
     assert basket.payment_method is None
-    assert basket.items.count() == 2
+    assert basket.items.count() == 4
     assert basket.items.get(product=products[0]).quantity == 2
     assert (
         basket.items.get(product=products[0]).unit_price_cents
@@ -104,6 +133,14 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
         basket.items.get(product=products[1]).unit_price_cents
         == products[1].unit_price_cents
     )
+    unpriced_basket_items = basket.items.filter(product=unpriced_product).order_by(
+        "unit_price_cents",
+    )
+    assert len(unpriced_basket_items) == 2
+    assert unpriced_basket_items[0].quantity == 1
+    assert unpriced_basket_items[0].unit_price_cents == 237
+    assert unpriced_basket_items[1].quantity == 1
+    assert unpriced_basket_items[1].unit_price_cents == 401
 
     # Assert redirected to basket update view
     redirect_url = live_reverse(live_server, "purchase:update", pk=basket.pk)
@@ -141,6 +178,12 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
     quantity = int(quantity_input.get_attribute("value"))
     assert quantity == 0
 
+    elements = selenium.find_elements(
+        By.CSS_SELECTOR,
+        f"[data-product-id='{unpriced_product.pk}']",
+    )
+    assert len(elements) == 2, "Unpriced products should be displayed"
+
     # Click on - on product 2
     displayed_product = displayed_products[1]
     displayed_product.find_element(By.CLASS_NAME, "btn-danger").click()
@@ -162,7 +205,7 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
     assert Basket.objects.count() == 1
     basket = Basket.objects.priced().first()
     assert basket.payment_method == payment_methods[1]
-    assert basket.items.count() == 2
+    assert basket.items.count() == 4
     assert basket.items.get(product=products[0]).quantity == 2
     assert (
         basket.items.get(product=products[0]).unit_price_cents
@@ -173,6 +216,14 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
         basket.items.get(product=products[1]).unit_price_cents
         == products[1].unit_price_cents
     )
+    unpriced_basket_items = basket.items.filter(product=unpriced_product).order_by(
+        "unit_price_cents",
+    )
+    assert len(unpriced_basket_items) == 2
+    assert unpriced_basket_items[0].quantity == 1
+    assert unpriced_basket_items[0].unit_price_cents == 237
+    assert unpriced_basket_items[1].quantity == 1
+    assert unpriced_basket_items[1].unit_price_cents == 401
 
     # Assert redirected to same view
     redirect_url = live_reverse(live_server, "purchase:update", pk=basket.pk)
