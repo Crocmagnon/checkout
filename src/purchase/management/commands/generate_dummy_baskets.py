@@ -52,13 +52,23 @@ class Command(BaseCommand):
             )
             items = []
             for product in selected_products:
-                items.append(
-                    BasketItem(
-                        product=product,
-                        basket=basket,
-                        quantity=random.randint(1, 3),
-                        unit_price_cents=product.unit_price_cents,
-                    ),
-                )
+                if not product.has_fixed_price:
+                    items.append(
+                        BasketItem(
+                            product=product,
+                            basket=basket,
+                            quantity=1,
+                            unit_price_cents=random.randint(317, 514),
+                        ),
+                    )
+                else:
+                    items.append(
+                        BasketItem(
+                            product=product,
+                            basket=basket,
+                            quantity=random.randint(1, 3),
+                            unit_price_cents=product.unit_price_cents,
+                        ),
+                    )
             BasketItem.objects.bulk_create(items)
         return count
