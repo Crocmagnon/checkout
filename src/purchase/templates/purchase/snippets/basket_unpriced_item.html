@@ -14,7 +14,8 @@
         <div class="card-body">
             <h4 class="card-title">{{ product.name }}</h4>
             <div class="input-group">
-                <input type="number" step="1" name="unpriced_product-{{ product.pk }}" min="0" class="numberinput form-control" required="" id="unpriced_id_product-{{ product.pk }}"
+                <input type="number" step="1" inputmode="numeric" min="0"
+                       name="unpriced_product-{{ product.pk }}" class="numberinput form-control" required="" id="unpriced_id_product-{{ product.pk }}"
                        value="{{ value|default:0 }}"
                 >
                 <span class="input-group-text" id="basic-addon1">cts</span>

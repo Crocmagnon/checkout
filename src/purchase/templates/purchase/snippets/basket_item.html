@@ -15,7 +15,7 @@
             <h4 class="card-title">{{ product.name }}</h4>
             <div class="input-group">
                 <button class="btn btn-danger" type="button" onclick="decrementValue('{{ field.id_for_label }}')"><i class="fa-solid fa-minus"></i></button>
-                {% crispy_field field 'class' 'form-control' %}
+                {% crispy_field field 'class' 'form-control' 'inputmode' 'numeric' %}
                 <button class="btn btn-success {% if field.value %}border-white{% endif %}" type="button" onclick="incrementValue('{{ field.id_for_label }}')"><i class="fa-solid fa-plus"></i></button>
             </div>
         </div>
