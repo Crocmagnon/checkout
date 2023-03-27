@@ -28,7 +28,7 @@ class BasketForm(forms.ModelForm):
         self.helper.add_input(Submit("submit", _("Save")))
         self.helper.attrs = {
             "hx_post": reverse("purchase:price_preview"),
-            "hx_trigger": "change",
+            "hx_trigger": "keyup,change",
             "hx_target": "#price_preview",
             "hx_swap": "innerHTML",
         }
