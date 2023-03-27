@@ -1,3 +1,4 @@
+from crispy_forms import layout
 from crispy_forms.bootstrap import InlineRadios
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Submit
@@ -28,7 +29,7 @@ class BasketForm(forms.ModelForm):
         self.helper.add_input(Submit("submit", _("Save")))
         self.helper.attrs = {
             "hx_post": reverse("purchase:price_preview"),
-            "hx_trigger": "keyup delay:500ms,change delay:500ms,load",
+            "hx_trigger": "keyup delay:500ms,change delay:500ms",
             "hx_target": "#price_preview",
             "hx_swap": "innerHTML",
         }
@@ -51,6 +52,9 @@ class BasketForm(forms.ModelForm):
                 },
             )
             fields.append(BasketItemField(field_name, product=product))
+        total = 0
+        if basket:
+            total = basket.price / 100
         self.helper.layout = Layout(
             Div(
                 *fields,
@@ -58,7 +62,11 @@ class BasketForm(forms.ModelForm):
                 css_id="products",
             ),
             InlineRadios("payment_method"),
-            Div(css_id="price_preview", css_class="mb-2"),
+            Div(
+                layout.HTML(f"Montant total : {total:.2f}€"),
+                css_id="price_preview",
+                css_class="mb-2",
+            ),
         )
 
     def save(self):
