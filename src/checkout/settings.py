@@ -64,6 +64,7 @@ DEBUG = env("DEBUG")
 ALLOWED_HOSTS = ["localhost"]  # Required for healthcheck
 if DEBUG:
     ALLOWED_HOSTS.append("127.0.0.1")
+    ALLOWED_HOSTS.append("192.168.1.27")
 
 ALLOWED_HOSTS.extend(env("HOSTS"))
 

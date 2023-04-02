@@ -12,7 +12,7 @@
             </div>
         {% endif %}
         <div class="card-body">
-            <h4 class="card-title">{{ product.name }}</h4>
+            <h5 class="card-title">{{ product.name }}</h5>
             <div class="input-group">
                 <button class="btn btn-danger" type="button" onclick="decrementValue('{{ field.id_for_label }}')"><i class="fa-solid fa-minus"></i></button>
                 {% crispy_field field 'class' 'form-control' 'inputmode' 'numeric' %}
