@@ -135,14 +135,14 @@ def get_products_plots(products: ProductQuerySet):
 
     x = np.arange(len(labels))
     width = 0.4
-    fig: Figure = plt.figure()
+    fig: Figure = plt.figure(figsize=(10, 6))
     fig.suptitle(_("Sales by product"))
 
     color = "tab:orange"
     ax1: Axes = fig.add_subplot()
     bar: BarContainer = ax1.bar(x - width / 2, sold, width=width, color=color)
     ax1.bar_label(bar)
-    ax1.tick_params(axis="x", rotation=15)
+    ax1.tick_params(axis="x", rotation=90)
     ax1.tick_params(axis="y", labelcolor=color)
     ax1.set_xticks(x, labels)
     ax1.set_ylabel(_("# sold"), color=color)
@@ -161,14 +161,14 @@ def get_products_plots(products: ProductQuerySet):
     fig = plt.figure()
     fig.suptitle(_("# sold"))
     ax1 = fig.add_subplot()
-    ax1.pie(sold, labels=labels, autopct="%d%%")
+    ax1.pie(sold, labels=labels, autopct="%d%%", pctdistance=0.85)
     fig.tight_layout()
     img2 = get_image_from_fig(fig)
 
     fig = plt.figure()
     fig.suptitle(_("Turnover by product"))
     ax1 = fig.add_subplot()
-    ax1.pie(turnover, labels=labels, autopct="%d%%")
+    ax1.pie(turnover, labels=labels, autopct="%d%%", pctdistance=0.85)
     fig.tight_layout()
     img3 = get_image_from_fig(fig)
 
