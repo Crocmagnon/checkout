@@ -86,3 +86,23 @@ def download_db(ctx: Context) -> None:
         ctx.run("scp -r ubuntu:/mnt/data/checkout/media/ ./src/media")
     with ctx.cd(SRC_DIR):
         ctx.run("./manage.py changepassword gaugendre", pty=True)
+
+
+@task
+def update_fixtures(ctx: Context) -> None:
+    with ctx.cd(SRC_DIR):
+        ctx.run(
+            "./manage.py dumpdata purchase.Product purchase.ProductCategory --natural-primary --natural-foreign -o ./purchase/fixtures/products.json",
+            echo=True,
+            pty=True,
+        )
+        ctx.run(
+            "./manage.py dumpdata purchase.PaymentMethod --natural-primary --natural-foreign -o ./purchase/fixtures/payment_methods.json",
+            echo=True,
+            pty=True,
+        )
+        ctx.run(
+            "pre-commit run --files ./purchase/fixtures/products.json ./purchase/fixtures/payment_methods.json",
+            echo=True,
+            pty=True,
+        )
