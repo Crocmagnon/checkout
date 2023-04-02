@@ -40,7 +40,7 @@ class ProductFactory(factory.django.DjangoModelFactory):
 
     name = factory.Faker("text", max_nb_chars=80)
     unit_price_cents = factory.LazyFunction(partial(random.randint, 80, 650))
-    category = factory.Iterator(ProductCategory.objects.all())
+    category = factory.SubFactory(ProductCategoryFactory)
 
 
 class PaymentMethodFactory(factory.django.DjangoModelFactory):
@@ -54,7 +54,7 @@ class BasketWithItemsFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Basket
 
-    payment_method = factory.Iterator(PaymentMethod.objects.all())
+    payment_method = factory.SubFactory(PaymentMethodFactory)
 
     @factory.post_generation
     def items(self, create, _extracted, **_kwargs):
