@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-27 22:58+0200\n"
+"POT-Creation-Date: 2023-04-02 18:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,29 +15,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: common/templates/403.html:4
+#: common/templates/403.html
 msgid "Permission denied"
 msgstr "Permission refusée"
 
-#: common/templates/403.html:5
+#: common/templates/403.html
 msgid "You're not allowed to access this page."
 msgstr "Vous n'avez pas le droit d'accéder à cette page"
 
-#: common/templates/404.html:4
+#: common/templates/404.html
 msgid "Page not found"
 msgstr "Page non trouvée"
 
-#: common/templates/404.html:5
+#: common/templates/404.html
 msgid "We tried and tried but couldn't find the page you're looking for."
 msgstr ""
 "Nous avons cherché partout mais nous n'avons pas trouvé la page que vous "
 "cherchiez."
 
-#: common/templates/500.html:11
+#: common/templates/500.html
 msgid "Server error (500)"
 msgstr "Erreur serveur (500)"
 
-#: common/templates/500.html:12
+#: common/templates/500.html
 msgid ""
 "There's an error on our end. Don't worry though, our engineers are already "
 "working to fix it!"
@@ -45,18 +45,18 @@ msgstr ""
 "Il y a une erreur de notre côté. Ne vous inquiétez pas, nos ingénieurs "
 "travaillent déjà à sa résolution !"
 
-#: common/templates/common/navbar.html:12
+#: common/templates/common/navbar.html
 msgid "New basket"
 msgstr "Nouveau panier"
 
-#: common/templates/common/navbar.html:17
+#: common/templates/common/navbar.html
 msgid "Baskets"
 msgstr "Paniers"
 
-#: common/templates/common/navbar.html:20
+#: common/templates/common/navbar.html
 msgid "Reports"
 msgstr "Rapports"
 
-#: common/templates/common/navbar.html:25
+#: common/templates/common/navbar.html
 msgid "Admin"
 msgstr "Admin"

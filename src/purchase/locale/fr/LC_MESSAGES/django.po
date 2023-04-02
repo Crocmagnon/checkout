@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 16:24+0200\n"
+"POT-Creation-Date: 2023-04-02 18:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,232 +15,235 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: purchase/admin.py:26
+#: purchase/admin.py
 msgid "unit price"
 msgstr "prix unitaire"
 
-#: purchase/admin.py:30
+#: purchase/admin.py
 msgid "sold"
 msgstr "vendu"
 
-#: purchase/admin.py:34 purchase/admin.py:47
+#: purchase/admin.py
 msgid "turnover"
 msgstr "chiffre d'affaires"
 
-#: purchase/admin.py:61 purchase/admin.py:78
+#: purchase/admin.py
 msgid "price"
 msgstr "prix"
 
-#: purchase/forms.py:29
+#: purchase/forms.py
 msgid "Save"
 msgstr "Enregistrer"
 
-#: purchase/models.py:16
+#: purchase/models.py
 msgid "created at"
 msgstr "créé à"
 
-#: purchase/models.py:17
+#: purchase/models.py
 msgid "updated at"
 msgstr "mis à jour à"
 
-#: purchase/models.py:45 purchase/models.py:92
+#: purchase/models.py
 msgid "name"
 msgstr "nom"
 
-#: purchase/models.py:50 purchase/models.py:158
+#: purchase/models.py
 msgid "payment method"
 msgstr "moyen de paiement"
 
-#: purchase/models.py:51
+#: purchase/models.py
 msgid "payment methods"
 msgstr "moyens de paiement"
 
-#: purchase/models.py:94 purchase/models.py:194
+#: purchase/models.py
 msgid "unit price (cents)"
 msgstr "prix unitaire (centimes)"
 
-#: purchase/models.py:96
+#: purchase/models.py
 msgid ""
 "Unit price in cents. Use zero to denote that the product has no fixed price."
 msgstr ""
 "Prix unitaire en centimes. Utiliser zéro pour indiquer que le produit n'a "
 "pas de prix fixe."
 
-#: purchase/models.py:101
+#: purchase/models.py
 msgid "initials"
 msgstr "initiales"
 
-#: purchase/models.py:107
+#: purchase/models.py
 msgid "display order"
 msgstr "ordre d'affichage"
 
-#: purchase/models.py:114 purchase/models.py:184
+#: purchase/models.py
 msgid "product"
 msgstr "produit"
 
-#: purchase/models.py:115
+#: purchase/models.py
 msgid "products"
 msgstr "produits"
 
-#: purchase/models.py:164 purchase/models.py:190
+#: purchase/models.py
 msgid "basket"
 msgstr "panier"
 
-#: purchase/models.py:165
+#: purchase/models.py
 msgid "baskets"
 msgstr "paniers"
 
-#: purchase/models.py:168
+#: purchase/models.py
 #, python-format
 msgid "Basket #%(id)s"
 msgstr "Panier n°%(id)s"
 
-#: purchase/models.py:192
+#: purchase/models.py
 msgid "quantity"
 msgstr "quantité"
 
-#: purchase/models.py:195
+#: purchase/models.py
 msgid "product's unit price in cents at the time of purchase"
 msgstr "prix unitaire du produit en centimes au moment de l'achat"
 
-#: purchase/models.py:201
+#: purchase/models.py
 msgid "basket item"
 msgstr "article de panier"
 
-#: purchase/models.py:202
+#: purchase/models.py
 msgid "basket items"
 msgstr "articles de panier"
 
-#: purchase/templates/purchase/basket_confirm_delete.html:7
+#: purchase/templates/purchase/basket_confirm_delete.html
 #, python-format
 msgid "Are you sure you want to delete \"%(basket)s\"?"
 msgstr "Êtes-vous sûr de vouloir supprimer \"%(basket)s\" ?"
 
-#: purchase/templates/purchase/basket_form.html:14
+#: purchase/templates/purchase/basket_form.html
 msgid "Missing payment method."
 msgstr "Moyen de paiement manquant."
 
-#: purchase/templates/purchase/basket_form.html:17
-#: purchase/templates/purchase/basket_form.html:58
+#: purchase/templates/purchase/basket_form.html
 msgid "New basket"
 msgstr "Nouveau panier"
 
-#: purchase/templates/purchase/basket_form.html:38
+#: purchase/templates/purchase/basket_form.html
 msgid "Add product"
 msgstr "Ajouter un produit"
 
-#: purchase/templates/purchase/basket_list.html:5
+#: purchase/templates/purchase/basket_list.html
 msgid "Baskets"
 msgstr "Paniers"
 
-#: purchase/templates/purchase/basket_list.html:11
+#: purchase/templates/purchase/basket_list.html
 #, python-format
 msgid "Basket #%(basket_id)s"
 msgstr "Panier n°%(basket_id)s"
 
-#: purchase/templates/purchase/basket_list.html:13
+#: purchase/templates/purchase/basket_list.html
 #, python-format
 msgid "1 item"
 msgid_plural "%(counter)s items"
 msgstr[0] "1 article"
 msgstr[1] "%(counter)s articles"
 
-#: purchase/templates/purchase/reports.html:9
+#: purchase/templates/purchase/reports.html
 msgid "Reports"
 msgstr "Rapports"
 
-#: purchase/templates/purchase/reports.html:10
+#: purchase/templates/purchase/reports.html
 msgid "All times"
 msgstr "Tous les temps"
 
-#: purchase/templates/purchase/reports.html:12
+#: purchase/templates/purchase/reports.html
 msgid "Total turnover:"
 msgstr "Chiffre d'affaires total :"
 
-#: purchase/templates/purchase/reports.html:13
+#: purchase/templates/purchase/reports.html
 msgid "Average basket:"
 msgstr "Panier moyen :"
 
-#: purchase/templates/purchase/reports.html:14
+#: purchase/templates/purchase/reports.html
 msgid "Number of baskets:"
 msgstr "Nombre de paniers :"
 
-#: purchase/templates/purchase/reports.html:17
+#: purchase/templates/purchase/reports.html
 msgid "By day"
 msgstr "Par jour"
 
-#: purchase/templates/purchase/reports.html:21
+#: purchase/templates/purchase/reports.html
+msgid "By hour"
+msgstr "Par heure"
+
+#: purchase/templates/purchase/reports.html
 msgid "Products"
 msgstr "Produits"
 
-#: purchase/templates/purchase/reports.html:25
+#: purchase/templates/purchase/reports.html
 msgid "Turnover by payment method"
 msgstr "Chiffre d'affaires par moyen de paiement"
 
-#: purchase/templates/purchase/snippets/by_day.html:6
+#: purchase/templates/purchase/snippets/by_day_table.html
 msgid "Date"
 msgstr "Date"
 
-#: purchase/templates/purchase/snippets/by_day.html:7
-#: purchase/templates/purchase/snippets/report_payment_methods.html:7
+#: purchase/templates/purchase/snippets/by_day_table.html
+#: purchase/templates/purchase/snippets/report_payment_methods.html
 msgid "# baskets"
 msgstr "Nb. de paniers"
 
-#: purchase/templates/purchase/snippets/by_day.html:8
-#: purchase/templates/purchase/snippets/report_payment_methods.html:8
-#: purchase/templates/purchase/snippets/report_products.html:8
+#: purchase/templates/purchase/snippets/by_day_table.html
+#: purchase/templates/purchase/snippets/report_payment_methods.html
+#: purchase/templates/purchase/snippets/report_products.html
 msgid "Turnover"
 msgstr "Chiffre d'affaires"
 
-#: purchase/templates/purchase/snippets/by_day.html:9
+#: purchase/templates/purchase/snippets/by_day_table.html
 msgid "Average basket"
 msgstr "Panier moyen"
 
-#: purchase/templates/purchase/snippets/report_payment_methods.html:6
+#: purchase/templates/purchase/snippets/report_payment_methods.html
 msgid "Payment method"
 msgstr "Moyen de paiement"
 
-#: purchase/templates/purchase/snippets/report_products.html:6
+#: purchase/templates/purchase/snippets/report_products.html
 msgid "Product"
 msgstr "Produit"
 
-#: purchase/templates/purchase/snippets/report_products.html:7
-#: purchase/views/reports.py:115 purchase/views/reports.py:129
+#: purchase/templates/purchase/snippets/report_products.html
+#: purchase/views/reports.py
 msgid "# sold"
 msgstr "Nb. vendus"
 
-#: purchase/views/basket.py:33
+#: purchase/views/basket.py
 msgid "Successfully created basket."
 msgstr "Panier correctement créé."
 
-#: purchase/views/basket.py:70
+#: purchase/views/basket.py
 msgid "Successfully updated basket."
 msgstr "Panier correctement modifié."
 
-#: purchase/views/basket.py:116
+#: purchase/views/basket.py
 msgid "Basket successfully deleted."
 msgstr "Panier correctement supprimé."
 
-#: purchase/views/reports.py:73
+#: purchase/views/reports.py
 msgid "No sale to report"
 msgstr "Aucune vente à afficher"
 
-#: purchase/views/reports.py:106
+#: purchase/views/reports.py
 msgid "Sales by product"
 msgstr "Ventes par produit"
 
-#: purchase/views/reports.py:121 purchase/views/reports.py:136
+#: purchase/views/reports.py
 msgid "Turnover by product"
 msgstr "Chiffre d'affaires par produit"
 
-#: purchase/views/reports.py:160
+#: purchase/views/reports.py
 msgid "Sales by hour"
 msgstr "Ventes par heure"
 
-#: purchase/views/reports.py:171
+#: purchase/views/reports.py
 msgid "Basket count by hour"
 msgstr "Nombre de paniers par heure"
 
-#: purchase/views/reports.py:179
+#: purchase/views/reports.py
 msgid "Turnover by hour"
 msgstr "Chiffre d'affaires par heure"

@@ -48,7 +48,11 @@ def sync_dependencies(ctx: Context):
 @task
 def makemessages(ctx: Context) -> None:
     with ctx.cd(SRC_DIR):
-        ctx.run("./manage.py makemessages -l en -l fr", pty=True, echo=True)
+        ctx.run(
+            "./manage.py makemessages -l en -l fr --add-location file",
+            pty=True,
+            echo=True,
+        )
 
 
 @task
