@@ -17,8 +17,10 @@
     <h3>{% translate "By day" %}</h3>
     {% include "purchase/snippets/by_day_table.html" %}
 
-    <h3>{% translate "By hour" %} <small class="text-muted">{{ date }}</small></h3>
-    {% include "purchase/snippets/htmx_plot.html" with url='purchase:by_hour_plot' %}
+    {% if date %}
+        <h3>{% translate "By hour" %} <small class="text-muted">{{ date }}</small></h3>
+        {% include "purchase/snippets/htmx_plot.html" with url='purchase:by_hour_plot' %}
+    {% endif %}
 
     <h2>{% translate "Products" %} <small class="text-muted">{{ date }}</small></h2>
     {% include "purchase/snippets/report_products.html" %}
