@@ -16,6 +16,7 @@ from purchase.tests.factories import (
     BasketWithItemsFactory,
     CashierFactory,
     PaymentMethodFactory,
+    ProductCategoryFactory,
     ProductFactory,
 )
 
@@ -30,6 +31,8 @@ def test_cashier_create_and_update_basket(  # noqa: PLR0915
 
     # Setup data
     cashier = CashierFactory()
+    ProductCategoryFactory()
+    ProductCategoryFactory()
     products = [
         ProductFactory(),
         ProductFactory(),
@@ -257,6 +260,8 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
 
     # Setup test data
     cashier = CashierFactory()
+    ProductCategoryFactory()
+    ProductCategoryFactory()
     _ = [
         ProductFactory(),
         ProductFactory(),

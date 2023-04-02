@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import Group, Permission
 
 from common.models import User
-from purchase.models import Basket, BasketItem, PaymentMethod, Product
+from purchase.models import Basket, BasketItem, PaymentMethod, Product, ProductCategory
 
 USER_PASSWORD = "test_password"
 
@@ -26,12 +26,21 @@ class CashierFactory(factory.django.DjangoModelFactory):
             self.groups.add(CashierGroupFactory())
 
 
+class ProductCategoryFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProductCategory
+
+    name = factory.Faker("text", max_nb_chars=30)
+    color_hue = factory.LazyFunction(partial(random.randint, 0, 360))
+
+
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
 
     name = factory.Faker("text", max_nb_chars=80)
     unit_price_cents = factory.LazyFunction(partial(random.randint, 80, 650))
+    category = factory.Iterator(ProductCategory.objects.all())
 
 
 class PaymentMethodFactory(factory.django.DjangoModelFactory):
