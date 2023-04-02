@@ -71,7 +71,7 @@ def reports(request):
     baskets = list(Basket.objects.priced().order_by("created_at"))
     if not baskets:
         messages.warning(request, _("No sale to report"))
-        return TemplateResponse(request, template_name, {})
+        return render(request, template_name, {})
 
     dates = Basket.objects.values_list("created_at__date", flat=True).distinct()
     by_day_report = [

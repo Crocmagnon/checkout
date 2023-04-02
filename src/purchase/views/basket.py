@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import permission_required
 from django.core.handlers.wsgi import WSGIRequest
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
-from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.utils.datastructures import MultiValueDict
 from django.utils.translation import gettext_lazy as _
@@ -35,7 +34,7 @@ def new_basket(request: WSGIRequest) -> HttpResponse:
     else:
         form = BasketForm()
 
-    return TemplateResponse(
+    return render(
         request,
         "purchase/basket_form.html",
         {"form": form, "products": Product.objects.with_no_fixed_price()},
@@ -102,7 +101,7 @@ def additional_unpriced_product(request: WSGIRequest) -> HttpResponse:
 @condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def list_baskets(request: WSGIRequest) -> HttpResponse:
     context = {"baskets": Basket.objects.priced().order_by("-id")}
-    return TemplateResponse(request, "purchase/basket_list.html", context)
+    return render(request, "purchase/basket_list.html", context)
 
 
 @require_http_methods(["GET", "POST"])
@@ -111,7 +110,7 @@ def delete_basket(request: WSGIRequest, pk: int) -> HttpResponse:
     basket = get_object_or_404(Basket, pk=pk)
     if request.method == "GET":
         context = {"basket": basket}
-        return TemplateResponse(request, "purchase/basket_confirm_delete.html", context)
+        return render(request, "purchase/basket_confirm_delete.html", context)
     basket.delete()
     messages.success(request, _("Basket successfully deleted."))
     return redirect("purchase:list")
