@@ -3,10 +3,10 @@
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-26T20:30:22.959Z",
-      "updated_at": "2022-04-26T20:30:22.959Z",
+      "updated_at": "2023-04-02T13:47:16.252Z",
       "name": "Clou",
-      "image": "",
-      "unit_price_cents": 134,
+      "unit_price_cents": 140,
+      "initials": "C",
       "display_order": 1
     }
   },
@@ -14,10 +14,10 @@
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-26T20:30:22.959Z",
-      "updated_at": "2022-04-27T21:04:04.197Z",
+      "updated_at": "2023-04-02T13:47:52.602Z",
       "name": "Villard'Ain",
-      "image": "",
-      "unit_price_cents": 290,
+      "unit_price_cents": 310,
+      "initials": "V",
       "display_order": 2
     }
   },
@@ -25,10 +25,10 @@
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-26T20:30:22.959Z",
-      "updated_at": "2022-04-28T16:09:00.142Z",
+      "updated_at": "2023-04-02T13:47:52.608Z",
       "name": "Herbier",
-      "image": "",
-      "unit_price_cents": 330,
+      "unit_price_cents": 360,
+      "initials": "Hb",
       "display_order": 4
     }
   },
@@ -36,21 +36,21 @@
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-26T20:30:22.959Z",
-      "updated_at": "2022-04-27T21:04:04.192Z",
+      "updated_at": "2023-04-02T13:47:52.622Z",
       "name": "Blanc vache",
-      "image": "",
-      "unit_price_cents": 650,
-      "display_order": 3
+      "unit_price_cents": 360,
+      "initials": "BV",
+      "display_order": 10
     }
   },
   {
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-28T16:08:08.298Z",
-      "updated_at": "2022-04-28T16:09:13.196Z",
+      "updated_at": "2023-04-02T13:47:52.610Z",
       "name": "Ap\u00e9rich\u00e8vres",
-      "image": "",
-      "unit_price_cents": 330,
+      "unit_price_cents": 360,
+      "initials": "Ac",
       "display_order": 5
     }
   },
@@ -58,10 +58,10 @@
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-28T16:08:16.542Z",
-      "updated_at": "2022-04-28T16:09:25.690Z",
+      "updated_at": "2023-04-02T13:47:52.614Z",
       "name": "Clougert",
-      "image": "",
-      "unit_price_cents": 450,
+      "unit_price_cents": 470,
+      "initials": "CM",
       "display_order": 6
     }
   },
@@ -69,10 +69,10 @@
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-28T16:08:20.471Z",
-      "updated_at": "2022-04-28T16:09:34.003Z",
+      "updated_at": "2023-04-02T13:47:52.617Z",
       "name": "Brique",
-      "image": "",
-      "unit_price_cents": 290,
+      "unit_price_cents": 310,
+      "initials": "Bq",
       "display_order": 7
     }
   },
@@ -80,11 +80,154 @@
     "model": "purchase.product",
     "fields": {
       "created_at": "2022-04-28T16:08:20.471Z",
-      "updated_at": "2022-04-28T16:09:34.003Z",
+      "updated_at": "2023-04-02T13:47:52.619Z",
       "name": "Tomme de ch\u00e8vre",
-      "image": "",
       "unit_price_cents": 0,
+      "initials": "T",
       "display_order": 8
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T12:47:15.522Z",
+      "updated_at": "2023-04-02T13:47:52.640Z",
+      "name": "Cr\u00eapes chocolat",
+      "unit_price_cents": 200,
+      "initials": "CrC",
+      "display_order": 20
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:02:38.149Z",
+      "updated_at": "2023-04-02T13:47:52.605Z",
+      "name": "Caprinoux",
+      "unit_price_cents": 100,
+      "initials": "Cap",
+      "display_order": 3
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:31:13.712Z",
+      "updated_at": "2023-04-02T13:47:52.624Z",
+      "name": "Clou affin\u00e9",
+      "unit_price_cents": 160,
+      "initials": "CA",
+      "display_order": 11
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:32:12.289Z",
+      "updated_at": "2023-04-02T13:47:52.626Z",
+      "name": "Ap\u00e9rich\u00e8vres frais",
+      "unit_price_cents": 250,
+      "initials": "AcF",
+      "display_order": 12
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:32:29.365Z",
+      "updated_at": "2023-04-02T13:47:52.628Z",
+      "name": "Blanc ch\u00e8vre",
+      "unit_price_cents": 480,
+      "initials": "BC",
+      "display_order": 13
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:32:41.308Z",
+      "updated_at": "2023-04-02T13:47:52.629Z",
+      "name": "Gros de vache",
+      "unit_price_cents": 200,
+      "initials": "GV",
+      "display_order": 14
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:32:48.404Z",
+      "updated_at": "2023-04-02T13:47:52.631Z",
+      "name": "P'tit clou",
+      "unit_price_cents": 60,
+      "initials": "PC",
+      "display_order": 15
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:33:12.184Z",
+      "updated_at": "2023-04-02T13:47:52.633Z",
+      "name": "Ap\u00e9rivache",
+      "unit_price_cents": 300,
+      "initials": "AV",
+      "display_order": 16
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:33:24.357Z",
+      "updated_at": "2023-04-02T13:47:52.635Z",
+      "name": "Fromage fort",
+      "unit_price_cents": 360,
+      "initials": "FF",
+      "display_order": 17
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:33:49.793Z",
+      "updated_at": "2023-04-02T13:47:52.636Z",
+      "name": "Lait de ch\u00e8vre",
+      "unit_price_cents": 200,
+      "initials": "L",
+      "display_order": 18
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:33:54.405Z",
+      "updated_at": "2023-04-02T13:47:52.638Z",
+      "name": "Verre",
+      "unit_price_cents": 100,
+      "initials": "V",
+      "display_order": 19
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:34:34.802Z",
+      "updated_at": "2023-04-02T13:47:52.641Z",
+      "name": "Cr\u00eape sucre",
+      "unit_price_cents": 150,
+      "initials": "CrS",
+      "display_order": 21
+    }
+  },
+  {
+    "model": "purchase.product",
+    "fields": {
+      "created_at": "2023-04-02T13:34:44.535Z",
+      "updated_at": "2023-04-02T13:47:52.643Z",
+      "name": "Cr\u00eape nature",
+      "unit_price_cents": 140,
+      "initials": "CrN",
+      "display_order": 22
     }
   }
 ]

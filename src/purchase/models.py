@@ -9,7 +9,6 @@ from django.db.models.functions import Coalesce
 from django.urls import reverse
 from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
-from PIL import Image, ImageOps
 from solo.models import SingletonModel
 
 
@@ -91,12 +90,17 @@ class ProductManager(models.Manager):
 
 class Product(Model):
     name = models.CharField(max_length=250, unique=True, verbose_name=_("name"))
-    image = models.ImageField(null=True, blank=True, verbose_name=_("image"))
     unit_price_cents = models.PositiveIntegerField(
         verbose_name=_("unit price (cents)"),
         help_text=_(
             "Unit price in cents. Use zero to denote that the product has no fixed price.",
         ),
+    )
+    initials = models.CharField(
+        max_length=10,
+        verbose_name=_("initials"),
+        blank=False,
+        null=False,
     )
     display_order = models.PositiveIntegerField(
         default=default_product_display_order,
@@ -126,42 +130,6 @@ class Product(Model):
     @property
     def has_fixed_price(self) -> bool:
         return self.unit_price_cents > 0
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if not self.image:
-            return
-        with Image.open(self.image.path) as img_file:
-            img = ImageOps.exif_transpose(img_file)
-
-            width, height = img.size  # Get dimensions
-
-            image_max_size = 300
-            if width > image_max_size and height > image_max_size:
-                # keep ratio but shrink down
-                img.thumbnail((width, height))
-
-            # check which one is smaller
-            if height < width:
-                # make square by cutting off equal amounts left and right
-                left = (width - height) / 2
-                right = (width + height) / 2
-                top = 0
-                bottom = height
-                img = img.crop((left, top, right, bottom))
-
-            elif width < height:
-                # make square by cutting off bottom
-                left = 0
-                right = width
-                top = 0
-                bottom = width
-                img = img.crop((left, top, right, bottom))
-
-            if width > image_max_size and height > image_max_size:
-                img.thumbnail((image_max_size, image_max_size))
-
-            img.save(self.image.path)
 
 
 class BasketQuerySet(models.QuerySet):

@@ -9,8 +9,15 @@ from purchase.templatetags.purchase import currency
 
 @register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["name", "display_order", "unit_price", "sold", "turnover"]
-    list_editable = ["display_order"]
+    list_display = [
+        "name",
+        "display_order",
+        "initials",
+        "unit_price",
+        "sold",
+        "turnover",
+    ]
+    list_editable = ["display_order", "initials"]
     search_fields = ["name"]
 
     def get_queryset(self, request):
