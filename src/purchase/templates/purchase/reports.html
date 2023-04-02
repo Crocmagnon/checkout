@@ -15,15 +15,18 @@
     </ul>
 
     <h3>{% translate "By day" %}</h3>
-    {% include "purchase/snippets/by_day.html" %}
+    {% include "purchase/snippets/by_day_table.html" %}
+
+    <h3>{% translate "By hour" %} <small class="text-muted">{{ date }}</small></h3>
     {% include "purchase/snippets/htmx_plot.html" with url='purchase:by_hour_plot' %}
 
-    <h2>{% translate "Products" %}</h2>
+    <h2>{% translate "Products" %} <small class="text-muted">{{ date }}</small></h2>
     {% include "purchase/snippets/report_products.html" %}
     {% include "purchase/snippets/htmx_plot.html" with url='purchase:products_plots' %}
 
-    <h2>{% translate "Turnover by payment method" %}</h2>
+    <h2>{% translate "Turnover by payment method" %} <small class="text-muted">{{ date }}</small></h2>
     {% include "purchase/snippets/report_payment_methods.html" %}
+
 {% endblock %}
 
 {% block extrascript %}

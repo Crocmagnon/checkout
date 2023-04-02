@@ -49,6 +49,7 @@ class PaymentMethod(Model):
     class Meta:
         verbose_name = _("payment method")
         verbose_name_plural = _("payment methods")
+        ordering = ("name",)
 
     def __str__(self):
         return self.name

@@ -11,7 +11,9 @@
     <tbody>
         {% for report in by_day %}
             <tr>
-                <th scope="row">{{ report.date }}</th>
+                {% with d=report.date %}
+                    <th scope="row"><a href="{% url "purchase:reports" %}?year={{ d.year }}&month={{ d.month }}&day={{ d.day }}">{{ d }}</a></th>
+                {% endwith %}
                 <td>{{ report.count }}</td>
                 <td>{{ report.turnover|currency }}</td>
                 <td>{{ report.average_basket|currency }}</td>

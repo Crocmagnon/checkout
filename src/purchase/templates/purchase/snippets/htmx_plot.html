@@ -1,5 +1,5 @@
 {% load static %}
-<div hx-get="{% url url %}"
+<div hx-get="{% url url %}?year={{ date.year|default:0 }}&month={{ date.month|default:0 }}&day={{ date.day|default:0 }}"
      hx-trigger="load"
      hx-swap="outerHTML"
 >

@@ -9,7 +9,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
-from django.template.response import TemplateResponse
 from django.utils.translation import gettext as _
 from django.views.decorators.http import condition
 from matplotlib import pyplot as plt
@@ -34,7 +33,18 @@ mpl.use("SVG")
 @permission_required("purchase.view_basket")
 @condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def products_plots_view(request):
-    products = Product.objects.with_turnover().with_sold()
+    year = int(request.GET.get("year", 0))
+    month = int(request.GET.get("month", 0))
+    day = int(request.GET.get("day", 0))
+
+    if year and month and day:
+        date = datetime.date(year, month, day)
+        baskets = Basket.objects.by_date(date)
+        products = Product.objects.filter(basket_items__basket__in=baskets)
+    else:
+        products = Product.objects.all()
+
+    products = products.with_turnover().with_sold().exclude(sold=0)
     (
         products_plot,
         products_sold_pie,
@@ -49,7 +59,16 @@ def products_plots_view(request):
 @permission_required("purchase.view_basket")
 @condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def by_hour_plot_view(request):
-    baskets = list(Basket.objects.priced().order_by("created_at"))
+    year = int(request.GET.get("year", 0))
+    month = int(request.GET.get("month", 0))
+    day = int(request.GET.get("day", 0))
+
+    if year and month and day:
+        date = datetime.date(year, month, day)
+        baskets = list(Basket.objects.by_date(date).priced().order_by("created_at"))
+    else:
+        baskets = list(Basket.objects.priced().order_by("created_at"))
+
     context = {
         "plots": [by_hour_plot(baskets)],
     }
@@ -84,17 +103,31 @@ def reports(request):
         for date in dates
     ]
 
-    products = Product.objects.with_turnover().with_sold()
-
     context = {
         "turnover": Basket.objects.turnover(),
-        "by_day": by_day_report,
         "average_basket": Basket.objects.average_basket(),
-        "products": products,
-        "payment_methods": PaymentMethod.objects.with_turnover().with_sold(),
         "basket_count": Basket.objects.count(),
+        "by_day": by_day_report,
     }
-    return TemplateResponse(request, template_name, context)
+
+    methods = PaymentMethod.objects.order_by("name")
+    products = Product.objects.all()
+
+    year = int(request.GET.get("year", 0))
+    month = int(request.GET.get("month", 0))
+    day = int(request.GET.get("day", 0))
+
+    if year and month and day:
+        date = datetime.date(year, month, day)
+        baskets = Basket.objects.by_date(date)
+        context["date"] = date
+        products = products.filter(basket_items__basket__in=baskets)
+        methods = methods.filter(baskets__in=baskets)
+
+    context["products"] = products.with_turnover().with_sold().exclude(sold=0)
+    context["payment_methods"] = methods.with_turnover().with_sold().exclude(sold=0)
+
+    return render(request, template_name, context)
 
 
 def get_products_plots(products: ProductQuerySet):
