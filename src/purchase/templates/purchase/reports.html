@@ -7,26 +7,15 @@
 
 {% block content %}
     <h1>{% translate "Reports" %}</h1>
-    <h2>{% translate "General" %}</h2>
+    <h2>{% translate "All times" %}</h2>
     <ul>
         <li>{% translate "Total turnover:" %} {{ turnover|currency }}</li>
         <li>{% translate "Average basket:" %} {{ average_basket|currency }}</li>
+        <li>{% translate "Number of baskets:" %} {{ basket_count }}</li>
     </ul>
 
     <h3>{% translate "By day" %}</h3>
-    <h4>{% translate "Turnover" %}</h4>
-    <ul>
-        {% for date, turnover in turnover_by_day.items %}
-            <li>{{ date }} : {{ turnover|currency }}</li>
-        {% endfor %}
-    </ul>
-    <h4>{% translate "Average basket" %}</h4>
-    <ul>
-        {% for date, average in average_basket_by_day.items %}
-            <li>{{ date }} : {{ average|currency }}</li>
-        {% endfor %}
-    </ul>
-
+    {% include "purchase/snippets/by_day.html" %}
     {% include "purchase/snippets/htmx_plot.html" with url='purchase:by_hour_plot' %}
 
     <h2>{% translate "Products" %}</h2>

@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load purchase %}
+
+<table class="table table-hover table-sm">
+    <thead><tr>
+        <th scope="col">{% translate "Date" %}</th>
+        <th scope="col">{% translate "# baskets" %}</th>
+        <th scope="col">{% translate "Turnover" %}</th>
+        <th scope="col">{% translate "Average basket" %}</th>
+    </tr></thead>
+    <tbody>
+        {% for report in by_day %}
+            <tr>
+                <th scope="row">{{ report.date }}</th>
+                <td>{{ report.count }}</td>
+                <td>{{ report.turnover|currency }}</td>
+                <td>{{ report.average_basket|currency }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

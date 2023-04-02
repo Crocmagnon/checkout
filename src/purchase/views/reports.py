@@ -1,3 +1,4 @@
+import dataclasses
 import datetime
 from io import StringIO
 from zoneinfo import ZoneInfo
@@ -55,6 +56,14 @@ def by_hour_plot_view(request):
     return render(request, "purchase/snippets/plots.html", context)
 
 
+@dataclasses.dataclass
+class ByDayReport:
+    date: datetime.date
+    turnover: float
+    average_basket: float
+    count: int
+
+
 @permission_required("purchase.view_basket")
 @condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def reports(request):
@@ -65,20 +74,25 @@ def reports(request):
         return TemplateResponse(request, template_name, {})
 
     dates = Basket.objects.values_list("created_at__date", flat=True).distinct()
-    average_basket_by_day = {
-        date: Basket.objects.by_date(date).average_basket() for date in dates
-    }
-    turnover_by_day = {date: Basket.objects.by_date(date).turnover() for date in dates}
+    by_day_report = [
+        ByDayReport(
+            date=date,
+            turnover=Basket.objects.by_date(date).turnover(),
+            average_basket=Basket.objects.by_date(date).average_basket(),
+            count=Basket.objects.by_date(date).count(),
+        )
+        for date in dates
+    ]
 
     products = Product.objects.with_turnover().with_sold()
 
     context = {
         "turnover": Basket.objects.turnover(),
-        "turnover_by_day": turnover_by_day,
+        "by_day": by_day_report,
         "average_basket": Basket.objects.average_basket(),
-        "average_basket_by_day": average_basket_by_day,
         "products": products,
         "payment_methods": PaymentMethod.objects.with_turnover().with_sold(),
+        "basket_count": Basket.objects.count(),
     }
     return TemplateResponse(request, template_name, context)
 
