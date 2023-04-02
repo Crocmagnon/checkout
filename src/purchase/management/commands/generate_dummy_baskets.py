@@ -7,7 +7,7 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 
-from purchase.models import Basket, BasketItem, PaymentMethod, Product
+from purchase.models import Basket, BasketItem, Cache, PaymentMethod, Product
 
 
 class Command(BaseCommand):
@@ -25,6 +25,7 @@ class Command(BaseCommand):
             with freezegun.freeze_time(now() + timedelta(hours=hour)):
                 count += self.generate_baskets(payment_methods, products)
 
+        Cache.get_solo().refresh()
         self.stdout.write(self.style.SUCCESS(f"Successfully created {count} baskets."))
 
     def delete(self, cls):
