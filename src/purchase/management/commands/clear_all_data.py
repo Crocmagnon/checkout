@@ -1,6 +1,13 @@
 from django.core.management.base import BaseCommand
 
-from purchase.models import Basket, BasketItem, Cache, PaymentMethod, Product
+from purchase.models import (
+    Basket,
+    BasketItem,
+    Cache,
+    PaymentMethod,
+    Product,
+    ProductCategory,
+)
 
 
 class Command(BaseCommand):
@@ -11,6 +18,7 @@ class Command(BaseCommand):
         self.delete(Basket)
         self.delete(Product)
         self.delete(PaymentMethod)
+        self.delete(ProductCategory)
         Cache.get_solo().refresh()
 
     def delete(self, cls):
