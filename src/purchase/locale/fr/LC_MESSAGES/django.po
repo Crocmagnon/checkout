@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-02 18:32+0200\n"
+"POT-Creation-Date: 2023-04-02 19:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -54,6 +54,27 @@ msgstr "moyen de paiement"
 #: purchase/models.py
 msgid "payment methods"
 msgstr "moyens de paiement"
+
+#: purchase/models.py
+msgid "color hue"
+msgstr "teinte de couleur"
+
+#: purchase/models.py
+msgid "Color hue in degrees (0-360)"
+msgstr "Teinte de couleur en degrés (0-360)"
+
+#: purchase/models.py
+#, fuzzy
+msgid "product category"
+msgstr "catégorie de produits"
+
+#: purchase/models.py
+msgid "product categories"
+msgstr "catégories de produits"
+
+#: purchase/models.py
+msgid "category"
+msgstr "catégorie"
 
 #: purchase/models.py
 msgid "unit price (cents)"

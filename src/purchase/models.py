@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-import hashlib
 import uuid
 
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.db.models import Avg, Count, F, Sum
 from django.db.models.functions import Coalesce
@@ -65,6 +65,22 @@ def default_product_display_order():
     return last.display_order + 1
 
 
+class ProductCategory(Model):
+    name = models.CharField(max_length=250, unique=True, verbose_name=_("name"))
+    color_hue = models.PositiveIntegerField(
+        validators=[MaxValueValidator(360)],
+        verbose_name=_("color hue"),
+        help_text=_("Color hue in degrees (0-360)"),
+    )
+
+    class Meta:
+        verbose_name = _("product category")
+        verbose_name_plural = _("product categories")
+
+    def __str__(self):
+        return self.name
+
+
 class ProductQuerySet(models.QuerySet):
     def with_turnover(self):
         return self.annotate(
@@ -83,6 +99,9 @@ class ProductQuerySet(models.QuerySet):
     def with_no_fixed_price(self):
         return self.filter(unit_price_cents=0)
 
+    def with_category(self):
+        return self.select_related("category")
+
 
 class ProductManager(models.Manager):
     def get_by_natural_key(self, name):
@@ -91,6 +110,13 @@ class ProductManager(models.Manager):
 
 class Product(Model):
     name = models.CharField(max_length=250, unique=True, verbose_name=_("name"))
+    category = models.ForeignKey(
+        ProductCategory,
+        on_delete=models.PROTECT,
+        verbose_name=_("category"),
+        null=False,
+        blank=False,
+    )
     unit_price_cents = models.PositiveIntegerField(
         verbose_name=_("unit price (cents)"),
         help_text=_(
@@ -123,10 +149,7 @@ class Product(Model):
 
     @property
     def color_hue(self):
-        return int(
-            hashlib.sha256(bytes(self.name, encoding="utf-8")).hexdigest()[:2],
-            base=16,
-        )
+        return self.category.color_hue
 
     @property
     def has_fixed_price(self) -> bool:

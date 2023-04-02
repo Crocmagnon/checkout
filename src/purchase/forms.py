@@ -40,7 +40,7 @@ class BasketForm(forms.ModelForm):
             for item in basket.items.all():
                 products[item.product] = item.quantity
         fields = []
-        for product in Product.objects.with_fixed_price():
+        for product in Product.objects.with_category().with_fixed_price():
             field_name = f"{PRICED_PREFIX}{product.id}"
             self.fields.update(
                 {

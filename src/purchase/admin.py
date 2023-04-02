@@ -3,7 +3,14 @@ from django.contrib.admin import register
 from django.utils.translation import gettext_lazy as _
 from solo.admin import SingletonModelAdmin
 
-from purchase.models import Basket, BasketItem, Cache, PaymentMethod, Product
+from purchase.models import (
+    Basket,
+    BasketItem,
+    Cache,
+    PaymentMethod,
+    Product,
+    ProductCategory,
+)
 from purchase.templatetags.purchase import currency
 
 
@@ -13,15 +20,16 @@ class ProductAdmin(admin.ModelAdmin):
         "name",
         "display_order",
         "initials",
+        "category",
         "unit_price",
         "sold",
         "turnover",
     ]
-    list_editable = ["display_order", "initials"]
+    list_editable = ["display_order"]
     search_fields = ["name"]
 
     def get_queryset(self, request):
-        return super().get_queryset(request).with_sold().with_turnover()
+        return super().get_queryset(request).with_category().with_sold().with_turnover()
 
     @admin.display(description=_("unit price"))
     def unit_price(self, instance: Product):
@@ -47,6 +55,12 @@ class PaymentMethodAdmin(admin.ModelAdmin):
     @admin.display(description=_("turnover"))
     def turnover(self, instance: Product):
         return currency(instance.turnover)
+
+
+@register(ProductCategory)
+class ProductCategoryAdmin(admin.ModelAdmin):
+    list_display = ["name", "color_hue"]
+    search_fields = ["name"]
 
 
 class BasketItemInline(admin.TabularInline):
