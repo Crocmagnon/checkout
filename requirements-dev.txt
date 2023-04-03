@@ -15,7 +15,7 @@ attrs==22.2.0
     #   outcome
     #   pytest
     #   trio
-black==23.1.0
+black==23.3.0
     # via -r requirements-dev.in
 build==0.10.0
     # via pip-tools
@@ -38,7 +38,7 @@ coverage[toml]==7.2.2
     # via pytest-cov
 distlib==0.3.6
     # via virtualenv
-django==4.1.7
+django==4.2
     # via
     #   -c constraints.txt
     #   model-bakery
@@ -46,7 +46,7 @@ exceptiongroup==1.1.1
     # via trio-websocket
 factory-boy==3.2.1
     # via -r requirements-dev.in
-faker==18.3.1
+faker==18.3.2
     # via factory-boy
 filelock==3.10.7
     # via virtualenv
@@ -63,7 +63,7 @@ iniconfig==2.0.0
     # via pytest
 invoke==2.0.0
     # via -r requirements-dev.in
-model-bakery==1.10.1
+model-bakery==1.10.3
     # via -r requirements-dev.in
 mypy-extensions==1.0.0
     # via black
@@ -132,7 +132,7 @@ requests==2.28.2
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.0.259
+ruff==0.0.260
     # via -r requirements-dev.in
 selenium==4.8.3
     # via
@@ -176,7 +176,7 @@ wsproto==1.2.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==23.0.1
     # via pip-tools
-setuptools==67.6.0
+setuptools==67.6.1
     # via
     #   -c constraints.txt
     #   nodeenv
