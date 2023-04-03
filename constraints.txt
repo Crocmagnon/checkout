@@ -16,7 +16,7 @@ crispy-bootstrap5==0.7
     # via -r requirements.in
 cycler==0.11.0
     # via matplotlib
-django==4.1.7
+django==4.2
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -44,7 +44,7 @@ django-htmx==1.14.0
     # via -r requirements.in
 django-solo==2.0.0
     # via -r requirements.in
-fonttools==4.39.2
+fonttools==4.39.3
     # via matplotlib
 freezegun==1.2.2
     # via -r requirements.in
@@ -62,7 +62,7 @@ numpy==1.24.2
     #   matplotlib
 packaging==23.0
     # via matplotlib
-pillow==9.4.0
+pillow==9.5.0
     # via
     #   -r requirements.in
     #   matplotlib
@@ -86,5 +86,5 @@ whitenoise==6.4.0
     # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
-setuptools==67.6.0
+setuptools==67.6.1
     # via gunicorn
