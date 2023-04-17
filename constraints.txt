@@ -60,7 +60,7 @@ numpy==1.24.2
     # via
     #   contourpy
     #   matplotlib
-packaging==23.0
+packaging==23.1
     # via matplotlib
 pillow==9.5.0
     # via
