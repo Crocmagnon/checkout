@@ -23,6 +23,7 @@ jobs:
       && (
         github.event.pull_request.user.login == 'crocmagnon-pr[bot]'
         || github.event.pull_request.user.login == 'pre-commit-ci[bot]'
+        || github.event.pull_request.user.login == 'dependabot[bot]'
       )
     steps:
       - name: Checkout
