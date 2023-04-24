@@ -56,7 +56,7 @@ kiwisolver==1.4.4
     # via matplotlib
 matplotlib==3.7.1
     # via -r requirements.in
-numpy==1.24.2
+numpy==1.24.3
     # via
     #   contourpy
     #   matplotlib
@@ -86,5 +86,5 @@ whitenoise==6.4.0
     # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
-setuptools==67.7.1
+setuptools==67.7.2
     # via gunicorn
