@@ -17,6 +17,7 @@ RUN date +'%Y-%m-%d %H:%M %Z' > /build-date
 FROM python:3.11.3-slim-bullseye AS final
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG PIP_DISABLE_PIP_VERSION_CHECK=1
 
 # Setup user & group
 ##############################################
