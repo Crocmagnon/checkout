@@ -64,4 +64,5 @@
 {% block extrascript %}
     <script src="{% static 'vendor/htmx-1.8.6/htmx.min.js' %}" defer></script>
     {% django_htmx_script %}
+    <script defer type="application/javascript" src="{% static "purchase/js/basket_form.js" %}"></script>
 {% endblock %}

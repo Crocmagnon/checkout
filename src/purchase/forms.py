@@ -19,9 +19,6 @@ class BasketForm(forms.ModelForm):
         fields = ["payment_method"]
         widgets = {"payment_method": forms.RadioSelect}
 
-    class Media:
-        js = ["purchase/js/basket_form.js"]
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()

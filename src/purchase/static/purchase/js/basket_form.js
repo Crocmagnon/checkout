@@ -23,3 +23,28 @@ window.dispatchChanged = function (element) {
     const event = new Event("change", { bubbles: true });
     element.dispatchEvent(event);
 };
+
+window.onUpdateQuantity = function (event) {
+    const { target } = event;
+    const parent = target.closest(".card");
+    const classes = ["bg-success", "text-white"];
+    if (target.value > 0) {
+        parent.classList.add(...classes);
+    } else {
+        parent.classList.remove(...classes);
+    }
+};
+
+window.setupEventsListener = function () {
+    const cards = document.querySelectorAll(".card input");
+    cards.forEach((item) => {
+        item.addEventListener("change", window.onUpdateQuantity);
+        item.addEventListener("keyup", window.onUpdateQuantity);
+    });
+};
+
+document.addEventListener("newUnpriced", function () {
+    window.setupEventsListener();
+});
+
+window.setupEventsListener();
