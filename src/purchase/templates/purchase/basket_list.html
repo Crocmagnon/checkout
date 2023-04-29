@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{% blocktranslate with basket_id=basket.id %}Basket #{{ basket_id }}{% endblocktranslate %}</h5>
                         <p class="card-text">
-                            {% blocktranslate count counter=basket.items.count %}1 item{% plural %}{{ counter }} items{% endblocktranslate %}<br>
+                            {% blocktranslate count counter=basket.articles_count %}1 item{% plural %}{{ counter }} items{% endblocktranslate %}<br>
                             {{ basket.price|currency }}<br>
                             {{ basket.payment_method|default:"-" }}<br>
                             {% now "Y-m-d" as todays_date %}

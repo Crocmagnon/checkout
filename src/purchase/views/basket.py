@@ -101,7 +101,7 @@ def additional_unpriced_product(request: WSGIRequest) -> HttpResponse:
 @permission_required("purchase.view_basket")
 @condition(etag_func=reports_etag, last_modified_func=reports_last_modified)
 def list_baskets(request: WSGIRequest) -> HttpResponse:
-    context = {"baskets": Basket.objects.priced().order_by("-id")}
+    context = {"baskets": Basket.objects.with_articles_count().priced().order_by("-id")}
     return render(request, "purchase/basket_list.html", context)
 
 
