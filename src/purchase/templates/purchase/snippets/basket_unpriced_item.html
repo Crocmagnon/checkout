@@ -1,6 +1,6 @@
 {% load crispy_forms_field %}
 <div class="col">
-    <div class="card h-100 bg-success text-white" data-product-id="{{ product.pk }}">
+    <div class="card h-100" data-product-id="{{ product.pk }}">
         {% if product.image %}
             <img src="{{ product.image.url }}" class="card-img">
         {% else %}

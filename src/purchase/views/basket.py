@@ -90,11 +90,12 @@ def additional_unpriced_product(request: WSGIRequest) -> HttpResponse:
     value = request.GET.get("value", 0)
     product = get_object_or_404(Product.objects.with_no_fixed_price(), pk=product_id)
     context = {"product": product, "value": value}
-    return render(
+    res = render(
         request,
         "purchase/snippets/basket_unpriced_item.html",
         context,
     )
+    return trigger_client_event(res, "newUnpriced", after="settle")
 
 
 @permission_required("purchase.view_basket")
