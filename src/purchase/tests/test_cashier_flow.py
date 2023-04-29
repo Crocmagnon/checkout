@@ -269,13 +269,21 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
     ]
     with freezegun.freeze_time("2022-09-24 19:01:00+0200"):
         basket_with_payment_method = BasketWithItemsFactory()
-        basket_with_payment_method = Basket.objects.priced().get(
-            pk=basket_with_payment_method.pk,
+        basket_with_payment_method = (
+            Basket.objects.priced()
+            .with_articles_count()
+            .get(
+                pk=basket_with_payment_method.pk,
+            )
         )
     with freezegun.freeze_time("2022-09-24 19:02:00+0200"):
         another_basket = BasketWithItemsFactory()
-        another_basket = Basket.objects.priced().get(
-            pk=another_basket.pk,
+        another_basket = (
+            Basket.objects.priced()
+            .with_articles_count()
+            .get(
+                pk=another_basket.pk,
+            )
         )
 
     # Login
@@ -287,7 +295,7 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
     first_basket = displayed_baskets[0]
     text = first_basket.text.replace("\n", " ")
     assert f"n°{another_basket.pk} " in text
-    expected_articles_count = another_basket.items.count()
+    expected_articles_count = another_basket.articles_count
     assert f" {expected_articles_count} article" in text
     expected_price = another_basket.price / 100
     assert f" {expected_price:.2f}€" in text
@@ -299,7 +307,7 @@ def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
     second_basket = displayed_baskets[1]
     text = second_basket.text.replace("\n", " ")
     assert f"n°{basket_with_payment_method.pk} " in text
-    expected_articles_count = basket_with_payment_method.items.count()
+    expected_articles_count = basket_with_payment_method.articles_count
     assert f" {expected_articles_count} article" in text
     expected_price = basket_with_payment_method.price / 100
     assert f" {expected_price:.2f}€" in text
