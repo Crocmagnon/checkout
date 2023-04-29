@@ -9,7 +9,14 @@ def _collectstatic():
 
 @pytest.fixture()
 def live_server(settings, live_server):
-    settings.STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+    settings.STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        },
+    }
     return live_server
 
 
