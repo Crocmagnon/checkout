@@ -53,8 +53,10 @@ class BasketForm(forms.ModelForm):
             )
             fields.append(BasketItemField(field_name, product=product))
         total = 0
+        count = 0
         if basket:
             total = basket.price / 100
+            count = basket.articles_count
         self.helper.layout = Layout(
             Div(
                 *fields,
@@ -63,7 +65,9 @@ class BasketForm(forms.ModelForm):
             ),
             InlineRadios("payment_method"),
             Div(
-                layout.HTML(f"Montant total : {total:.2f}€"),
+                layout.HTML(
+                    f"Montant total : {total:.2f}€<br>Nombre d'articles: {count}",
+                ),
                 css_id="price_preview",
                 css_class="mb-2",
             ),

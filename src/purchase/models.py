@@ -157,6 +157,9 @@ class Product(Model):
 
 
 class BasketQuerySet(models.QuerySet):
+    def with_articles_count(self) -> BasketQuerySet:
+        return self.annotate(articles_count=Sum(F("items__quantity")))
+
     def priced(self) -> BasketQuerySet:
         return self.annotate(
             price=Coalesce(Sum(F("items__quantity") * F("items__unit_price_cents")), 0),

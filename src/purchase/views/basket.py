@@ -60,7 +60,7 @@ def update_with_unpriced_products(basket: Basket, post_data: MultiValueDict):
 @require_http_methods(["GET", "POST"])
 @permission_required("purchase.change_basket")
 def update_basket(request: WSGIRequest, pk: int) -> HttpResponse:
-    basket = get_object_or_404(Basket.objects.priced(), pk=pk)
+    basket = get_object_or_404(Basket.objects.priced().with_articles_count(), pk=pk)
     if request.method == "POST":
         form = BasketForm(request.POST, instance=basket)
         if form.is_valid():
@@ -120,15 +120,20 @@ def delete_basket(request: WSGIRequest, pk: int) -> HttpResponse:
 @permission_required("purchase.add_basket")
 def price_preview(request: WSGIRequest) -> HttpResponse:
     total = 0
+    count = 0
     for name in request.POST:
         if name.startswith(PRICED_PREFIX):
             product_id = name[len(PRICED_PREFIX) :]
             product = get_object_or_404(Product, pk=product_id)
-            total += product.unit_price_cents * int(request.POST.get(name, 0))
+            number = int(request.POST.get(name, 0))
+            total += product.unit_price_cents * number
+            count += number
         elif name.startswith(UNPRICED_PREFIX):
-            total += sum(map(int, request.POST.getlist(name)))
+            prices = list(filter(lambda x: x > 0, map(int, request.POST.getlist(name))))
+            total += sum(prices)
+            count += len(prices)
 
     total = f"{total/100:.2f}€"
     return HttpResponse(
-        f'<span hx-swap-oob="true" id="basket-price" class="badge bg-secondary">{total}</span>Montant total : {total}',
+        f'<span hx-swap-oob="true" id="basket-price" class="badge bg-secondary">{total}</span>Montant total : {total}<br>Nombre d\'articles: {count}',
     )
