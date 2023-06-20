@@ -1,18 +1,6 @@
 ###############################################################################
 # pytest
 ###############################################################################
-[tool.pytest.ini_options]
-addopts = "--color=yes --driver Firefox"
-minversion = "6.0"
-DJANGO_SETTINGS_MODULE = "checkout.settings"
-testpaths = [
-    "src",
-]
-
-###############################################################################
-# ruff
-###############################################################################
-
 [tool.ruff]
 src = ["src"]
 target-version = "py311"
@@ -52,3 +40,15 @@ convention = "pep257"
 
 [tool.ruff.mccabe]
 max-complexity = 10
+
+[tool.pytest.ini_options]
+addopts = "--color=yes --driver Firefox"
+minversion = "6.0"
+DJANGO_SETTINGS_MODULE = "checkout.settings"
+testpaths = [
+    "src",
+]
+
+###############################################################################
+# ruff
+###############################################################################
