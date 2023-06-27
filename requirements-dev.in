@@ -8,7 +8,10 @@ pre-commit>=2.7
 model-bakery>=1.1
 invoke>=2.0.0
 factory-boy>=3.2.1
-selenium>=4.4.3
+# pytest-selenium is broken with selenium 4.10.0
+# TypeError: WebDriver.__init__() got an unexpected keyword argument 'service_log_path'
+# https://github.com/robotframework/SeleniumLibrary/issues/1835
+selenium>=4.4.3,<4.10.0
 black>=22.12.0
 pip-tools>=6.0
 ruff>=0.0.237
