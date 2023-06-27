@@ -15,6 +15,7 @@ ignore = [
     "E501",  # long lines
     "D1",  # missing docstring
     "TRY003",  # Avoid specifying long messages outside the exception class
+    "RUF012",  # Mutable class attributes should be annotated with `typing.ClassVar`
 ]
 
 [tool.ruff.per-file-ignores]
