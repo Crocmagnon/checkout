@@ -8,8 +8,6 @@ asgiref==3.7.2
     # via
     #   -c constraints.txt
     #   django
-async-generator==1.10
-    # via trio
 attrs==23.1.0
     # via
     #   outcome
@@ -37,11 +35,11 @@ coverage[toml]==7.2.7
     # via pytest-cov
 distlib==0.3.6
     # via virtualenv
-django==4.2.2
+django==4.2.3
     # via
     #   -c constraints.txt
     #   model-bakery
-exceptiongroup==1.1.1
+exceptiongroup==1.1.2
     # via trio-websocket
 factory-boy==3.2.1
     # via -r requirements-dev.in
@@ -78,7 +76,7 @@ packaging==23.1
     #   pytest
 pathspec==0.11.1
     # via black
-pip-tools==6.13.0
+pip-tools==6.14.0
     # via -r requirements-dev.in
 platformdirs==3.8.0
     # via
@@ -149,7 +147,7 @@ sqlparse==0.4.4
     #   django
 tenacity==8.2.2
     # via pytest-selenium
-trio==0.22.0
+trio==0.22.1
     # via
     #   selenium
     #   trio-websocket
