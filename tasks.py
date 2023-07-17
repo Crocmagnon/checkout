@@ -16,7 +16,7 @@ def update_dependencies(ctx: Context, *, sync: bool = True):
 
 @task
 def compile_dependencies(ctx: Context, *, update: bool = False, sync: bool = False):
-    common_args = "-q --allow-unsafe --resolver=backtracking"
+    common_args = "-q --allow-unsafe"
     if update:
         common_args += " --upgrade"
     with ctx.cd(BASE_DIR):
