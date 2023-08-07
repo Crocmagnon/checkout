@@ -16,11 +16,11 @@ contourpy==1.1.0
     # via matplotlib
 crispy-bootstrap5==0.7
     # via -r requirements.in
-cryptography==41.0.2
+cryptography==41.0.3
     # via django-anymail
 cycler==0.11.0
     # via matplotlib
-django==4.2.3
+django==4.2.4
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -48,7 +48,7 @@ django-htmx==1.16.0
     # via -r requirements.in
 django-solo==2.1.0
     # via -r requirements.in
-fonttools==4.41.1
+fonttools==4.42.0
     # via matplotlib
 freezegun==1.2.2
     # via -r requirements.in
