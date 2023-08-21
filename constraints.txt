@@ -48,7 +48,7 @@ django-htmx==1.16.0
     # via -r requirements.in
 django-solo==2.1.0
     # via -r requirements.in
-fonttools==4.42.0
+fonttools==4.42.1
     # via matplotlib
 freezegun==1.2.2
     # via -r requirements.in
