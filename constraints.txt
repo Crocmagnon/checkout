@@ -20,7 +20,7 @@ cryptography==41.0.3
     # via django-anymail
 cycler==0.11.0
     # via matplotlib
-django==4.2.4
+django==4.2.5
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -40,7 +40,7 @@ django-crispy-forms==2.0
     #   crispy-bootstrap5
 django-csp==3.7
     # via -r requirements.in
-django-environ==0.10.0
+django-environ==0.11.2
     # via -r requirements.in
 django-extensions==3.2.3
     # via -r requirements.in
