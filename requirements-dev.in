@@ -4,6 +4,8 @@ pytest>=6.0
 pytest-cov>=3.0.0
 pytest-django>=4.5.0
 pytest-selenium>=4.0.0
+# pytest-selenium 4.0.1 has an implicit dependency on `py`
+py>=1.11.0
 pre-commit>=2.7
 model-bakery>=1.1
 invoke>=2.0.0
