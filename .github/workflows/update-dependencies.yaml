@@ -30,7 +30,7 @@ jobs:
           pip install pip-tools invoke
           invoke update-dependencies --no-sync
       - name: Generate token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@v2
         id: generate-token
         with:
           app_id: ${{ secrets.PR_APP_ID }}
