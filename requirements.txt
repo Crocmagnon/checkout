@@ -12,7 +12,7 @@ cffi==1.15.1
     # via cryptography
 charset-normalizer==3.2.0
     # via requests
-contourpy==1.1.0
+contourpy==1.1.1
     # via matplotlib
 crispy-bootstrap5==0.7
     # via -r requirements.in
@@ -58,9 +58,9 @@ idna==3.4
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
-matplotlib==3.7.2
+matplotlib==3.8.0
     # via -r requirements.in
-numpy==1.25.2
+numpy==1.26.0
     # via
     #   contourpy
     #   matplotlib
@@ -68,13 +68,13 @@ packaging==23.1
     # via
     #   gunicorn
     #   matplotlib
-pillow==10.0.0
+pillow==10.0.1
     # via
     #   -r requirements.in
     #   matplotlib
 pycparser==2.21
     # via cffi
-pyparsing==3.0.9
+pyparsing==3.1.1
     # via matplotlib
 python-dateutil==2.8.2
     # via
