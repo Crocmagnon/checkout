@@ -8,9 +8,9 @@ asgiref==3.7.2
     # via django
 certifi==2023.7.22
     # via requests
-cffi==1.15.1
+cffi==1.16.0
     # via cryptography
-charset-normalizer==3.2.0
+charset-normalizer==3.3.0
     # via requests
 contourpy==1.1.1
     # via matplotlib
@@ -18,7 +18,7 @@ crispy-bootstrap5==0.7
     # via -r requirements.in
 cryptography==41.0.4
     # via django-anymail
-cycler==0.11.0
+cycler==0.12.0
     # via matplotlib
 django==4.2.5
     # via
@@ -48,7 +48,7 @@ django-htmx==1.16.0
     # via -r requirements.in
 django-solo==2.1.0
     # via -r requirements.in
-fonttools==4.42.1
+fonttools==4.43.0
     # via matplotlib
 freezegun==1.2.2
     # via -r requirements.in
@@ -64,7 +64,7 @@ numpy==1.26.0
     # via
     #   contourpy
     #   matplotlib
-packaging==23.1
+packaging==23.2
     # via
     #   gunicorn
     #   matplotlib
@@ -88,7 +88,7 @@ six==1.16.0
     # via python-dateutil
 sqlparse==0.4.4
     # via django
-urllib3==2.0.5
+urllib3==2.0.6
     # via
     #   django-anymail
     #   requests
