@@ -1,0 +1,5 @@
+[tools]
+python = {version="3.11", virtualenv=".venv"}
+
+[env]
+ENV_FILE = "{{config_root}}/envs/local.env"
