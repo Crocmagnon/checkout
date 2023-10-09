@@ -31,17 +31,17 @@ click==8.1.7
     # via
     #   black
     #   pip-tools
-coverage[toml]==7.3.1
+coverage[toml]==7.3.2
     # via pytest-cov
 distlib==0.3.7
     # via virtualenv
-django==4.2.5
+django==4.2.6
     # via
     #   -c constraints.txt
     #   model-bakery
 factory-boy==3.3.0
     # via -r requirements-dev.in
-faker==19.6.2
+faker==19.8.0
     # via factory-boy
 filelock==3.12.4
     # via virtualenv
