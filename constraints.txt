@@ -16,7 +16,7 @@ contourpy==1.1.1
     # via matplotlib
 crispy-bootstrap5==0.7
     # via -r requirements.in
-cryptography==41.0.4
+cryptography==41.0.5
     # via django-anymail
 cycler==0.12.1
     # via matplotlib
@@ -30,7 +30,7 @@ django==4.2.6
     #   django-extensions
     #   django-htmx
     #   django-solo
-django-anymail==10.1
+django-anymail==10.2
     # via
     #   -r requirements.in
     #   django-anymail
