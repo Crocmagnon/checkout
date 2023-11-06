@@ -10,17 +10,17 @@ certifi==2023.7.22
     # via requests
 cffi==1.16.0
     # via cryptography
-charset-normalizer==3.3.1
+charset-normalizer==3.3.2
     # via requests
-contourpy==1.1.1
+contourpy==1.2.0
     # via matplotlib
-crispy-bootstrap5==0.7
+crispy-bootstrap5==2023.10
     # via -r requirements.in
 cryptography==41.0.5
     # via django-anymail
 cycler==0.12.1
     # via matplotlib
-django==4.2.6
+django==4.2.7
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -50,7 +50,7 @@ django-htmx==1.17.0
     # via -r requirements.in
 django-solo==2.1.0
     # via -r requirements.in
-fonttools==4.43.1
+fonttools==4.44.0
     # via matplotlib
 freezegun==1.2.2
     # via -r requirements.in
@@ -60,7 +60,7 @@ idna==3.4
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
-matplotlib==3.8.0
+matplotlib==3.8.1
     # via -r requirements.in
 numpy==1.26.1
     # via
