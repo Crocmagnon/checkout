@@ -5,8 +5,10 @@
 #    pip-compile --allow-unsafe --output-file=constraints.txt --strip-extras requirements.in
 #
 asgiref==3.7.2
-    # via django
-certifi==2023.7.22
+    # via
+    #   django
+    #   django-htmx
+certifi==2023.11.17
     # via requests
 cffi==1.16.0
     # via cryptography
@@ -46,11 +48,11 @@ django-environ==0.11.2
     # via -r requirements.in
 django-extensions==3.2.3
     # via -r requirements.in
-django-htmx==1.17.0
+django-htmx==1.17.2
     # via -r requirements.in
 django-solo==2.1.0
     # via -r requirements.in
-fonttools==4.44.0
+fonttools==4.45.0
     # via matplotlib
 freezegun==1.2.2
     # via -r requirements.in
@@ -60,7 +62,7 @@ idna==3.4
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
-matplotlib==3.8.1
+matplotlib==3.8.2
     # via -r requirements.in
 numpy==1.26.2
     # via
