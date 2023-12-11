@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 
 def create_default_categories(apps, schema_editor):
-    ProductCategory = apps.get_model("purchase", "ProductCategory")  # noqa: N806
+    ProductCategory = apps.get_model("purchase", "ProductCategory")
     ProductCategory.objects.using(schema_editor.connection.alias).create(
         name="default",
         color_hue=0,

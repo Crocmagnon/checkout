@@ -4,7 +4,7 @@ from django.db import migrations, models
 
 
 def forwards(apps, schema_editor):
-    BasketItem = apps.get_model("purchase", "BasketItem")  # noqa: N806
+    BasketItem = apps.get_model("purchase", "BasketItem")
     items = (
         BasketItem.objects.using(schema_editor.connection.alias)
         .all()

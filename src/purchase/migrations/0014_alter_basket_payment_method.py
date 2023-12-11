@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 
 def delete_baskets_without_payment_method(apps, schema_editor):
-    Basket = apps.get_model("purchase", "Basket")  # noqa: N806
+    Basket = apps.get_model("purchase", "Basket")
     Basket.objects.using(schema_editor.connection.alias).filter(
         payment_method=None,
     ).delete()
