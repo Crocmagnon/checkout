@@ -12,7 +12,7 @@ attrs==23.1.0
     # via
     #   outcome
     #   trio
-black==23.11.0
+black==23.12.1
     # via -r requirements-dev.in
 build==1.0.3
     # via pip-tools
@@ -31,25 +31,25 @@ click==8.1.7
     # via
     #   black
     #   pip-tools
-coverage[toml]==7.3.2
+coverage[toml]==7.3.4
     # via
     #   coverage
     #   pytest-cov
-distlib==0.3.7
+distlib==0.3.8
     # via virtualenv
-django==4.2.7
+django==4.2.8
     # via
     #   -c constraints.txt
     #   model-bakery
 factory-boy==3.3.0
     # via -r requirements-dev.in
-faker==20.1.0
+faker==21.0.0
     # via factory-boy
 filelock==3.13.1
     # via virtualenv
 h11==0.14.0
     # via wsproto
-identify==2.5.32
+identify==2.5.33
     # via pre-commit
 idna==3.6
     # via
@@ -78,17 +78,17 @@ packaging==23.2
     #   black
     #   build
     #   pytest
-pathspec==0.11.2
+pathspec==0.12.1
     # via black
 pip-tools==7.3.0
     # via -r requirements-dev.in
-platformdirs==4.0.0
+platformdirs==4.1.0
     # via
     #   black
     #   virtualenv
 pluggy==1.3.0
     # via pytest
-pre-commit==3.5.0
+pre-commit==3.6.0
     # via -r requirements-dev.in
 py==1.11.0
     # via -r requirements-dev.in
@@ -131,7 +131,7 @@ requests==2.31.0
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.1.6
+ruff==0.1.9
     # via -r requirements-dev.in
 selenium==4.9.1
     # via
@@ -151,7 +151,7 @@ sqlparse==0.4.4
     #   django
 tenacity==8.2.3
     # via pytest-selenium
-trio==0.23.1
+trio==0.23.2
     # via
     #   selenium
     #   trio-websocket
@@ -163,7 +163,7 @@ urllib3[socks]==2.1.0
     #   requests
     #   selenium
     #   urllib3
-virtualenv==20.24.7
+virtualenv==20.25.0
     # via pre-commit
 wheel==0.42.0
     # via pip-tools
@@ -171,9 +171,9 @@ wsproto==1.2.0
     # via trio-websocket
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==23.3.1
+pip==23.3.2
     # via pip-tools
-setuptools==69.0.2
+setuptools==69.0.3
     # via
     #   nodeenv
     #   pip-tools
