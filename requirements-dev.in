@@ -4,16 +4,11 @@ pytest>=6.0
 pytest-cov>=3.0.0
 pytest-django>=4.5.0
 pytest-selenium>=4.0.0
-# pytest-selenium 4.0.1 has an implicit dependency on `py`
-py>=1.11.0
 pre-commit>=2.7
 model-bakery>=1.1
 invoke>=2.0.0
 factory-boy>=3.2.1
-# pytest-selenium is broken with selenium 4.10.0
-# TypeError: WebDriver.__init__() got an unexpected keyword argument 'service_log_path'
-# https://github.com/robotframework/SeleniumLibrary/issues/1835
-selenium>=4.4.3,<4.10.0
+selenium>=4.4.3
 black>=22.12.0
 pip-tools>=6.0
 ruff>=0.0.237
