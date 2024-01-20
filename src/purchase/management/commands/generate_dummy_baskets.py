@@ -11,7 +11,7 @@ from purchase.models import Basket, BasketItem, Cache, PaymentMethod, Product
 
 
 class Command(BaseCommand):
-    help = "Generates dummy baskets"  # noqa: A003
+    help = "Generates dummy baskets"
 
     def handle(self, *args, **options):  # noqa: ARG002
         call_command("loaddata", ["payment_methods", "products"])

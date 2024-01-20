@@ -11,7 +11,7 @@ from purchase.models import (
 
 
 class Command(BaseCommand):
-    help = "Clear all data"  # noqa: A003
+    help = "Clear all data"
 
     def handle(self, *args, **options):  # noqa: ARG002
         self.delete(BasketItem)
