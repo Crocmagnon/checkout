@@ -10,7 +10,7 @@ inv sync-dependencies
 pre-commit install --install-hooks
 inv test
 ./src/manage.py migrate
-./src/manage.py generat_dummy_baskets
+./src/manage.py generate_dummy_baskets
 ./src/manage.py createsuperuser
 ```
 
