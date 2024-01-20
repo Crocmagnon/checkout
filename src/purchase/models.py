@@ -203,7 +203,7 @@ class BasketItemQuerySet(models.QuerySet):
         return self.annotate(price=Coalesce(F("quantity") * F("unit_price_cents"), 0))
 
 
-class BasketItem(Model):
+class BasketItem(Model):  # noqa: DJ008
     product = models.ForeignKey(
         to=Product,
         on_delete=models.PROTECT,
