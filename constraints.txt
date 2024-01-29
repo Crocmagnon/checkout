@@ -18,7 +18,7 @@ contourpy==1.2.0
     # via matplotlib
 crispy-bootstrap5==2023.10
     # via -r requirements.in
-cryptography==41.0.7
+cryptography==42.0.1
     # via django-anymail
 cycler==0.12.1
     # via matplotlib
@@ -36,7 +36,7 @@ django-anymail==10.2
     # via
     #   -r requirements.in
     #   django-anymail
-django-cleanup==8.0.0
+django-cleanup==8.1.0
     # via -r requirements.in
 django-crispy-forms==2.1
     # via
