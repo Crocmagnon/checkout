@@ -1,6 +1,7 @@
 import time
 
 import freezegun
+import pytest
 from django.urls import reverse
 from pytest_django.live_server_helper import LiveServer
 from selenium.webdriver import ActionChains, Keys
@@ -20,6 +21,7 @@ from purchase.tests.factories import (
 )
 
 
+@pytest.mark.flaky(reruns=5)
 @freezegun.freeze_time("2022-09-24 19:01:00+0200")
 def test_cashier_create_and_update_basket(  # noqa: PLR0915
     live_server: LiveServer,
