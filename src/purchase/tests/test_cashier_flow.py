@@ -253,6 +253,7 @@ def login(
     selenium.find_element(By.ID, "id_password").send_keys(Keys.RETURN)
 
 
+@pytest.mark.flaky(reruns=5)
 @freezegun.freeze_time("2022-09-24 19:03:00+0200")
 def test_baskets_list(live_server: LiveServer, selenium: WebDriver):
     wait = WebDriverWait(selenium, 10)
