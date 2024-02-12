@@ -22,7 +22,7 @@ cryptography==42.0.2
     # via django-anymail
 cycler==0.12.1
     # via matplotlib
-django==5.0.1
+django==5.0.2
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -52,7 +52,7 @@ django-htmx==1.17.2
     # via -r requirements.in
 django-solo==2.2.0
     # via -r requirements.in
-fonttools==4.47.2
+fonttools==4.48.1
     # via matplotlib
 freezegun==1.4.0
     # via -r requirements.in
@@ -64,7 +64,7 @@ kiwisolver==1.4.5
     # via matplotlib
 matplotlib==3.8.2
     # via -r requirements.in
-numpy==1.26.3
+numpy==1.26.4
     # via
     #   contourpy
     #   matplotlib
