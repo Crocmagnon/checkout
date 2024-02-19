@@ -18,7 +18,7 @@ contourpy==1.2.0
     # via matplotlib
 crispy-bootstrap5==2023.10
     # via -r requirements.in
-cryptography==42.0.2
+cryptography==42.0.3
     # via django-anymail
 cycler==0.12.1
     # via matplotlib
@@ -52,7 +52,7 @@ django-htmx==1.17.2
     # via -r requirements.in
 django-solo==2.2.0
     # via -r requirements.in
-fonttools==4.48.1
+fonttools==4.49.0
     # via matplotlib
 freezegun==1.4.0
     # via -r requirements.in
@@ -62,7 +62,7 @@ idna==3.6
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
-matplotlib==3.8.2
+matplotlib==3.8.3
     # via -r requirements.in
 numpy==1.26.4
     # via
@@ -92,7 +92,7 @@ six==1.16.0
     # via python-dateutil
 sqlparse==0.4.4
     # via django
-urllib3==2.2.0
+urllib3==2.2.1
     # via
     #   django-anymail
     #   requests
