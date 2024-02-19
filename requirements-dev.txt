@@ -12,7 +12,7 @@ attrs==23.2.0
     # via
     #   outcome
     #   trio
-black==24.1.1
+black==24.2.0
     # via -r requirements-dev.in
 build==1.0.3
     # via pip-tools
@@ -43,13 +43,13 @@ django==5.0.2
     #   model-bakery
 factory-boy==3.3.0
     # via -r requirements-dev.in
-faker==23.1.0
+faker==23.2.1
     # via factory-boy
 filelock==3.13.1
     # via virtualenv
 h11==0.14.0
     # via wsproto
-identify==2.5.34
+identify==2.5.35
     # via pre-commit
 idna==3.6
     # via
@@ -81,7 +81,7 @@ packaging==23.2
     #   pytest-rerunfailures
 pathspec==0.12.1
     # via black
-pip-tools==7.3.0
+pip-tools==7.4.0
     # via -r requirements-dev.in
 platformdirs==4.2.0
     # via
@@ -89,13 +89,15 @@ platformdirs==4.2.0
     #   virtualenv
 pluggy==1.4.0
     # via pytest
-pre-commit==3.6.1
+pre-commit==3.6.2
     # via -r requirements-dev.in
 pyproject-hooks==1.0.0
-    # via build
+    # via
+    #   build
+    #   pip-tools
 pysocks==1.7.1
     # via urllib3
-pytest==8.0.0
+pytest==8.0.1
     # via
     #   -r requirements-dev.in
     #   pytest-base-url
@@ -114,7 +116,7 @@ pytest-django==4.8.0
     # via -r requirements-dev.in
 pytest-html==4.1.1
     # via pytest-selenium
-pytest-metadata==3.1.0
+pytest-metadata==3.1.1
     # via pytest-html
 pytest-rerunfailures==13.0
     # via -r requirements-dev.in
@@ -133,9 +135,9 @@ requests==2.31.0
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.2.1
+ruff==0.2.2
     # via -r requirements-dev.in
-selenium==4.17.2
+selenium==4.18.0
     # via
     #   -r requirements-dev.in
     #   pytest-selenium
@@ -161,7 +163,7 @@ trio-websocket==0.11.1
     # via selenium
 typing-extensions==4.9.0
     # via selenium
-urllib3[socks]==2.2.0
+urllib3[socks]==2.2.1
     # via
     #   -c constraints.txt
     #   requests
