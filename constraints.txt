@@ -33,9 +33,7 @@ django==5.0.2
     #   django-htmx
     #   django-solo
 django-anymail==10.2
-    # via
-    #   -r requirements.in
-    #   django-anymail
+    # via -r requirements.in
 django-cleanup==8.1.0
     # via -r requirements.in
 django-crispy-forms==2.1
