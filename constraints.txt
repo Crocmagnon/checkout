@@ -22,7 +22,7 @@ cryptography==42.0.5
     # via django-anymail
 cycler==0.12.1
     # via matplotlib
-django==5.0.2
+django==5.0.3
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -40,13 +40,13 @@ django-crispy-forms==2.1
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
-django-csp==3.7
+django-csp==3.8
     # via -r requirements.in
 django-environ==0.11.2
     # via -r requirements.in
 django-extensions==3.2.3
     # via -r requirements.in
-django-htmx==1.17.2
+django-htmx==1.17.3
     # via -r requirements.in
 django-solo==2.2.0
     # via -r requirements.in
@@ -78,7 +78,7 @@ pycparser==2.21
     # via cffi
 pyparsing==3.1.1
     # via matplotlib
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   freezegun
     #   matplotlib

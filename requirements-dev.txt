@@ -14,7 +14,7 @@ attrs==23.2.0
     #   trio
 black==24.2.0
     # via -r requirements-dev.in
-build==1.0.3
+build==1.1.1
     # via pip-tools
 certifi==2024.2.2
     # via
@@ -35,13 +35,13 @@ coverage[toml]==7.4.3
     # via pytest-cov
 distlib==0.3.8
     # via virtualenv
-django==5.0.2
+django==5.0.3
     # via
     #   -c constraints.txt
     #   model-bakery
 factory-boy==3.3.0
     # via -r requirements-dev.in
-faker==23.2.1
+faker==23.3.0
     # via factory-boy
 filelock==3.13.1
     # via virtualenv
@@ -122,7 +122,7 @@ pytest-selenium==4.1.0
     # via -r requirements-dev.in
 pytest-variables==3.1.0
     # via pytest-selenium
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
     # via
     #   -c constraints.txt
     #   faker
@@ -133,7 +133,7 @@ requests==2.31.0
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.2.2
+ruff==0.3.0
     # via -r requirements-dev.in
 selenium==4.18.1
     # via
