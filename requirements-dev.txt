@@ -41,7 +41,7 @@ django==5.0.3
     #   model-bakery
 factory-boy==3.3.0
     # via -r requirements-dev.in
-faker==23.3.0
+faker==24.1.0
     # via factory-boy
 filelock==3.13.1
     # via virtualenv
@@ -70,7 +70,7 @@ nodeenv==1.8.0
     # via pre-commit
 outcome==1.3.0.post0
     # via trio
-packaging==23.2
+packaging==24.0
     # via
     #   -c constraints.txt
     #   black
@@ -79,7 +79,7 @@ packaging==23.2
     #   pytest-rerunfailures
 pathspec==0.12.1
     # via black
-pip-tools==7.4.0
+pip-tools==7.4.1
     # via -r requirements-dev.in
 platformdirs==4.2.0
     # via
@@ -95,7 +95,7 @@ pyproject-hooks==1.0.0
     #   pip-tools
 pysocks==1.7.1
     # via urllib3
-pytest==8.0.2
+pytest==8.1.1
     # via
     #   -r requirements-dev.in
     #   pytest-base-url
@@ -133,7 +133,7 @@ requests==2.31.0
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.3.0
+ruff==0.3.2
     # via -r requirements-dev.in
 selenium==4.18.1
     # via
