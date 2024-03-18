@@ -10,16 +10,12 @@ asgiref==3.7.2
     #   django-htmx
 certifi==2024.2.2
     # via requests
-cffi==1.16.0
-    # via cryptography
 charset-normalizer==3.3.2
     # via requests
 contourpy==1.2.0
     # via matplotlib
 crispy-bootstrap5==2024.2
     # via -r requirements.in
-cryptography==42.0.5
-    # via django-anymail
 cycler==0.12.1
     # via matplotlib
 django==5.0.3
@@ -32,7 +28,7 @@ django==5.0.3
     #   django-extensions
     #   django-htmx
     #   django-solo
-django-anymail==10.2
+django-anymail==10.3
     # via -r requirements.in
 django-cleanup==8.1.0
     # via -r requirements.in
@@ -50,7 +46,7 @@ django-htmx==1.17.3
     # via -r requirements.in
 django-solo==2.2.0
     # via -r requirements.in
-fonttools==4.49.0
+fonttools==4.50.0
     # via matplotlib
 freezegun==1.4.0
     # via -r requirements.in
@@ -74,8 +70,6 @@ pillow==10.2.0
     # via
     #   -r requirements.in
     #   matplotlib
-pycparser==2.21
-    # via cffi
 pyparsing==3.1.2
     # via matplotlib
 python-dateutil==2.9.0.post0
