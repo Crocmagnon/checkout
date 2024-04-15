@@ -52,7 +52,7 @@ freezegun==1.4.0
     # via -r requirements.in
 gunicorn==21.2.0
     # via -r requirements.in
-idna==3.6
+idna==3.7
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
@@ -82,7 +82,7 @@ requests==2.31.0
     #   django-anymail
 six==1.16.0
     # via python-dateutil
-sqlparse==0.4.4
+sqlparse==0.5.0
     # via django
 urllib3==2.2.1
     # via
