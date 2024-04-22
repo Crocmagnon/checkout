@@ -50,7 +50,7 @@ fonttools==4.51.0
     # via matplotlib
 freezegun==1.4.0
     # via -r requirements.in
-gunicorn==21.2.0
+gunicorn==22.0.0
     # via -r requirements.in
 idna==3.7
     # via requests
