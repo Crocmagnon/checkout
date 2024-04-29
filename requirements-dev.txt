@@ -12,7 +12,7 @@ attrs==23.2.0
     # via
     #   outcome
     #   trio
-black==24.4.0
+black==24.4.2
     # via -r requirements-dev.in
 build==1.2.1
     # via pip-tools
@@ -31,7 +31,7 @@ click==8.1.7
     # via
     #   black
     #   pip-tools
-coverage[toml]==7.4.4
+coverage[toml]==7.5.0
     # via pytest-cov
 distlib==0.3.8
     # via virtualenv
@@ -41,9 +41,9 @@ django==5.0.4
     #   model-bakery
 factory-boy==3.3.0
     # via -r requirements-dev.in
-faker==24.11.0
+faker==25.0.0
     # via factory-boy
-filelock==3.13.4
+filelock==3.14.0
     # via virtualenv
 h11==0.14.0
     # via wsproto
@@ -81,7 +81,7 @@ pathspec==0.12.1
     # via black
 pip-tools==7.4.1
     # via -r requirements-dev.in
-platformdirs==4.2.0
+platformdirs==4.2.1
     # via
     #   black
     #   virtualenv
@@ -89,13 +89,13 @@ pluggy==1.5.0
     # via pytest
 pre-commit==3.7.0
     # via -r requirements-dev.in
-pyproject-hooks==1.0.0
+pyproject-hooks==1.1.0
     # via
     #   build
     #   pip-tools
 pysocks==1.7.1
     # via urllib3
-pytest==8.1.1
+pytest==8.2.0
     # via
     #   -r requirements-dev.in
     #   pytest-base-url
@@ -133,9 +133,9 @@ requests==2.31.0
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.4.1
+ruff==0.4.2
     # via -r requirements-dev.in
-selenium==4.19.0
+selenium==4.20.0
     # via
     #   -r requirements-dev.in
     #   pytest-selenium
@@ -166,7 +166,7 @@ urllib3[socks]==2.2.1
     #   -c constraints.txt
     #   requests
     #   selenium
-virtualenv==20.25.3
+virtualenv==20.26.1
     # via pre-commit
 wheel==0.43.0
     # via pip-tools
