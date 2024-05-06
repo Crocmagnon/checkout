@@ -18,7 +18,7 @@ crispy-bootstrap5==2024.2
     # via -r requirements.in
 cycler==0.12.1
     # via matplotlib
-django==5.0.4
+django==5.0.5
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
