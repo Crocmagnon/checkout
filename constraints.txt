@@ -18,7 +18,7 @@ crispy-bootstrap5==2024.2
     # via -r requirements.in
 cycler==0.12.1
     # via matplotlib
-django==5.0.5
+django==5.0.6
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -48,7 +48,7 @@ django-solo==2.2.0
     # via -r requirements.in
 fonttools==4.51.0
     # via matplotlib
-freezegun==1.5.0
+freezegun==1.5.1
     # via -r requirements.in
 gunicorn==22.0.0
     # via -r requirements.in
