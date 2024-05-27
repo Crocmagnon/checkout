@@ -1,7 +1,7 @@
 ##############################################
 # write git info
 ##############################################
-FROM alpine/git:2.43.4 AS git
+FROM alpine/git:2.45.1 AS git
 
 WORKDIR /app
 COPY .git /app/.git/
