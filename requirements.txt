@@ -8,7 +8,7 @@ asgiref==3.8.1
     # via
     #   django
     #   django-htmx
-certifi==2024.2.2
+certifi==2024.6.2
     # via requests
 charset-normalizer==3.3.2
     # via requests
@@ -46,7 +46,7 @@ django-htmx==1.17.3
     # via -r requirements.in
 django-solo==2.2.0
     # via -r requirements.in
-fonttools==4.52.1
+fonttools==4.53.0
     # via matplotlib
 freezegun==1.5.1
     # via -r requirements.in
@@ -76,7 +76,7 @@ python-dateutil==2.9.0.post0
     # via
     #   freezegun
     #   matplotlib
-requests==2.32.2
+requests==2.32.3
     # via
     #   -r requirements.in
     #   django-anymail
