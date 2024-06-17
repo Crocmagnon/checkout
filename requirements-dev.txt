@@ -43,7 +43,7 @@ factory-boy==3.3.0
     # via -r requirements-dev.in
 faker==25.8.0
     # via factory-boy
-filelock==3.14.0
+filelock==3.15.1
     # via virtualenv
 h11==0.14.0
     # via wsproto
@@ -133,7 +133,7 @@ requests==2.32.3
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.4.8
+ruff==0.4.9
     # via -r requirements-dev.in
 selenium==4.21.0
     # via
@@ -151,7 +151,7 @@ sqlparse==0.5.0
     # via
     #   -c constraints.txt
     #   django
-tenacity==8.3.0
+tenacity==8.4.1
     # via pytest-selenium
 trio==0.25.1
     # via
@@ -161,7 +161,7 @@ trio-websocket==0.11.1
     # via selenium
 typing-extensions==4.12.2
     # via selenium
-urllib3[socks]==2.2.1
+urllib3[socks]==2.2.2
     # via
     #   -c constraints.txt
     #   requests
