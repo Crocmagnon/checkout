@@ -31,11 +31,11 @@ click==8.1.7
     # via
     #   black
     #   pip-tools
-coverage[toml]==7.5.4
+coverage[toml]==7.6.0
     # via pytest-cov
 distlib==0.3.8
     # via virtualenv
-django==5.0.6
+django==5.0.7
     # via
     #   -c constraints.txt
     #   model-bakery
@@ -178,5 +178,5 @@ wsproto==1.2.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.1.2
     # via pip-tools
-setuptools==70.2.0
+setuptools==70.3.0
     # via pip-tools

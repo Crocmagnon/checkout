@@ -18,7 +18,7 @@ crispy-bootstrap5==2024.2
     # via -r requirements.in
 cycler==0.12.1
     # via matplotlib
-django==5.0.6
+django==5.0.7
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -28,7 +28,7 @@ django==5.0.6
     #   django-extensions
     #   django-htmx
     #   django-solo
-django-anymail==11.0
+django-anymail==11.0.1
     # via -r requirements.in
 django-cleanup==8.1.0
     # via -r requirements.in
