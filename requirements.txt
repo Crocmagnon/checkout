@@ -32,7 +32,7 @@ django-anymail[mailgun]==11.0.1
     # via -r requirements.in
 django-cleanup==8.1.0
     # via -r requirements.in
-django-crispy-forms==2.2
+django-crispy-forms==2.3
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -58,7 +58,7 @@ kiwisolver==1.4.5
     # via matplotlib
 matplotlib==3.9.1
     # via -r requirements.in
-numpy==2.0.0
+numpy==2.0.1
     # via
     #   contourpy
     #   matplotlib
@@ -82,7 +82,7 @@ requests==2.32.3
     #   django-anymail
 six==1.16.0
     # via python-dateutil
-sqlparse==0.5.0
+sqlparse==0.5.1
     # via django
 urllib3==2.2.2
     # via
