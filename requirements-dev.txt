@@ -8,11 +8,11 @@ asgiref==3.8.1
     # via
     #   -c constraints.txt
     #   django
-attrs==23.2.0
+attrs==24.1.0
     # via
     #   outcome
     #   trio
-black==24.4.2
+black==24.8.0
     # via -r requirements-dev.in
 build==1.2.1
     # via pip-tools
@@ -31,7 +31,7 @@ click==8.1.7
     # via
     #   black
     #   pip-tools
-coverage[toml]==7.6.0
+coverage[toml]==7.6.1
     # via pytest-cov
 distlib==0.3.8
     # via virtualenv
@@ -41,7 +41,7 @@ django==5.0.7
     #   model-bakery
 factory-boy==3.3.0
     # via -r requirements-dev.in
-faker==26.0.0
+faker==26.1.0
     # via factory-boy
 filelock==3.15.4
     # via virtualenv
@@ -133,7 +133,7 @@ requests==2.32.3
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.5.5
+ruff==0.5.6
     # via -r requirements-dev.in
 selenium==4.23.1
     # via
@@ -153,7 +153,7 @@ sqlparse==0.5.1
     #   django
 tenacity==9.0.0
     # via pytest-selenium
-trio==0.26.0
+trio==0.26.1
     # via
     #   selenium
     #   trio-websocket
@@ -170,7 +170,7 @@ virtualenv==20.26.3
     # via pre-commit
 websocket-client==1.8.0
     # via selenium
-wheel==0.43.0
+wheel==0.44.0
     # via pip-tools
 wsproto==1.2.0
     # via trio-websocket

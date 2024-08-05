@@ -42,7 +42,7 @@ django-environ==0.11.2
     # via -r requirements.in
 django-extensions==3.2.3
     # via -r requirements.in
-django-htmx==1.18.0
+django-htmx==1.19.0
     # via -r requirements.in
 django-solo==2.3.0
     # via -r requirements.in
@@ -56,7 +56,7 @@ idna==3.7
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
-matplotlib==3.9.1
+matplotlib==3.9.0
     # via -r requirements.in
 numpy==2.0.1
     # via
