@@ -40,10 +40,8 @@ class Command(BaseCommand):
             method = random.choices(payment_methods, weights=methods_weights)[0]
             basket = Basket.objects.create(payment_method=method)
             items_in_basket = int(random.normalvariate(3, 2))
-            if items_in_basket > len(products):
-                items_in_basket = len(products)
-            if items_in_basket < 1:
-                items_in_basket = 1
+            items_in_basket = min(items_in_basket, len(products))
+            items_in_basket = max(items_in_basket, 1)
             rng = np.random.default_rng()
             selected_products = rng.choice(
                 products,
