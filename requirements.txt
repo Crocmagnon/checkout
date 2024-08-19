@@ -56,9 +56,9 @@ idna==3.7
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
-matplotlib==3.9.1.post1
+matplotlib==3.9.2
     # via -r requirements.in
-numpy==2.0.1
+numpy==2.1.0
     # via
     #   contourpy
     #   matplotlib
