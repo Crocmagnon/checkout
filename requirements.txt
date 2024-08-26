@@ -52,7 +52,7 @@ freezegun==1.5.1
     # via -r requirements.in
 gunicorn==23.0.0
     # via -r requirements.in
-idna==3.7
+idna==3.8
     # via requests
 kiwisolver==1.4.5
     # via matplotlib
@@ -70,7 +70,7 @@ pillow==10.4.0
     # via
     #   -r requirements.in
     #   matplotlib
-pyparsing==3.1.2
+pyparsing==3.1.4
     # via matplotlib
 python-dateutil==2.9.0.post0
     # via
