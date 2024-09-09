@@ -18,7 +18,7 @@ crispy-bootstrap5==2024.2
     # via -r requirements.in
 cycler==0.12.1
     # via matplotlib
-django==5.1
+django==5.1.1
     # via
     #   -r requirements.in
     #   crispy-bootstrap5
@@ -54,11 +54,11 @@ gunicorn==23.0.0
     # via -r requirements.in
 idna==3.8
     # via requests
-kiwisolver==1.4.5
+kiwisolver==1.4.7
     # via matplotlib
 matplotlib==3.9.2
     # via -r requirements.in
-numpy==2.1.0
+numpy==2.1.1
     # via
     #   contourpy
     #   matplotlib
