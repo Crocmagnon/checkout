@@ -14,7 +14,7 @@ RUN date +'%Y-%m-%d %H:%M %Z' > /build-date
 ##############################################
 # Main image
 ##############################################
-FROM python:3.12.5-slim-bullseye AS final
+FROM python:3.12.6-slim-bullseye AS final
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
