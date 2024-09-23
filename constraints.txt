@@ -30,7 +30,7 @@ django==5.1.1
     #   django-solo
 django-anymail==12.0
     # via -r requirements.in
-django-cleanup==8.1.0
+django-cleanup==9.0.0
     # via -r requirements.in
 django-crispy-forms==2.3
     # via
@@ -46,7 +46,7 @@ django-htmx==1.19.0
     # via -r requirements.in
 django-solo==2.3.0
     # via -r requirements.in
-fonttools==4.53.1
+fonttools==4.54.0
     # via matplotlib
 freezegun==1.5.1
     # via -r requirements.in
