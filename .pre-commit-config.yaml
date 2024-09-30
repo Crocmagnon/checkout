@@ -40,7 +40,7 @@ repos:
     hooks:
       - id: djhtml
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.7
+    rev: v0.6.8
     hooks:
       - id: ruff
         args: [--fix]
@@ -50,7 +50,7 @@ repos:
       - id: prettier
         types_or: [javascript, css]
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.11.0
+    rev: v9.11.1
     hooks:
       - id: eslint
         args: [--fix]
