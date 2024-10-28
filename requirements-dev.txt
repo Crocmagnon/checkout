@@ -41,7 +41,7 @@ django==5.1.2
     #   model-bakery
 factory-boy==3.3.1
     # via -r requirements-dev.in
-faker==30.8.0
+faker==30.8.1
     # via factory-boy
 filelock==3.16.1
     # via virtualenv
@@ -133,7 +133,7 @@ requests==2.32.3
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.7.0
+ruff==0.7.1
     # via -r requirements-dev.in
 selenium==4.25.0
     # via
@@ -168,7 +168,7 @@ urllib3[socks]==2.2.3
     #   -c constraints.txt
     #   requests
     #   selenium
-virtualenv==20.27.0
+virtualenv==20.27.1
     # via pre-commit
 websocket-client==1.8.0
     # via selenium
@@ -178,7 +178,7 @@ wsproto==1.2.0
     # via trio-websocket
 
 # The following packages are considered to be unsafe in a requirements file:
-pip==24.2
+pip==24.3.1
     # via pip-tools
 setuptools==75.2.0
     # via pip-tools
