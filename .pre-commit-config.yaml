@@ -75,5 +75,5 @@ repos:
         files: ^requirements\.in|constraints\.txt$
       - id: pip-compile
         name: pip-compile requirements-dev.txt
-        args: [-q, --allow-unsafe, --no-strip-extras, requirements-dev.in]
+        args: [-q, --allow-unsafe, --no-strip-extras, --constraint=constraints.txt, requirements-dev.in]
         files: ^requirements-dev\.(in|txt)$
