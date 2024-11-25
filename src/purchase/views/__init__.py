@@ -8,10 +8,10 @@ from .basket import (
 )
 
 __all__ = [
-    "new_basket",
-    "update_basket",
+    "additional_unpriced_product",
     "delete_basket",
     "list_baskets",
-    "additional_unpriced_product",
+    "new_basket",
     "price_preview",
+    "update_basket",
 ]
