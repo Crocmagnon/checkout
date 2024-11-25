@@ -31,7 +31,7 @@ click==8.1.7
     # via
     #   black
     #   pip-tools
-coverage[toml]==7.6.7
+coverage[toml]==7.6.8
     # via pytest-cov
 distlib==0.3.9
     # via virtualenv
@@ -116,7 +116,7 @@ pytest-html==4.1.1
     # via pytest-selenium
 pytest-metadata==3.1.1
     # via pytest-html
-pytest-rerunfailures==14.0
+pytest-rerunfailures==15.0
     # via -r requirements-dev.in
 pytest-selenium==4.1.0
     # via -r requirements-dev.in
@@ -133,9 +133,9 @@ requests==2.32.3
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.7.4
+ruff==0.8.0
     # via -r requirements-dev.in
-selenium==4.26.1
+selenium==4.27.0
     # via
     #   -r requirements-dev.in
     #   pytest-selenium
@@ -172,7 +172,7 @@ virtualenv==20.27.1
     # via pre-commit
 websocket-client==1.8.0
     # via selenium
-wheel==0.45.0
+wheel==0.45.1
     # via pip-tools
 wsproto==1.2.0
     # via trio-websocket
@@ -180,5 +180,5 @@ wsproto==1.2.0
 # The following packages are considered to be unsafe in a requirements file:
 pip==24.3.1
     # via pip-tools
-setuptools==75.5.0
+setuptools==75.6.0
     # via pip-tools
