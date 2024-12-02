@@ -56,7 +56,7 @@ idna==3.10
     # via requests
 kiwisolver==1.4.7
     # via matplotlib
-matplotlib==3.9.2
+matplotlib==3.9.3
     # via -r requirements.in
 numpy==2.1.3
     # via
