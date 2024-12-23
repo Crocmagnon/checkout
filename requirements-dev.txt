@@ -27,7 +27,7 @@ charset-normalizer==3.4.0
     # via
     #   -c constraints.txt
     #   requests
-click==8.1.7
+click==8.1.8
     # via
     #   black
     #   pip-tools
@@ -58,7 +58,7 @@ iniconfig==2.0.0
     # via pytest
 invoke==2.2.0
     # via -r requirements-dev.in
-jinja2==3.1.4
+jinja2==3.1.5
     # via pytest-html
 markupsafe==3.0.2
     # via jinja2
@@ -133,7 +133,7 @@ requests==2.32.3
     #   -c constraints.txt
     #   pytest-base-url
     #   pytest-selenium
-ruff==0.8.3
+ruff==0.8.4
     # via -r requirements-dev.in
 selenium==4.27.1
     # via
@@ -163,7 +163,7 @@ typing-extensions==4.12.2
     # via
     #   faker
     #   selenium
-urllib3[socks]==2.2.3
+urllib3[socks]==2.3.0
     # via
     #   -c constraints.txt
     #   requests
