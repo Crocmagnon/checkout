@@ -17,15 +17,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: pip
-      - name: Install dependencies
+          python-version-file: "pyproject.toml"
+      - name: Install the project
         run: |
-          pip install pip-tools
-          pip-sync requirements.txt requirements-dev.txt
+          uv sync --all-extras --dev --frozen --no-install-project
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends gettext
       - name: Setup pre-commit cache
@@ -34,7 +34,7 @@ jobs:
           path: ~/.cache/pre-commit
           key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
       - name: Check pre-commit
-        run: pre-commit run --show-diff-on-failure --color=always --all-files
+        run: uv run pre-commit run --show-diff-on-failure --color=always --all-files
       - name: Test
-        run: inv test-cov
+        run: uv run inv test-cov
         working-directory: ./src/
