@@ -12,9 +12,25 @@ RUN date +'%Y-%m-%d %H:%M %Z' > /build-date
 
 
 ##############################################
+# install python dependencies
+##############################################
+FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+WORKDIR /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --frozen --no-install-project --no-dev
+ADD . /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --frozen --no-dev
+
+
+
+##############################################
 # Main image
 ##############################################
-FROM python:3.13.0-slim-bullseye AS final
+FROM python:3.13.1-slim-bookworm AS final
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
@@ -38,10 +54,7 @@ COPY --chown=django:django --from=git /git-describe /git-commit /build-date /app
 
 # Create directory structure
 ##############################################
-WORKDIR /app
-COPY --chown=django:django pyproject.toml requirements.txt ./
-ADD --chown=django:django ./src ./src
-COPY --chown=django:django tasks.py ./tasks.py
+COPY --from=builder --chown=django:django /app /app
 
 RUN mkdir -p /app/data /app/db
 RUN chown django:django /app /app/data /app/db
@@ -51,7 +64,8 @@ ENV SECRET_KEY "changeme"
 ENV DEBUG "false"
 ENV DB_BASE_DIR "/app/db"
 
-RUN python -m pip install --no-cache-dir -r requirements.txt
+ENV PATH="/app/.venv/bin:$PATH"
+
 WORKDIR /app/src
 RUN python manage.py collectstatic --noinput --clear
 RUN python manage.py compilemessages -l fr -l en

@@ -1,5 +1,5 @@
-FROM mcr.microsoft.com/devcontainers/python:3.12-bullseye
+FROM mcr.microsoft.com/devcontainers/python:3.13-bookworm
 RUN apt-get update && apt-get upgrade -y
-RUN pip install pip-tools invoke
-COPY requirements.in requirements.txt requirements-dev.in requirements-dev.txt constraints.txt tasks.py ./
-RUN invoke sync-dependencies
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+COPY pyproject.toml uv.lock tasks.py ./
+RUN uv sync --frozen

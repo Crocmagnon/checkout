@@ -1,6 +1,4 @@
 exclude: \.min\.(js|css)(\.map)?$|^\.idea/|/vendor/
-ci:
-  skip: [pip-compile]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -62,18 +60,7 @@ repos:
     rev: v2.5.0
     hooks:
       - id: pyproject-fmt
-  - repo: https://github.com/jazzband/pip-tools
-    rev: 7.4.1
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.5.13
     hooks:
-      - id: pip-compile
-        name: pip-compile requirements.txt
-        args: [-q, --allow-unsafe, --no-strip-extras, requirements.in]
-        files: ^requirements\.(in|txt)$
-      - id: pip-compile
-        name: pip-compile constraints.txt
-        args: [-q, --allow-unsafe, --strip-extras, --output-file=constraints.txt, requirements.in]
-        files: ^requirements\.in|constraints\.txt$
-      - id: pip-compile
-        name: pip-compile requirements-dev.txt
-        args: [-q, --allow-unsafe, --no-strip-extras, --constraint=constraints.txt, requirements-dev.in]
-        files: ^requirements-dev\.(in|txt)$
+      - id: uv-lock

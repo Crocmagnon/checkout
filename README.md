@@ -5,13 +5,12 @@ Simple interface to register baskets.
 ## Quick start
 Clone, then
 ```shell
-pip install -U pip pip-tools invoke
-inv sync-dependencies
-pre-commit install --install-hooks
+uv sync
+uv run pre-commit install --install-hooks
 inv test
-./src/manage.py migrate
-./src/manage.py generate_dummy_baskets
-./src/manage.py createsuperuser
+uv run ./src/manage.py migrate
+uv run ./src/manage.py generate_dummy_baskets
+uv run ./src/manage.py createsuperuser
 ```
 
 # Reuse

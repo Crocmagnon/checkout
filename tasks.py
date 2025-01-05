@@ -10,39 +10,15 @@ TEST_ENV = {"ENV_FILE": BASE_DIR / "envs" / "test-envs.env"}
 
 
 @task
-def update_dependencies(ctx: Context, *, sync: bool = True):
-    return compile_dependencies(ctx, update=True, sync=sync)
-
-
-@task
-def compile_dependencies(ctx: Context, *, update: bool = False, sync: bool = False):
-    common_args = "-q --allow-unsafe"
-    if update:
-        common_args += " --upgrade"
+def update_dependencies(ctx: Context):
     with ctx.cd(BASE_DIR):
-        ctx.run(
-            f"pip-compile {common_args} --no-strip-extras requirements.in",
-            pty=True,
-            echo=True,
-        )
-        ctx.run(
-            f"pip-compile {common_args} --strip-extras -o constraints.txt requirements.in",
-            pty=True,
-            echo=True,
-        )
-        ctx.run(
-            f"pip-compile {common_args} --no-strip-extras -c constraints.txt requirements-dev.in",
-            pty=True,
-            echo=True,
-        )
-    if sync:
-        sync_dependencies(ctx)
+        ctx.run("uv lock --upgrade", pty=True, echo=True)
 
 
 @task
 def sync_dependencies(ctx: Context):
     with ctx.cd(BASE_DIR):
-        ctx.run("pip-sync requirements.txt requirements-dev.txt", pty=True, echo=True)
+        ctx.run("uv sync", pty=True, echo=True)
 
 
 @task

@@ -3,5 +3,5 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
-  "postStartCommand": "inv sync-dependencies && pre-commit install --install-hooks"
+  "postStartCommand": "uv sync && uv run pre-commit install --install-hooks"
 }

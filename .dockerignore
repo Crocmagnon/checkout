@@ -9,3 +9,5 @@ __pycache__/
 .idea/
 *.mo
 .kolo/
+.venv
+node_modules
