@@ -23,6 +23,23 @@ dependencies = [
   "whitenoise>=6.2",
 ]
 
+[dependency-groups]
+dev = [
+  "black>=22.12",
+  "factory-boy>=3.2.1",
+  "invoke>=2",
+  "model-bakery>=1.1",
+  "pip-tools>=6",
+  "pre-commit>=2.7",
+  "pytest>=6",
+  "pytest-cov>=3",
+  "pytest-django>=4.5",
+  "pytest-rerunfailures>=13",
+  "pytest-selenium>=4",
+  "ruff>=0.0.237",
+  "selenium>=4.4.3",
+]
+
 [tool.ruff]
 target-version = "py313"
 src = [
@@ -83,24 +100,6 @@ testpaths = [
 
 markers = [
   "flaky",
-]
-
-[dependency-groups]
-dev = [
-  "pre-commit>=2.7",
-  "pytest>=6.0",
-  "pytest-cov>=3.0.0",
-  "pytest-django>=4.5.0",
-  "pytest-selenium>=4.0.0",
-  "pytest-rerunfailures>=13.0",
-  "pre-commit>=2.7",
-  "model-bakery>=1.1",
-  "invoke>=2.0.0",
-  "factory-boy>=3.2.1",
-  "selenium>=4.4.3",
-  "black>=22.12.0",
-  "pip-tools>=6.0",
-  "ruff>=0.0.237",
 ]
 
 [tool.uv]
