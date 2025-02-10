@@ -30,7 +30,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ##############################################
 # Main image
 ##############################################
-FROM python:3.13.1-slim-bookworm AS final
+FROM python:3.13.2-slim-bookworm AS final
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG PIP_DISABLE_PIP_VERSION_CHECK=1
